@@ -138,6 +138,10 @@ async function startGame({ direction, mode }) {
     });
   });
 
+  engine.on('mode:done', () => {
+    router.navigate('#home');
+  });
+
   router.navigate('#play');
   activeMode.start();
 }

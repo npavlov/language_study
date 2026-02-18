@@ -121,17 +121,28 @@ export class GameEngine extends EventEmitter {
       direction: this.direction,
     });
 
+    this._emitWordLoaded();
     return this.getCurrentWord();
   }
 
   /**
-   * Get the current word in session.
+   * Get the current word in session (pure getter — no side effects).
    */
   getCurrentWord() {
     if (!this.session) return null;
     const { words, currentIndex } = this.session;
     if (currentIndex >= words.length) return null;
+    return words[currentIndex];
+  }
 
+  /**
+   * Emit word:loaded for the current word.
+   * Called only from startSession() and nextWord().
+   */
+  _emitWordLoaded() {
+    if (!this.session) return;
+    const { words, currentIndex } = this.session;
+    if (currentIndex >= words.length) return;
     const entry = words[currentIndex];
     this.emit('word:loaded', {
       index: currentIndex,
@@ -140,8 +151,6 @@ export class GameEngine extends EventEmitter {
       type: entry.type,
       id: entry.id,
     });
-
-    return entry;
   }
 
   /**
@@ -277,6 +286,7 @@ export class GameEngine extends EventEmitter {
       return this.endSession();
     }
 
+    this._emitWordLoaded();
     return this.getCurrentWord();
   }
 

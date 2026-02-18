@@ -65,13 +65,22 @@ describe('GameEngine', () => {
     expect(word.term).toBeTruthy();
   });
 
-  it('emits word:loaded on getCurrentWord', () => {
-    engine.startSession();
+  it('emits word:loaded on startSession and nextWord (not getCurrentWord)', () => {
     let emitted = null;
     engine.on('word:loaded', (data) => { emitted = data; });
-    engine.getCurrentWord();
+    engine.startSession();
     expect(emitted).toBeDefined();
     expect(emitted.index).toBe(0);
+
+    // getCurrentWord should NOT emit again
+    emitted = null;
+    engine.getCurrentWord();
+    expect(emitted).toBeNull();
+
+    // nextWord should emit
+    engine.nextWord();
+    expect(emitted).toBeDefined();
+    expect(emitted.index).toBe(1);
   });
 
   it('returns hint level 1 (Serbian) on first getHint', () => {
