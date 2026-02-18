@@ -11707,40 +11707,6 @@
       }
     },
     {
-      "id": "en-0349",
-      "term": "stršljen",
-      "source_language": "en",
-      "type": "word",
-      "translations": {
-        "en": "wasp",
-        "sr": "stršljen",
-        "ru": "оса"
-      },
-      "examples": {
-        "en": [
-          "A wasp flew into the room through the window."
-        ],
-        "sr": [
-          "Stršljen je uleteo u sobu kroz prozor."
-        ],
-        "ru": [
-          "Оса влетела в комнату через окно."
-        ]
-      },
-      "explanation": "Насекомое с жалом, похожее на пчелу, но более агрессивное, часто чёрно-жёлтого цвета.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:10:19.588Z"
-      }
-    },
-    {
       "id": "en-0350",
       "term": "and I put on my thong",
       "source_language": "en",
@@ -13326,40 +13292,6 @@
         ]
       },
       "explanation": "Фраза означает возможность попытаться что-либо сделать или рискнуть. Используется для выражения готовности к попытке достичь цели.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:11:45.994Z"
-      }
-    },
-    {
-      "id": "en-0398",
-      "term": "Rekao sam mu oproštajne reči, spremio se i sada idem kući",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "I said goodbye to him, got ready, and now I'm going home.",
-        "sr": "Rekao sam mu oproštajne reči, spremio se i sada idem kući.",
-        "ru": "Я попрощался с ним, подготовился и теперь иду домой."
-      },
-      "examples": {
-        "en": [
-          "I said goodbye to him, got ready, and now I'm going home."
-        ],
-        "sr": [
-          "Rekao sam mu oproštajne reči, spremio se i sada idem kući."
-        ],
-        "ru": [
-          "Я попрощался с ним, подготовился и теперь иду домой."
-        ]
-      },
-      "explanation": "Повествование о последовательности действий: прощание, подготовка и отправление домой. Описывает завершение встречи и уход.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -16082,40 +16014,6 @@
         ]
       },
       "explanation": "Вызывающее чувство стыда и оскорбления; наносящее ущерб чести, достоинству человека.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:13:57.781Z"
-      }
-    },
-    {
-      "id": "en-0479",
-      "term": "cruel",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "cruel",
-        "sr": "okrutan",
-        "ru": "жестокий"
-      },
-      "examples": {
-        "en": [
-          "His cruel remarks deeply hurt everyone around him."
-        ],
-        "sr": [
-          "Njegove okrutne primedbe su duboko povredile sve oko njega."
-        ],
-        "ru": [
-          "Его жестокие замечания глубоко ранили всех вокруг него."
-        ]
-      },
-      "explanation": "Безжалостный, причиняющий боль и страдания; проявляющий жестокость и отсутствие сочувствия.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -24675,40 +24573,6 @@
       }
     },
     {
-      "id": "en-0736",
-      "term": "follies",
-      "source_language": "en",
-      "type": "word",
-      "translations": {
-        "en": "mistakes",
-        "sr": "greške",
-        "ru": "ошибки"
-      },
-      "examples": {
-        "en": [
-          "We all make follies in our youth."
-        ],
-        "sr": [
-          "Svi činimo greške u mladosti."
-        ],
-        "ru": [
-          "Мы все совершаем ошибки в молодости."
-        ]
-      },
-      "explanation": "Ошибки или глупые поступки, особенно совершённые из-за недостатка суждения или опыта. Часто используется для обозначения действий, о которых человек позже сожалеет.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:21:06.503Z"
-      }
-    },
-    {
       "id": "en-0737",
       "term": "the lama had produced a small slip of paper",
       "source_language": "en",
@@ -27056,40 +26920,6 @@
         "source_file": "english_words.txt",
         "reviewed": false,
         "enriched_at": "2026-02-18T10:23:02.234Z"
-      }
-    },
-    {
-      "id": "en-0806",
-      "term": "obscenity",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "obscenity",
-        "sr": "nepriklađenost",
-        "ru": "непристойность"
-      },
-      "examples": {
-        "en": [
-          "The film was criticized for its obscenity and vulgar language."
-        ],
-        "sr": [
-          "Film je kritikovan zbog svoje nepriklađenosti i vulgarne reči."
-        ],
-        "ru": [
-          "Фильм критиковали за его непристойность и вульгарный язык."
-        ]
-      },
-      "explanation": "Грубое, оскорбительное или неприличное выражение, слово или поведение, которое считается социально неприемлемым. Может относиться к сексуально откровенному или циничному содержанию.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:23:11.022Z"
       }
     },
     {
@@ -33694,40 +33524,6 @@
         ]
       },
       "explanation": "Решать проблемы, разрешать конфликты или разбираться в сложной ситуации путём обсуждения и поиска компромисса.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:28:23.790Z"
-      }
-    },
-    {
-      "id": "en-1004",
-      "term": "bonkers",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "bonkers",
-        "sr": "lud, smiješan, oduševljen",
-        "ru": "сумасшедший, глупый, чрезвычайно восторженный"
-      },
-      "examples": {
-        "en": [
-          "He went bonkers when he heard the good news."
-        ],
-        "sr": [
-          "Postao je lud kada je čuo dobru vijest."
-        ],
-        "ru": [
-          "Он сошёл с ума, когда услышал хорошую новость."
-        ]
-      },
-      "explanation": "Неформальное прилагательное, означающее сумасшедший, глупый или крайне восторженный. Часто используется в разговорной речи для описания экстравагантного поведения.",
       "pronunciation": null,
       "category": null,
       "tags": [],
