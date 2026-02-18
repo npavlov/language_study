@@ -109,12 +109,12 @@ export class AddWordsScreen {
 
   /** Make the screen visible. */
   show() {
-    if (this._root) this._root.hidden = false;
+    if (this._container) this._container.classList.add('screen--active');
   }
 
   /** Hide the screen (DOM stays in place). */
   hide() {
-    if (this._root) this._root.hidden = true;
+    if (this._container) this._container.classList.remove('screen--active');
   }
 
   /** Tear down: remove DOM and event listeners. */

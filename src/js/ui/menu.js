@@ -30,16 +30,16 @@ export class MenuScreen {
   }
 
   show() {
-    if (this._root) {
-      this._root.classList.add('screen--active');
+    if (this._container) {
+      this._container.classList.add('screen--active');
       this._updateStats();
       this._updateWordCount();
     }
   }
 
   hide() {
-    if (this._root) {
-      this._root.classList.remove('screen--active');
+    if (this._container) {
+      this._container.classList.remove('screen--active');
     }
   }
 
@@ -56,8 +56,8 @@ export class MenuScreen {
   }
 
   _build() {
-    const root = el('div', 'screen screen--active');
-    root.id = 'menu-screen';
+    const root = el('div', 'menu');
+    root.id = 'menu-content';
 
     // --- Header / Title ---
     const header = el('div', 'menu__header');

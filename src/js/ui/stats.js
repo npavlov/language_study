@@ -271,12 +271,14 @@ export class StatsScreen {
   show() {
     if (!this.#container) throw new Error('StatsScreen: call init(container) before show()');
 
+    this.#container.classList.add('screen--active');
+
     // Tear down any previous render.
     this.#root?.remove();
 
     const progress = loadProgress();
 
-    const root = el('div', 'screen screen--active stats');
+    const root = el('div', 'stats');
     this.#root = root;
 
     // Header
@@ -311,8 +313,8 @@ export class StatsScreen {
    * Hide the stats screen without destroying it.
    */
   hide() {
-    if (this.#root) {
-      this.#root.classList.remove('screen--active');
+    if (this.#container) {
+      this.#container.classList.remove('screen--active');
     }
   }
 

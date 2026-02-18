@@ -10,11 +10,25 @@
   padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
 }
 
-/* Mode cards stack vertically on phone */
+/* Mode cards: 2x2 grid even on phone */
 .mode-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
+.mode-grid .card {
+  padding: var(--spacing-sm);
+  text-align: center;
+}
+
+.mode-grid .card__icon {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-xs);
+}
+
+.mode-grid .card__subtitle {
+  display: none;
 }
 
 /* Stats bar chart: fewer bars visible, each wider */
@@ -29,9 +43,18 @@
     padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
   }
 
-  /* Mode cards: 2-column grid */
+  /* Mode cards: 2-column grid, show descriptions */
   .mode-grid {
     grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .mode-grid .card {
+    padding: var(--spacing-md);
+  }
+
+  .mode-grid .card__subtitle {
+    display: block;
   }
 
   /* Flashcard can be wider */
