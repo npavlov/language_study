@@ -21,11 +21,12 @@ const projectRoot = join(__dirname, '..');
 // ---------------------------------------------------------------------------
 // Config
 // ---------------------------------------------------------------------------
-const BATCH_SIZE = 30;
+const BATCH_SIZE = 5;
 const DELAY_MS = 600;
 const MAX_RETRIES = 3;
 const DRY_RUN = process.argv.includes('--dry-run');
 const MODEL = 'claude-haiku-4-5-20251001';
+const MAX_TOKENS = 8192;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -157,7 +158,7 @@ async function enrichFile(filePath, client) {
       try {
         const message = await client.messages.create({
           model: MODEL,
-          max_tokens: 4096,
+          max_tokens: MAX_TOKENS,
           messages: [{ role: 'user', content: buildPrompt(batch) }],
         });
 
