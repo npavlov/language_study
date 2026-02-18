@@ -3,7 +3,8 @@
 ## Project Purpose
 
 Static HTML game for a Russian-native speaker learning English and Serbian.
-Words are stored as structured JSON. The app runs entirely client-side on GitHub Pages.
+Words are stored in SQLite (source of truth) and exported to JSON for the browser.
+The app runs entirely client-side on GitHub Pages.
 All UI text is in Russian. English and Serbian are study languages only.
 
 ## Tech Stack
@@ -12,7 +13,8 @@ All UI text is in Russian. English and Serbian are study languages only.
 - **HTML**: semantic HTML5 (`<main>`, `<section>`, `<nav>`, `<button>`).
 - **CSS**: custom properties for theming, BEM naming, mobile-first media queries.
 - **Node.js**: dev tooling only (tests, linting, build scripts). Never served at runtime.
-- **Data**: static JSON files loaded via `fetch()`.
+- **Data**: SQLite database (`data/vocabulary.db`) → exported to JSON (`public/data/*.json`) for browser `fetch()`.
+- **SQLite**: `better-sqlite3` (devDependency) for all data pipeline scripts. FTS5 full-text search.
 
 ## Directory Structure
 
@@ -20,6 +22,8 @@ All UI text is in Russian. English and Serbian are study languages only.
 index.html              # app shell (viewport meta, CSS links, #app div)
 CLAUDE.md               # this file — AI-first project docs
 AGENTS.md               # beads workflow instructions for agents
+data/
+  vocabulary.db         # SQLite database — source of truth for all vocabulary
 src/
   js/
     main.js             # app entry — wires router, screens, game modes
@@ -45,29 +49,49 @@ src/
   assets/               # images, icons, fonts
 public/
   data/
-    vocabulary-en.json  # English word entries (served as static assets)
-    vocabulary-sr.json  # Serbian word entries (served as static assets)
+    vocabulary-en.json  # generated from SQLite — English entries for browser
+    vocabulary-sr.json  # generated from SQLite — Serbian entries for browser
 scripts/
-  parse-words.js        # parse .txt word files → structured JSON
-  enrich-vocabulary.js  # AI-enrich vocabulary via Claude API
-  cleanup-vocabulary.js # deduplicate/validate vocabulary files
+  lib/
+    db.js               # shared DB helper (openDb, row converters, UPSERT_SQL)
+  parse-words.js        # parse .txt word files → SQLite
+  enrich-vocabulary.js  # AI-enrich vocabulary via Claude API (reads/writes SQLite)
+  cleanup-vocabulary.js # deduplicate/validate vocabulary in SQLite
+  db-export.js          # SQLite → JSON export for browser runtime
+  vocab-cli.js          # CRUD CLI: add, remove, edit, search, list, stats
+  migrate-to-sqlite.js  # one-time JSON → SQLite migration
 tests/                  # unit tests (vitest)
   engine.test.js        # GameEngine, levenshtein, fuzzyMatch, transliteration
   schema.test.js        # vocabulary JSON schema validation
+  sqlite.test.js        # SQLite schema, integrity, FTS, roundtrip tests
   parser.test.js        # parse-words script tests
+  word-selection.test.js # shuffle, filterIds, session tests
+  vocabulary-integrity.test.js # cross-language contamination checks
   setup.test.js         # test environment setup
 ```
 
 ## Build & Run Commands
 
 ```bash
-npm run dev       # start local dev server (vite)
-npm run build     # vite build → dist/ (for GitHub Pages deploy)
-npm run test      # vitest run
+# Development
+npm run dev        # start local dev server (vite)
+npm run build      # vite build → dist/ (for GitHub Pages deploy)
+npm run test       # vitest run (106 tests)
 npm run test:watch # vitest (watch mode)
-npm run lint      # eslint src/js/
-npm run parse     # parse .txt word files → public/data/*.json (idempotent)
-npm run enrich    # AI-enrich vocabulary via Claude API (needs ANTHROPIC_API_KEY)
+npm run lint       # eslint src/js/
+
+# Data pipeline (SQLite-based)
+npm run vocab -- search "word"    # full-text search
+npm run vocab -- add --term "hello" --lang en --translation-sr "zdravo" --translation-ru "привет"
+npm run vocab -- remove --id en-0042
+npm run vocab -- edit --id en-0042 --difficulty 4
+npm run vocab -- list --lang en --limit 20
+npm run vocab -- stats            # counts, enrichment %, difficulty distribution
+npm run vocab -- export           # regenerate JSON from SQLite
+npm run db:export  # same as vocab export — SQLite → JSON
+npm run parse      # parse .txt word files → SQLite
+npm run enrich     # AI-enrich vocabulary (needs ANTHROPIC_API_KEY)
+npm run migrate    # one-time JSON → SQLite migration (use --force to overwrite)
 ```
 
 ## Naming Conventions
@@ -80,8 +104,23 @@ npm run enrich    # AI-enrich vocabulary via Claude API (needs ANTHROPIC_API_KEY
 | CSS classes | BEM                 | `.card__front--flipped`    |
 | CSS vars    | kebab-case          | `--color-primary`          |
 | JSON keys   | snake_case          | `source_language`          |
+| SQL columns | snake_case          | `source_language`          |
 
 ## Architecture
+
+### Data Flow
+
+```
+data/vocabulary.db (SQLite, source of truth)
+       │
+       ├── npm run db:export ──→ public/data/vocabulary-{en,sr}.json (browser runtime)
+       │
+       ├── npm run vocab ──→ CRUD operations directly on SQLite
+       │
+       └── npm run enrich ──→ AI enrichment reads/writes SQLite
+```
+
+Browser runtime is unchanged: `fetch()` loads JSON, no SQLite in the browser.
 
 ### Event-Driven Decoupling
 
@@ -92,6 +131,10 @@ The engine and UI communicate via events (EventEmitter pattern):
 - **Navigation event**: `mode:done` — emitted by mode UI, listened in `main.js` to navigate back to `#home`
 
 **Critical**: `getCurrentWord()` is a **pure getter** (no side effects). The `word:loaded` event is emitted only by `startSession()` and `nextWord()` via the private `_emitWordLoaded()` method.
+
+### Session Behavior
+
+Sessions include **all playable entries** (no sessionSize limit). Words are shuffled using Fisher-Yates. `startSession(filterIds?)` accepts optional ID array for review sessions (e.g., flashcards "review mistakes").
 
 ### Routing
 
@@ -105,7 +148,39 @@ All user-facing UI text is in Russian, stored in `src/js/i18n.js`. Import `{ t }
 
 ## Data Format
 
-Each vocabulary entry follows this schema:
+### SQLite Schema (source of truth)
+
+```sql
+CREATE TABLE vocabulary (
+  id               TEXT PRIMARY KEY,    -- 'en-0001', 'sr-0042'
+  term             TEXT NOT NULL,       -- the word/phrase being studied
+  source_language  TEXT NOT NULL,       -- 'en' or 'sr'
+  type             TEXT NOT NULL,       -- 'word' or 'phrase'
+  translation_en   TEXT,                -- NULL for English entries
+  translation_sr   TEXT,                -- NULL for Serbian entries
+  translation_ru   TEXT,                -- Russian translation (hint)
+  examples_en      TEXT DEFAULT '[]',   -- JSON array of strings
+  examples_sr      TEXT DEFAULT '[]',
+  examples_ru      TEXT DEFAULT '[]',
+  explanation      TEXT,                -- Russian explanation
+  pronunciation    TEXT,                -- JSON object or NULL
+  category         TEXT,
+  tags             TEXT DEFAULT '[]',   -- JSON array of strings
+  difficulty       INTEGER DEFAULT 3,   -- 1-5
+  enriched         INTEGER DEFAULT 0,   -- 0 or 1
+  date_added       TEXT,
+  source_file      TEXT,
+  reviewed         INTEGER DEFAULT 0,
+  enriched_at      TEXT
+);
+
+-- FTS5 full-text search on term and all translations
+CREATE VIRTUAL TABLE vocabulary_fts USING fts5(...);
+```
+
+### JSON Format (browser runtime)
+
+Generated by `npm run db:export`. Each file has `{ schema_version: "1.0", entries: [...] }`.
 
 ```json
 {
@@ -113,36 +188,17 @@ Each vocabulary entry follows this schema:
   "term": "persevere",
   "source_language": "en",
   "type": "word",
-  "translations": {
-    "en": null,
-    "sr": "istrajati",
-    "ru": "упорствовать"
-  },
-  "examples": {
-    "en": ["You must persevere despite the difficulties."],
-    "sr": ["Morate istrajati uprkos poteškoćama."],
-    "ru": ["Вы должны упорствовать, несмотря на трудности."]
-  },
-  "explanation": "Проявлять настойчивость, не сдаваться перед трудностями.",
+  "translations": { "en": null, "sr": "istrajati", "ru": "упорствовать" },
+  "examples": { "en": ["..."], "sr": ["..."], "ru": ["..."] },
+  "explanation": "Проявлять настойчивость...",
   "pronunciation": { "en": "ˌpɜːrsəˈvɪr" },
   "category": "character",
   "tags": ["character", "resilience"],
   "difficulty": 2,
   "enriched": true,
-  "metadata": {
-    "date_added": "2026-02-18",
-    "source_file": "english_words.txt",
-    "reviewed": false
-  }
+  "metadata": { "date_added": "2026-02-18", "source_file": "english_words.txt", "reviewed": false }
 }
 ```
-
-- `term` = the word or phrase being studied. Field in source language.
-- `translations.{lang}` = translation to that language. `null` for the source language itself.
-- `examples.{lang}` = **array of strings** (example sentences). Empty array `[]` if none.
-- `enriched` = `true` after AI enrichment fills translations/examples/explanation.
-- `ru` translations serve as **fallback hints only** — not a primary display language.
-- `null` for any missing field. The game engine and UI must handle `null` gracefully.
 
 ## Hint Systems
 
@@ -188,11 +244,57 @@ All modes emit `mode:done` via `this._engine.emit('mode:done')` for back-to-menu
 
 ## Data Pipeline
 
-1. **Parse** raw .txt files → structured JSON: `npm run parse -- --english english_words.txt --output public/data/`
+1. **Parse** raw .txt files → SQLite: `npm run parse`
 2. **Enrich** with AI translations, examples, explanations: `ANTHROPIC_API_KEY=sk-... npm run enrich`
-3. Enrichment is idempotent — skips entries where `enriched === true`. Safe to re-run.
-4. Batches of 30, saves after each batch, auto-retries on failure.
-5. `--dry-run` flag previews without API calls.
+3. **Export** SQLite → JSON for browser: `npm run db:export`
+4. Enrichment is idempotent — skips entries where `enriched = 1`. Safe to re-run.
+5. Batches of 5, saves after each batch, auto-retries on failure.
+6. `--dry-run` flag previews without API calls.
+
+## Agent Workflow — Vocabulary CRUD
+
+For Claude agents or human devs editing vocabulary data:
+
+### Quick reference
+
+```bash
+# Search
+npm run vocab -- search "word"
+
+# Add a word
+npm run vocab -- add --term "hello" --lang en --translation-sr "zdravo" --translation-ru "привет"
+
+# Remove
+npm run vocab -- remove --id en-0042
+
+# Edit
+npm run vocab -- edit --id en-0042 --difficulty 4 --category "greetings"
+
+# After ANY database change, regenerate JSON:
+npm run db:export
+
+# Verify
+npm run test
+```
+
+### Direct SQL (for bulk operations)
+
+```bash
+# Via better-sqlite3 in Node.js one-liner:
+node -e '
+import Database from "better-sqlite3";
+const db = new Database("data/vocabulary.db");
+db.prepare("UPDATE vocabulary SET difficulty = 4 WHERE category = ?").run("advanced");
+db.close();
+'
+```
+
+### Important rules
+
+- **Always run `npm run db:export` after modifying the database** — JSON files must stay in sync.
+- **Always run `npm test` after changes** — verifies SQLite ↔ JSON consistency.
+- The shared DB module is at `scripts/lib/db.js` — use `openDb()`, `jsonEntryToRow()`, `rowToJsonEntry()`, `UPSERT_SQL`.
+- SQLite file is committed to git. JSON files are also committed (for dev server convenience).
 
 ## Coding Conventions
 
@@ -207,7 +309,9 @@ All modes emit `mode:done` via `this._engine.emit('mode:done')` for back-to-menu
 
 ## Testing
 
+- 106 tests across 7 test files.
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
+- SQLite tests: schema validation, data integrity, FTS search, roundtrip consistency.
 - Use vitest. Place tests in `tests/` mirroring `src/js/` structure.
 - No DOM/browser tests unless unavoidable.
 - Target coverage: core modules (engine, progress, modes) above 80%.
@@ -222,3 +326,5 @@ All modes emit `mode:done` via `this._engine.emit('mode:done')` for back-to-menu
 - Commit `node_modules/`, `dist/`, `.env`, or `.DS_Store`.
 - Hardcode UI text in mode files — use `i18n.js`.
 - Emit events from `getCurrentWord()` — it must be a pure getter.
+- Modify JSON vocabulary files directly — always edit SQLite and run `npm run db:export`.
+- Use sql.js or any SQLite in the browser — SQLite is for the data pipeline only.
