@@ -29,7 +29,7 @@ describe('GameEngine', () => {
 
   beforeEach(() => {
     entries = makeMockEntries(10);
-    engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 5 });
+    engine = new GameEngine({ entries, direction: 'en-sr' });
   });
 
   it('creates with correct direction parsing', () => {
@@ -50,10 +50,10 @@ describe('GameEngine', () => {
     expect(playable.length).toBe(9);
   });
 
-  it('starts a session with correct word count', () => {
+  it('starts a session with all playable words', () => {
     const word = engine.startSession();
     expect(word).toBeDefined();
-    expect(engine.session.words.length).toBe(5);
+    expect(engine.session.words.length).toBe(10);
     expect(engine.session.currentIndex).toBe(0);
     expect(engine.session.score).toBe(0);
   });
@@ -167,14 +167,12 @@ describe('GameEngine', () => {
     expect(engine.session.bestStreak).toBe(3);
   });
 
-  it('prioritizes wrong words in selection', () => {
-    const wrongHistory = [entries[0].id, entries[1].id];
-    engine.sessionSize = 5;
-    engine.startSession(wrongHistory);
+  it('filters to specific IDs when filterIds provided', () => {
+    const filterIds = [entries[0].id, entries[1].id, entries[2].id];
+    engine.startSession(filterIds);
     const selectedIds = engine.session.words.map((w) => w.id);
-    // Wrong words should appear more frequently, but it's probabilistic
-    // Just verify session started without error
-    expect(selectedIds.length).toBe(5);
+    expect(selectedIds.length).toBe(3);
+    expect(new Set(selectedIds)).toEqual(new Set(filterIds));
   });
 });
 

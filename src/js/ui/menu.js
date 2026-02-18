@@ -3,6 +3,7 @@
  */
 
 import { loadProgress } from '../progress.js';
+import { t } from '../i18n.js';
 
 export class MenuScreen {
   constructor() {
@@ -12,7 +13,7 @@ export class MenuScreen {
     this._selectedMode = 'flashcards';
     this._onStart = null;
     this._onExport = null;
-    this._wordCount = 0;
+    this._wordCounts = { en: 0, sr: 0 };
   }
 
   /**
@@ -21,9 +22,9 @@ export class MenuScreen {
    * @param {number} options.wordCount - total available words
    * @param {function} options.onStart - callback({direction, mode})
    */
-  init(container, { wordCount = 0, onStart = () => {}, onExport = () => {} } = {}) {
+  init(container, { wordCounts = { en: 0, sr: 0 }, onStart = () => {}, onExport = () => {} } = {}) {
     this._container = container;
-    this._wordCount = wordCount;
+    this._wordCounts = wordCounts;
     this._onStart = onStart;
     this._onExport = onExport;
     this._build();
@@ -43,8 +44,8 @@ export class MenuScreen {
     }
   }
 
-  setWordCount(count) {
-    this._wordCount = count;
+  setWordCounts(counts) {
+    this._wordCounts = counts;
     this._updateWordCount();
   }
 
@@ -100,6 +101,7 @@ export class MenuScreen {
       this._refs.toggleBtns.forEach((b) => b.classList.remove('toggle__option--active'));
       btn.classList.add('toggle__option--active');
       this._selectedDirection = btn.dataset.direction;
+      this._updateWordCount();
     });
 
     root.appendChild(dirSection);
@@ -198,7 +200,9 @@ export class MenuScreen {
 
   _updateWordCount() {
     if (this._refs.wordCount) {
-      this._refs.wordCount.textContent = `${this._wordCount} слов доступно`;
+      const targetLang = this._selectedDirection.split('-')[0];
+      const count = this._wordCounts[targetLang] || 0;
+      this._refs.wordCount.textContent = `${count} ${t.words_available}`;
     }
   }
 }

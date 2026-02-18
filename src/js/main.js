@@ -100,6 +100,15 @@ function rebuildAllEntries() {
   return allEntries;
 }
 
+function computeWordCounts(entries) {
+  const counts = { en: 0, sr: 0 };
+  for (const e of entries) {
+    if (e.source_language === 'en') counts.en++;
+    else if (e.source_language === 'sr') counts.sr++;
+  }
+  return counts;
+}
+
 // --- Game launch ---
 async function startGame({ direction, mode }) {
   const ModeClass = MODE_MAP[mode];
@@ -117,12 +126,11 @@ async function startGame({ direction, mode }) {
   }
 
   rebuildAllEntries();
-  menuScreen.setWordCount(allEntries.length);
+  menuScreen.setWordCounts(computeWordCounts(allEntries));
 
   const engine = new GameEngine({
     entries: allEntries,
     direction,
-    sessionSize: 20,
   });
 
   activeMode = new ModeClass();
@@ -160,7 +168,7 @@ async function init() {
     // Menu (show immediately with 0 word count, updated after first load)
     menuScreen = new MenuScreen();
     menuScreen.init(screens.menu, {
-      wordCount: 0,
+      wordCounts: { en: 0, sr: 0 },
       onStart: startGame,
       onExport: async () => {
         await ensureVocabLoaded('en', 'sr');
@@ -185,7 +193,7 @@ async function init() {
     router.register('#home', () => {
       stopGame();
       rebuildAllEntries();
-      menuScreen.setWordCount(allEntries.length);
+      menuScreen.setWordCounts(computeWordCounts(allEntries));
       menuScreen.show();
     }, () => menuScreen.hide());
 
@@ -215,7 +223,7 @@ async function init() {
     // Preload vocabulary in background after UI is shown
     ensureVocabLoaded('en', 'sr').then(() => {
       rebuildAllEntries();
-      menuScreen.setWordCount(allEntries.length);
+      menuScreen.setWordCounts(computeWordCounts(allEntries));
     });
   } catch (err) {
     console.error('Failed to initialize app:', err);

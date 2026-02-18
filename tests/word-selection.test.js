@@ -2,10 +2,11 @@
  * Word selection & randomization tests.
  *
  * Verifies that the GameEngine:
- * - Actually randomizes word selection (not always the same set)
- * - Uses the full vocabulary pool, not just a fixed subset
- * - Respects weighted selection (difficulty, wrongHistory)
- * - Handles edge cases (small pools, single-word pools)
+ * - Shuffles all playable entries into each session (Fisher-Yates)
+ * - Produces different orderings across sessions
+ * - Does not duplicate words within a session
+ * - Handles edge cases (single-word pool, no playable entries)
+ * - Supports filterIds for review sessions
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -42,67 +43,47 @@ function getSelectedIds(engine) {
 }
 
 // ---------------------------------------------------------------------------
-// Randomization tests
+// Shuffle tests
 // ---------------------------------------------------------------------------
 
-describe('Word selection randomization', () => {
+describe('Word selection — all entries, shuffled', () => {
   const POOL_SIZE = 100;
-  const SESSION_SIZE = 20;
   let entries;
 
   beforeEach(() => {
     entries = makeMockEntries(POOL_SIZE);
   });
 
-  it('selects exactly sessionSize words from the pool', () => {
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: SESSION_SIZE });
+  it('selects all playable entries', () => {
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
     engine.startSession();
-    expect(engine.session.words.length).toBe(SESSION_SIZE);
+    expect(engine.session.words.length).toBe(POOL_SIZE);
   });
 
   it('does not repeat words within a single session', () => {
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: SESSION_SIZE });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
     engine.startSession();
     const ids = getSelectedIds(engine);
     const unique = new Set(ids);
     expect(unique.size).toBe(ids.length);
   });
 
-  it('produces different word sets across multiple sessions', () => {
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: SESSION_SIZE });
+  it('produces different orderings across sessions', () => {
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
 
-    const selections = [];
+    const orderings = [];
     for (let i = 0; i < 10; i++) {
       engine.startSession();
-      selections.push(getSelectedIds(engine).sort().join(','));
+      orderings.push(getSelectedIds(engine).join(','));
     }
 
-    const uniqueSets = new Set(selections);
-    // With 100 words and 20 per session, getting the exact same set 10 times
-    // would be astronomically unlikely. At least 2 different sets expected.
-    expect(uniqueSets.size).toBeGreaterThan(1);
-  });
-
-  it('covers the full vocabulary pool over many sessions', () => {
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: SESSION_SIZE });
-    const seenIds = new Set();
-
-    // Run enough sessions that we should see most words
-    for (let i = 0; i < 50; i++) {
-      engine.startSession();
-      for (const id of getSelectedIds(engine)) {
-        seenIds.add(id);
-      }
-    }
-
-    // With 100 words, 50 sessions of 20, we should see almost all words.
-    // Even the least-likely word (difficulty=1, weight=1.0) has ~20% chance per session.
-    // Probability of missing it in 50 sessions: (1 - 0.2)^50 ≈ 1.4e-5
-    expect(seenIds.size).toBeGreaterThanOrEqual(90);
+    const uniqueOrderings = new Set(orderings);
+    // 100 entries shuffled — virtually impossible to get the same order twice
+    expect(uniqueOrderings.size).toBeGreaterThan(1);
   });
 
   it('does not always pick the same first word', () => {
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: SESSION_SIZE });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
     const firstWords = new Set();
 
     for (let i = 0; i < 20; i++) {
@@ -115,53 +96,39 @@ describe('Word selection randomization', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Weighted selection tests
+// filterIds tests
 // ---------------------------------------------------------------------------
 
-describe('Weighted word selection', () => {
-  it('wrongHistory words appear more frequently', () => {
-    const entries = makeMockEntries(50, { difficulty: 1 }); // all same difficulty
-    const wrongIds = [entries[0].id, entries[1].id];
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 10 });
+describe('Word selection — filterIds', () => {
+  it('includes only entries matching filterIds', () => {
+    const entries = makeMockEntries(50);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    const filterIds = [entries[0].id, entries[10].id, entries[20].id];
 
-    let wrongAppearances = 0;
-    const TRIALS = 100;
-
-    for (let i = 0; i < TRIALS; i++) {
-      engine.startSession(wrongIds);
-      const ids = getSelectedIds(engine);
-      if (ids.includes(wrongIds[0])) wrongAppearances++;
-    }
-
-    // Without wrongHistory boost, each word has 10/50 = 20% chance.
-    // With +3 weight boost (from 1.0 to 4.0), the probability is ~57%.
-    // Over 100 trials, expect significantly more than 20%.
-    expect(wrongAppearances).toBeGreaterThan(35);
+    engine.startSession(filterIds);
+    const ids = getSelectedIds(engine);
+    expect(ids.length).toBe(3);
+    expect(new Set(ids)).toEqual(new Set(filterIds));
   });
 
-  it('higher difficulty words appear more often than lower ones', () => {
-    // Create 50 words: 25 at difficulty=1, 25 at difficulty=5
-    const entries = [
-      ...makeMockEntries(25).map((e, i) => ({ ...e, id: `low-${i}`, difficulty: 1 })),
-      ...makeMockEntries(25).map((e, i) => ({ ...e, id: `high-${i}`, difficulty: 5 })),
-    ];
+  it('ignores filterIds that are not playable', () => {
+    const entries = makeMockEntries(10);
+    // Make entry 0 unplayable
+    entries[0].translations.sr = null;
+    entries[0].translations.ru = null;
 
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 10 });
-    let highCount = 0;
-    let lowCount = 0;
-    const TRIALS = 200;
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession([entries[0].id, entries[1].id]);
+    const ids = getSelectedIds(engine);
+    expect(ids.length).toBe(1);
+    expect(ids[0]).toBe(entries[1].id);
+  });
 
-    for (let i = 0; i < TRIALS; i++) {
-      engine.startSession();
-      for (const w of engine.session.words) {
-        if (w.id.startsWith('high-')) highCount++;
-        else lowCount++;
-      }
-    }
-
-    // Difficulty 1 → weight 1.0, Difficulty 5 → weight 2.2
-    // high should be picked more often than low
-    expect(highCount).toBeGreaterThan(lowCount);
+  it('uses all playable entries when filterIds is undefined', () => {
+    const entries = makeMockEntries(25);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession();
+    expect(engine.session.words.length).toBe(25);
   });
 });
 
@@ -170,23 +137,9 @@ describe('Weighted word selection', () => {
 // ---------------------------------------------------------------------------
 
 describe('Word selection edge cases', () => {
-  it('handles pool smaller than sessionSize', () => {
-    const entries = makeMockEntries(5);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 20 });
-    engine.startSession();
-    expect(engine.session.words.length).toBe(5);
-  });
-
-  it('handles pool equal to sessionSize', () => {
-    const entries = makeMockEntries(20);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 20 });
-    engine.startSession();
-    expect(engine.session.words.length).toBe(20);
-  });
-
   it('handles single-word pool', () => {
     const entries = makeMockEntries(1);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 20 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
     engine.startSession();
     expect(engine.session.words.length).toBe(1);
   });
@@ -196,18 +149,17 @@ describe('Word selection edge cases', () => {
       ...e,
       translations: { en: null, sr: null, ru: null },
     }));
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 5 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
     expect(() => engine.startSession()).toThrow('No playable entries');
   });
 
   it('filters out entries missing required translations', () => {
     const entries = makeMockEntries(10);
-    // Remove sr and ru translations from first 3
     for (let i = 0; i < 3; i++) {
       entries[i].translations.sr = null;
       entries[i].translations.ru = null;
     }
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 20 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
     const playable = engine.getPlayableEntries();
     expect(playable.length).toBe(7);
   });
@@ -220,7 +172,7 @@ describe('Word selection edge cases', () => {
 describe('Session simulation (typing mode flow)', () => {
   it('completes a full session cycling through all words', () => {
     const entries = makeMockEntries(30);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 10 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
 
     engine.startSession();
     let wordsProcessed = 0;
@@ -233,30 +185,30 @@ describe('Session simulation (typing mode flow)', () => {
       if (!next || next.score !== undefined) break;
     }
 
-    expect(wordsProcessed).toBe(10);
+    expect(wordsProcessed).toBe(30);
   });
 
   it('wrong answers re-queue words, extending the session', () => {
     const entries = makeMockEntries(30);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 5 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
 
     engine.startSession();
     const initialLength = engine.session.words.length;
 
     // Answer the first word wrong
     engine.checkAnswer('completely_wrong', 'sr');
-    // Word should be re-queued
     expect(engine.session.words.length).toBeGreaterThan(initialLength);
   });
 
   it('session ends with valid summary after all words', () => {
     const entries = makeMockEntries(10);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 5 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
 
     engine.startSession();
+    const total = engine.session.words.length;
 
     // Answer all words
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < total; i++) {
       const word = engine.getCurrentWord();
       if (!word) break;
       engine.checkAnswer(word.translations.sr, 'sr');
@@ -266,15 +218,15 @@ describe('Session simulation (typing mode flow)', () => {
     // Session should have auto-ended or we end it
     const summary = engine.session ? engine.endSession() : null;
     if (summary) {
-      expect(summary.totalAnswered).toBe(5);
-      expect(summary.totalCorrect).toBe(5);
+      expect(summary.totalAnswered).toBe(total);
+      expect(summary.totalCorrect).toBe(total);
       expect(summary.accuracy).toBe(100);
     }
   });
 
   it('hint system works through the engine for typing mode', () => {
     const entries = makeMockEntries(10);
-    const engine = new GameEngine({ entries, direction: 'en-sr', sessionSize: 5 });
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
 
     engine.startSession();
 

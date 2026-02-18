@@ -54,6 +54,9 @@ export const t = {
   pairs_matched: 'Пар найдено',
   next_round: 'Следующий раунд',
 
+  // Menu
+  words_available: 'слов доступно',
+
   // Language labels
   lang_en: 'Английский',
   lang_sr: 'Сербский',

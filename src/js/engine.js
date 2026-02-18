@@ -4,7 +4,7 @@
  * Responsibilities:
  * - Load vocabulary JSON and filter by language direction
  * - Manage session state (score, streak, hints, words)
- * - Drive word selection (random, weighted by difficulty & errors)
+ * - Shuffle all playable words (Fisher-Yates) for infinite sessions
  * - Implement two-tier hint system (sister language → Russian fallback)
  * - Emit events for UI decoupling
  */
@@ -21,13 +21,11 @@ export class GameEngine extends EventEmitter {
    * @param {Object} options
    * @param {Array} options.entries - vocabulary entries
    * @param {string} options.direction - 'en-sr' (learn English, hint Serbian) or 'sr-en' (learn Serbian, hint English)
-   * @param {number} [options.sessionSize=20] - words per session
    */
-  constructor({ entries, direction = 'en-sr', sessionSize = 20 }) {
+  constructor({ entries, direction = 'en-sr' }) {
     super();
     this.allEntries = entries;
     this.direction = direction;
-    this.sessionSize = sessionSize;
 
     // Derived from direction
     this.targetLang = direction.split('-')[0]; // language being learned
@@ -51,56 +49,35 @@ export class GameEngine extends EventEmitter {
   }
 
   /**
-   * Select words for a session with weighted randomness.
-   * Prioritizes: words user got wrong > higher difficulty > random.
+   * Fisher-Yates shuffle — returns a new shuffled copy of the array.
+   * @param {Array} arr
+   * @returns {Array}
    */
-  selectSessionWords(playable, wrongHistory = []) {
-    const count = Math.min(this.sessionSize, playable.length);
-
-    // Build weighted pool
-    const weighted = playable.map((entry) => {
-      let weight = 1;
-      // Higher difficulty = slightly more likely
-      weight += (entry.difficulty - 1) * 0.3;
-      // Previously wrong = much more likely
-      if (wrongHistory.includes(entry.id)) {
-        weight += 3;
-      }
-      return { entry, weight };
-    });
-
-    // Weighted random selection without replacement
-    const selected = [];
-    const pool = [...weighted];
-
-    for (let i = 0; i < count && pool.length > 0; i++) {
-      const totalWeight = pool.reduce((sum, w) => sum + w.weight, 0);
-      let rand = Math.random() * totalWeight;
-
-      for (let j = 0; j < pool.length; j++) {
-        rand -= pool[j].weight;
-        if (rand <= 0) {
-          selected.push(pool[j].entry);
-          pool.splice(j, 1);
-          break;
-        }
-      }
+  shuffleEntries(arr) {
+    const shuffled = [...arr];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-
-    return selected;
+    return shuffled;
   }
 
   /**
    * Start a new game session.
-   * @param {string[]} [wrongHistory] - IDs of previously wrong words
+   * @param {string[]} [filterIds] - if provided, only include entries with these IDs
    */
-  startSession(wrongHistory = []) {
-    const playable = this.getPlayableEntries();
+  startSession(filterIds) {
+    let playable = this.getPlayableEntries();
     if (playable.length === 0) {
       throw new Error('No playable entries for this language direction');
     }
 
-    const words = this.selectSessionWords(playable, wrongHistory);
+    if (filterIds && filterIds.length > 0) {
+      const idSet = new Set(filterIds);
+      playable = playable.filter((e) => idSet.has(e.id));
+    }
+
+    const words = this.shuffleEntries(playable);
 
     this.session = {
       words,
