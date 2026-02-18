@@ -4053,40 +4053,6 @@
       }
     },
     {
-      "id": "en-0121",
-      "term": "• Led the front-end team to ensure efficient product delivery within tight deadlines",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "Led the front-end team to ensure efficient product delivery within tight deadlines",
-        "sr": "Vodio je tim front-end razvoja da osigura efikasnu dostavu proizvoda u skladu sa strogim rokovanjima",
-        "ru": "Возглавлял фронтенд-команду для обеспечения эффективной доставки продукта в условиях жестких сроков"
-      },
-      "examples": {
-        "en": [
-          "She led the front-end team to ensure efficient product delivery within tight deadlines."
-        ],
-        "sr": [
-          "Vodila je tim front-end razvoja da osigura efikasnu dostavu proizvoda u skladu sa strogim rokovanjima."
-        ],
-        "ru": [
-          "Она возглавляла фронтенд-команду для обеспечения эффективной доставки продукта в условиях жестких сроков."
-        ]
-      },
-      "explanation": "Фраза описывает лидерскую роль при управлении командой фронтенд-разработчиков с целью быстрого и качественного выпуска продукта при ограниченном времени.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:04:04.815Z"
-      }
-    },
-    {
       "id": "en-0122",
       "term": "fostering a strong community",
       "source_language": "en",
@@ -4516,40 +4482,6 @@
         ]
       },
       "explanation": "Вежливое, формальное выражение для вопроса о чьих-либо планах на вечер. Используется в литературном или старомодном стиле речи.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:04:20.838Z"
-      }
-    },
-    {
-      "id": "en-0135",
-      "term": "Permit me to remark upon the exquisite beauty of your portraits, which are truly a testament to artistry and grace",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "Dozvolite mi da priimetim na neobičnu lepotu vaših portreta, koji su zaista svedočanstvo umetnosti i gracioznosti.",
-        "ru": "Позвольте мне заметить об изысканной красоте ваших портретов, которые действительно являются свидетельством артистизма и грации."
-      },
-      "examples": {
-        "en": [
-          "Permit me to remark upon the exquisite beauty of your portraits, which are truly a testament to artistry and grace."
-        ],
-        "sr": [
-          "Dozvolite mi da priimetim na neobičnu lepotu vaših portreta, koji su zaista svedočanstvo umetnosti i gracioznosti."
-        ],
-        "ru": [
-          "Позвольте мне заметить об изысканной красоте ваших портретов, которые действительно являются свидетельством артистизма и грации."
-        ]
-      },
-      "explanation": "Вежливое, формальное выражение восхищения портретами, используемое в литературной или викторианской речи. Выражает уважение к мастерству художника.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -8156,40 +8088,6 @@
         ]
       },
       "explanation": "Глагол, означающий резко и с силой закрыть что-либо или ударить об что-то. Часто используется для описания агрессивного или раздраженного действия.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:07:27.045Z"
-      }
-    },
-    {
-      "id": "en-0242",
-      "term": "You were right when you said that walking in the mountains wouldn't do me any good.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "Bila si u pravu kada si rekla da šetnja po planinama meni ne bi donela nikakvu korist.",
-        "ru": "Ты была права, когда сказала, что прогулка в горах не принесет мне никакой пользы."
-      },
-      "examples": {
-        "en": [
-          "You were right when you said that walking in the mountains wouldn't do me any good."
-        ],
-        "sr": [
-          "Bila si u pravu kada si rekla da šetnja po planinama meni ne bi donela nikakvu korist."
-        ],
-        "ru": [
-          "Ты была права, когда сказала, что прогулка в горах не принесет мне никакой пользы."
-        ]
-      },
-      "explanation": "Фраза, выражающая согласие с чьим-то предыдущим утверждением о том, что определённое действие не будет полезным. Используется для признания правоты собеседника.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -12238,40 +12136,6 @@
         ]
       },
       "explanation": "Гладкий, плавный, без перерывов и проблем. Характеризует процессы или переходы, которые происходят без видимых швов или помех.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:10:44.929Z"
-      }
-    },
-    {
-      "id": "en-0362",
-      "term": "I’ve often facilitated quick feasibility spikes to inform product decisions early.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "I've often facilitated quick feasibility spikes to inform product decisions early.",
-        "sr": "Često sam olakšavao brze testove izvodljivosti kako bih rano informisao odluke o proizvodu.",
-        "ru": "Я часто организовывал быстрые проверки осуществимости, чтобы рано информировать решения о продукте."
-      },
-      "examples": {
-        "en": [
-          "I've often facilitated quick feasibility spikes to inform product decisions early."
-        ],
-        "sr": [
-          "Često sam olakšavao brze testove izvodljivosti kako bih rano informisao odluke o proizvodu."
-        ],
-        "ru": [
-          "Я часто организовывал быстрые проверки осуществимости, чтобы рано информировать решения о продукте."
-        ]
-      },
-      "explanation": "Предложение описывает практику проведения быстрых исследований для проверки возможности реализации идей до принятия основных решений о развитии продукта.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -18853,40 +18717,6 @@
       }
     },
     {
-      "id": "en-0556",
-      "term": "The word \"handicap\" has several meanings, most commonly referring to a disadvantage that affects someone's ability to perform or compete, or a method of equalizing chances in a competition.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "Reč \"hendikep\" ima nekoliko značenja, najčešće se odnosi na nedostatak koji utiče na tuđu mogućnost da izvršava ili se takmiči, ili na metodu izjednačavanja šansi u konkurenciji.",
-        "ru": "Слово «инвалидность» имеет несколько значений, чаще всего обозначает недостаток, влияющий на способность человека выполнять задачи или участвовать в соревнованиях, либо метод уравнивания шансов в конкурсе."
-      },
-      "examples": {
-        "en": [
-          "His physical handicap did not prevent him from achieving great success."
-        ],
-        "sr": [
-          "Njegov fizički hendikep ga nije sprečio da postigne veliki uspeh."
-        ],
-        "ru": [
-          "Его физический недостаток не помешал ему добиться большого успеха."
-        ]
-      },
-      "explanation": "Слово обозначает недостаток или помеху, которая затрудняет выполнение какой-либо деятельности, или систему выравнивания условий в спорте и играх.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:16:09.828Z"
-      }
-    },
-    {
       "id": "en-0557",
       "term": "buzzer",
       "source_language": "en",
@@ -22123,40 +21953,6 @@
       }
     },
     {
-      "id": "en-0652",
-      "term": "2. In today’s digital world, having a stable internet connection has become a necessity rather than a luxury.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "In today's digital world, having a stable internet connection has become a necessity rather than a luxury.",
-        "sr": "U današnjem digitalnom svijetu, imanje stabilne internet konekcije postalo je neophodnost umjesto luksuza.",
-        "ru": "В современном цифровом мире стабильное интернет-соединение стало необходимостью, а не роскошью."
-      },
-      "examples": {
-        "en": [
-          "In today's digital world, having a stable internet connection has become a necessity rather than a luxury."
-        ],
-        "sr": [
-          "U današnjem digitalnom svijetu, imanje stabilne internet konekcije postalo je neophodnost umjesto luksuza."
-        ],
-        "ru": [
-          "В современном цифровом мире стабильное интернет-соединение стало необходимостью, а не роскошью."
-        ]
-      },
-      "explanation": "Фраза подчёркивает, что интернет перестал быть дополнительным удобством и теперь является необходимым инструментом для повседневной жизни и работы.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:18:42.843Z"
-      }
-    },
-    {
       "id": "en-0653",
       "term": "essentials",
       "source_language": "en",
@@ -22518,40 +22314,6 @@
         ]
       },
       "explanation": "Быть лучше, выше или больше, чем кто-то или что-то. Означает превышение определённого уровня или стандарта.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:18:59.677Z"
-      }
-    },
-    {
-      "id": "en-0664",
-      "term": "She trained day and night to surpass her previous performance and break the school’s swimming record.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "She trained day and night to surpass her previous performance and break the school's swimming record.",
-        "sr": "Trenirala je dan i noć da nadmaši svoj prethodni rezultat i obori školski rekord u plivanju.",
-        "ru": "Она тренировалась день и ночь, чтобы превзойти свой предыдущий результат и установить новый школьный рекорд по плаванию."
-      },
-      "examples": {
-        "en": [
-          "She trained day and night to surpass her previous performance and break the school's swimming record."
-        ],
-        "sr": [
-          "Trenirala je dan i noć da nadmaši svoj prethodni rezultat i obori školski rekord u plivanju."
-        ],
-        "ru": [
-          "Она тренировалась день и ночь, чтобы превзойти свой предыдущий результат и установить новый школьный рекорд по плаванию."
-        ]
-      },
-      "explanation": "Полное предложение описывает усердную подготовку атлета с целью достичь лучшего результата и установить новый рекорд.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -24063,40 +23825,6 @@
       }
     },
     {
-      "id": "en-0709",
-      "term": "George heard the heavy wooden door slam in the wind as Chuck came out onto the parapet beside him.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "Džordž je čuo kako se teška drvena vrata s hukom zatvore na vetru dok je Čak izašao na terasu pored njega.",
-        "ru": "Джордж услышал, как тяжёлая деревянная дверь с грохотом захлопнулась на ветру, когда Чак вышел на парапет рядом с ним."
-      },
-      "examples": {
-        "en": [
-          "George heard the heavy wooden door slam in the wind as Chuck came out onto the parapet beside him."
-        ],
-        "sr": [
-          "Džordž je čuo kako se teška drvena vrata s hukom zatvore na vetru dok je Čak izašao na terasu pored njega."
-        ],
-        "ru": [
-          "Джордж услышал, как тяжёлая деревянная дверь с грохотом захлопнулась на ветру, когда Чак вышел на парапет рядом с ним."
-        ]
-      },
-      "explanation": "Описание сцены, где персонаж Джордж слышит звук захлопывающейся двери, в то время как его знакомый Чак появляется на крыше или возвышенной платформе.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:20:10.772Z"
-      }
-    },
-    {
       "id": "en-0710",
       "term": "slam",
       "source_language": "en",
@@ -24390,40 +24118,6 @@
         ]
       },
       "explanation": "Прилагательное, описывающее объект с острыми углами и резкими линиями. Противоположно округлому и мягкому.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:20:30.322Z"
-      }
-    },
-    {
-      "id": "en-0719",
-      "term": "The squat, angular buildings were silhouetted against the afterglow of the sunset",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "The squat, angular buildings were silhouetted against the afterglow of the sunset.",
-        "sr": "Prizemiste, uglaste zgrade su bile siluetiran protiv posljednjeg sjaja zalaska sunca.",
-        "ru": "Приземистые, угловатые здания вырисовывались на фоне закатного солнца."
-      },
-      "examples": {
-        "en": [
-          "The squat, angular buildings were silhouetted against the afterglow of the sunset."
-        ],
-        "sr": [
-          "Prizemiste, uglaste zgrade su bile siluetiran protiv posljednjeg sjaja zalaska sunca."
-        ],
-        "ru": [
-          "Приземистые, угловатые здания вырисовывались на фоне закатного солнца."
-        ]
-      },
-      "explanation": "Описательное предложение, рисующее образ архитектурных сооружений, видимых в виде темных контуров против света вечернего неба.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -31153,40 +30847,6 @@
       }
     },
     {
-      "id": "en-0917",
-      "term": "I had — of course — neglected to make any plans for the 17th. The dread rushed outward from my gut until my entire body was hot and cold.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "Naravno, zaboravio sam da napravim bilo kakve planove za 17-ti. Strah je izbio iz mog stomaka dok mi celo telo nije bilo vruće i hladno.",
-        "ru": "Я, разумеется, забыл составить какие-либо планы на семнадцатое. Страх волной распространился от моего живота, пока мое тело не охватило ощущение жара и холода."
-      },
-      "examples": {
-        "en": [
-          "The dread rushed outward from my gut until my entire body was hot and cold."
-        ],
-        "sr": [
-          "Strah je izbio iz mog stomaka dok mi celo telo nije bilo vruće i hladno."
-        ],
-        "ru": [
-          "Страх волной распространился от моего живота, пока мое тело не охватило ощущение жара и холода."
-        ]
-      },
-      "explanation": "Описание физического проявления страха, когда эмоция охватывает всё тело, вызывая противоречивые ощущения жара и холода. Это выражение передает интенсивность паники и беспокойства.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:26:07.247Z"
-      }
-    },
-    {
       "id": "en-0918",
       "term": "Pollen",
       "source_language": "en",
@@ -32649,40 +32309,6 @@
       }
     },
     {
-      "id": "en-0961",
-      "term": "In a country where the rule of law was frequently trumped by the rule of in-laws.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "U zemlji gde je vladavina zakona često bila nadmetana vladavinom rodbine.",
-        "ru": "В стране, где верховенство закона часто вытеснялось влиянием родственников."
-      },
-      "examples": {
-        "en": [
-          "In a country where the rule of law was frequently trumped by the rule of in-laws."
-        ],
-        "sr": [
-          "U zemlji gde je vladavina zakona često bila nadmetana vladavinom rodbine."
-        ],
-        "ru": [
-          "В стране, где верховенство закона часто вытеснялось влиянием родственников."
-        ]
-      },
-      "explanation": "Фраза выражает критику коррупции и непотизма, когда личные связи и влияние семьи имеют приоритет перед законом и справедливостью.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:27:19.070Z"
-      }
-    },
-    {
       "id": "en-0962",
       "term": "trumped",
       "source_language": "en",
@@ -33158,40 +32784,6 @@
         "source_file": "english_words.txt",
         "reviewed": false,
         "enriched_at": "2026-02-18T10:27:36.379Z"
-      }
-    },
-    {
-      "id": "en-0976",
-      "term": "It was a different kind of legacy — not one built on recognition, but on quiet generosity.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "To je bilo drugačije nasledstvo — ne ono izgrađeno na priznanju, već na tihoj великодушности.",
-        "ru": "Это было другое наследие — не построенное на признании, а на тихой щедрости."
-      },
-      "examples": {
-        "en": [
-          "Her legacy was not about fame, but about the lives she quietly changed."
-        ],
-        "sr": [
-          "Njeno nasledstvo nije bilo o slavi, već o životima koje je tiho promenila."
-        ],
-        "ru": [
-          "Её наследие заключалось не в славе, а в жизнях, которые она тихо изменила."
-        ]
-      },
-      "explanation": "Фраза описывает наследие, основанное не на общественном признании, а на скромных и бескорыстных поступках. Подчёркивает духовную ценность над социальным статусом.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:27:44.764Z"
       }
     },
     {
@@ -34116,7 +33708,7 @@
     },
     {
       "id": "en-1004",
-      "term": "Bonkers\" is an informal adjective that means crazy, silly, or wildly enthusiastic",
+      "term": "bonkers",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -35470,40 +35062,6 @@
         ]
       },
       "explanation": "Фраза, обозначающая укрепление отношений или связей между людьми, группами или странами. Подразумевает более глубокое и прочное взаимодействие.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:29:34.096Z"
-      }
-    },
-    {
-      "id": "en-1044",
-      "term": "I choose my teacher very carefully because for me it’s almost like choosing a business partner.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "I choose my teacher very carefully because for me it's almost like choosing a business partner.",
-        "sr": "Pažljivo biram svog učitelja jer je to za mene kao izbor poslovnog partnera.",
-        "ru": "Я выбираю своего учителя очень тщательно, потому что для меня это почти как выбор делового партнера."
-      },
-      "examples": {
-        "en": [
-          "I choose my teacher very carefully because for me it's almost like choosing a business partner."
-        ],
-        "sr": [
-          "Pažljivo biram svog učitelja jer je to za mene kao izbor poslovnog partnera."
-        ],
-        "ru": [
-          "Я выбираю своего учителя очень тщательно, потому что для меня это почти как выбор делового партнера."
-        ]
-      },
-      "explanation": "Фраза, выражающая серьезность отношения к выбору учителя, приравнивая его значимость к выбору деловых партнеров. Подчеркивает важность доверия и совместимости.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -37389,40 +36947,6 @@
       }
     },
     {
-      "id": "en-1100",
-      "term": "Little progress since the last sprint due to a large number of bugs and complex integration testing.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "Mali napredak od prošlog sprinta zbog velikog broja grešaka i složenog integraciono testiranja.",
-        "ru": "Небольшой прогресс с момента последнего спринта из-за большого количества ошибок и сложного интеграционного тестирования."
-      },
-      "examples": {
-        "en": [
-          "Little progress since the last sprint due to a large number of bugs and complex integration testing."
-        ],
-        "sr": [
-          "Mali napredak od prošlog sprinta zbog velikog broja grešaka i složenog integraciono testiranja."
-        ],
-        "ru": [
-          "Небольшой прогресс с момента последнего спринта из-за большого количества ошибок и сложного интеграционного тестирования."
-        ]
-      },
-      "explanation": "Техническое выражение, используемое в разработке программного обеспечения для описания ограниченного прогресса в работе из-за обнаруженных ошибок и необходимости проведения тщательного тестирования интеграции между компонентами.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:31:05.701Z"
-      }
-    },
-    {
       "id": "en-1101",
       "term": "Attractive",
       "source_language": "en",
@@ -38240,7 +37764,7 @@
     },
     {
       "id": "en-1125",
-      "term": "\"To mail it in\" is an idiom that means to perform a task with minimal effort, leading to a lackluster result. It can also be used literally to mean sending something via the postal service.",
+      "term": "To mail it in",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -39565,40 +39089,6 @@
       }
     },
     {
-      "id": "en-1164",
-      "term": "\"Is seldom employed\" means something happens not often, infrequently, or rarely, often in a formal or literary way",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "\"Retko se koristi\" znači da se nešto dešava ne često, retko ili oskudno, često na formalan ili književan način",
-        "ru": "\"Редко используется\" означает, что что-то происходит нечасто, редко или скудно, часто формальным или литературным способом"
-      },
-      "examples": {
-        "en": [
-          "This word is seldom employed in modern English."
-        ],
-        "sr": [
-          "Ova reč se retko koristi u modernom engleskom jeziku."
-        ],
-        "ru": [
-          "Это слово редко используется в современном английском языке."
-        ]
-      },
-      "explanation": "Фраза объясняет, что что-то используется или происходит не часто, редко. Обычно применяется к словам, выражениям или действиям в формальном или литературном контексте.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:32:51.064Z"
-      }
-    },
-    {
       "id": "en-1165",
       "term": "Seldom",
       "source_language": "en",
@@ -39701,40 +39191,6 @@
       }
     },
     {
-      "id": "en-1168",
-      "term": "b The cqordinator is a confident member who sets objectives and defines team members' roles.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "The Coordinator is a confident member who sets objectives and defines team members' roles.",
-        "sr": "Koordinator je samouveran član koji postavlja ciljeve i definiše uloge članova tima.",
-        "ru": "Координатор — это уверенный в себе член команды, который определяет цели и роли участников."
-      },
-      "examples": {
-        "en": [
-          "The Coordinator is a confident member who sets objectives and defines team members' roles at the beginning of the project."
-        ],
-        "sr": [
-          "Koordinator je samouveran član koji postavlja ciljeve i definiše uloge članova tima na početku projekta."
-        ],
-        "ru": [
-          "Координатор — уверенный в себе член команды, который определяет цели и роли участников в начале проекта."
-        ]
-      },
-      "explanation": "Тип командного игрока, обладающий лидерскими качествами, отвечающий за установление целей команды и распределение ответственности между её членами.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:33:00.865Z"
-      }
-    },
-    {
       "id": "en-1169",
       "term": "c The Shaper defines issues, shapes ideas and leadsthe action.",
       "source_language": "en",
@@ -39766,108 +39222,6 @@
         "source_file": "english_words.txt",
         "reviewed": false,
         "enriched_at": "2026-02-18T10:33:00.865Z"
-      }
-    },
-    {
-      "id": "en-1170",
-      "term": "d The Plant is a creative and imaginative perion who supplies original ideas and solves problems.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "The Plant is a creative and imaginative person who supplies original ideas and solves problems.",
-        "sr": "Genijalni član je kreativna i imaginativna osoba koja daje originalne ideje i rešava probleme.",
-        "ru": "Генератор идей — творческий и воображаемый человек, который предлагает оригинальные идеи и решает проблемы."
-      },
-      "examples": {
-        "en": [
-          "The Plant is a creative and imaginative person who supplies original ideas and solves problems during brainstorming sessions."
-        ],
-        "sr": [
-          "Genijalni član je kreativna i imaginativna osoba koja daje originalne ideje i rešava probleme tokom sesija za razmenu ideja."
-        ],
-        "ru": [
-          "Генератор идей — творческий и воображаемый человек, который предлагает оригинальные идеи и решает проблемы на сессиях мозгового штурма."
-        ]
-      },
-      "explanation": "Тип командного игрока с развитым творческим мышлением, способный генерировать инновационные идеи и находить нестандартные решения для проблем команды.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:33:00.865Z"
-      }
-    },
-    {
-      "id": "en-1171",
-      "term": "e The Resource Investigator communicate} witnth outside world and explores opportunities.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "The Resource Investigator communicates with the outside world and explores opportunities.",
-        "sr": "Istraživač resursa komunicira sa spoljašnjim svetom i istražuje mogućnosti.",
-        "ru": "Исследователь ресурсов общается с внешним миром и исследует возможности."
-      },
-      "examples": {
-        "en": [
-          "The resource investigator on our team always finds new business partnerships."
-        ],
-        "sr": [
-          "Istraživač resursa u našem timu uvek pronalazi nove poslovne partnere."
-        ],
-        "ru": [
-          "Исследователь ресурсов в нашей команде всегда находит новых деловых партнеров."
-        ]
-      },
-      "explanation": "Роль в команде, ответственная за поиск внешних возможностей, контактов и информации. Такой человек активно взаимодействует с окружающей средой и приносит в команду новые идеи и ресурсы.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:33:13.783Z"
-      }
-    },
-    {
-      "id": "en-1172",
-      "term": "f The Monitor Evaluator sees all the possiqilitie evaluates situations objectively and sees what is",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "The Monitor Evaluator sees all the possibilities, evaluates situations objectively and sees what is realistic.",
-        "sr": "Nadzornik-evaluator vidi sve mogućnosti, objektivno ocenjuje situacije i vidi šta je realno.",
-        "ru": "Монитор-оценщик видит все возможности, объективно оценивает ситуации и видит, что реально."
-      },
-      "examples": {
-        "en": [
-          "The monitor evaluator carefully analyzed the project risks before we started."
-        ],
-        "sr": [
-          "Nadzornik-evaluator je pažljivo analizirao rizike projekta pre nego što smo počeli."
-        ],
-        "ru": [
-          "Монитор-оценщик тщательно проанализировал риски проекта перед началом работы."
-        ]
-      },
-      "explanation": "Роль в команде, которая отвечает за объективный анализ и оценку ситуаций. Такой человек видит реальность без эмоций и предоставляет трезвые суждения о возможностях и рисках.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:33:13.783Z"
       }
     },
     {
@@ -39926,40 +39280,6 @@
         ]
       },
       "explanation": "Роль в команде, которая фокусируется на сплочении членов команды и создании гармонии. Такой человек поддерживает коллег, разрешает конфликты и способствует командному духу.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:33:13.783Z"
-      }
-    },
-    {
-      "id": "en-1175",
-      "term": "h The Completer Finisher meets deaqti12es, corrects,mistakes and makes sure nothing is forgotten.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": "The Completer Finisher meets deadlines, corrects mistakes and makes sure nothing is forgotten.",
-        "sr": "Završilac zadataka ispunjava rokove, ispravljaje greške i osigurava da se ništa ne zaboravi.",
-        "ru": "Завершитель выполняет сроки, исправляет ошибки и следит, чтобы ничто не было забыто."
-      },
-      "examples": {
-        "en": [
-          "The completer finisher caught an error in the report just before submission."
-        ],
-        "sr": [
-          "Završilac je uhvatio grešku u izveštaju baš pre nego što je podnesen."
-        ],
-        "ru": [
-          "Завершитель поймал ошибку в отчете прямо перед отправкой."
-        ]
-      },
-      "explanation": "Роль в команде, ответственная за внимание к деталям и своевременное завершение работы. Такой человек следит за сроками, проверяет качество и обеспечивает полноту выполнения задач.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -45811,40 +45131,6 @@
         ]
       },
       "explanation": "Увеличенный, расширенный или улучшенный, особенно с помощью технологии. Может означать дополнение реальности цифровыми элементами.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:38:21.316Z"
-      }
-    },
-    {
-      "id": "en-1349",
-      "term": "A \"no-brainer\" is an idiom describing a decision, choice, or question that is extremely easy, obvious, or requires almost no thought.",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "\"Bezglava odluka\" je idiom koji opisuje odluku, izbor ili pitanje koje je izuzetno lako, očito ili zahtijeva gotovo nikakvu razmišljanja.",
-        "ru": "\"Решение, не требующее раздумий\" — идиома, описывающая решение, выбор или вопрос, который чрезвычайно лёгкий, очевидный или требует почти никакого размышления."
-      },
-      "examples": {
-        "en": [
-          "Choosing between a safe job and an unsafe one is a no-brainer."
-        ],
-        "sr": [
-          "Odabiranje između sigurnog i nesigurnog posla je bezglava odluka."
-        ],
-        "ru": [
-          "Выбор между безопасной и опасной работой — решение, не требующее раздумий."
-        ]
-      },
-      "explanation": "Идиоматическое выражение для описания очень простого и очевидного выбора или решения, которое не требует серьезного размышления.",
       "pronunciation": null,
       "category": null,
       "tags": [],
