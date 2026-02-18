@@ -2,21 +2,15 @@
 
 /**
  * enrich-vocabulary.js — Use Claude API to fill missing translations,
- * examples, and explanations in vocabulary JSON files.
+ * examples, and explanations in the vocabulary database.
  *
  * Usage:
- *   node scripts/enrich-vocabulary.js
- *   node scripts/enrich-vocabulary.js --dry-run
  *   ANTHROPIC_API_KEY=sk-... node scripts/enrich-vocabulary.js
+ *   node scripts/enrich-vocabulary.js --dry-run
  */
 
 import Anthropic from '@anthropic-ai/sdk';
-import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const projectRoot = join(__dirname, '..');
+import { openDb } from './lib/db.js';
 
 // ---------------------------------------------------------------------------
 // Config
@@ -35,21 +29,16 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function needsEnrichment(entry) {
-  if (entry.enriched) return false;
-  const t = entry.translations;
-  const hasAllTranslations = t.en && t.sr && t.ru;
-  const hasExamples = entry.examples.en.length > 0 && entry.examples.sr.length > 0 && entry.examples.ru.length > 0;
-  const hasExplanation = entry.explanation;
-  return !(hasAllTranslations && hasExamples && hasExplanation);
-}
-
 function buildPrompt(entries) {
   const items = entries.map((e) => ({
     id: e.id,
     term: e.term,
     source_language: e.source_language,
-    existing_translations: e.translations,
+    existing_translations: {
+      en: e.translation_en,
+      sr: e.translation_sr,
+      ru: e.translation_ru,
+    },
     existing_explanation: e.explanation,
   }));
 
@@ -81,75 +70,81 @@ ${JSON.stringify(items, null, 2)}`;
 }
 
 function parseResponse(text) {
-  // Extract JSON array from response (handle possible markdown wrapping)
   const jsonMatch = text.match(/\[[\s\S]*\]/);
   if (!jsonMatch) throw new Error('No JSON array found in response');
   return JSON.parse(jsonMatch[0]);
 }
 
-function applyEnrichment(entry, enriched) {
-  // Merge translations — keep existing, fill nulls
-  for (const lang of ['en', 'sr', 'ru']) {
-    if (entry.translations[lang] === null && enriched.translations?.[lang]) {
-      entry.translations[lang] = enriched.translations[lang];
-    }
-  }
-
-  // Merge examples — append new, avoid duplicates
-  for (const lang of ['en', 'sr', 'ru']) {
-    if (enriched.examples?.[lang]) {
-      for (const ex of enriched.examples[lang]) {
-        if (!entry.examples[lang].includes(ex)) {
-          entry.examples[lang].push(ex);
-        }
-      }
-    }
-  }
-
-  // Set explanation if missing
-  if (!entry.explanation && enriched.explanation) {
-    entry.explanation = enriched.explanation;
-  }
-
-  entry.enriched = true;
-  entry.metadata.enriched_at = new Date().toISOString();
-}
-
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
-async function enrichFile(filePath, client) {
-  const data = JSON.parse(readFileSync(filePath, 'utf-8'));
-  const toEnrich = data.entries.filter(needsEnrichment);
+async function main() {
+  console.log('=== Language Study AI Enrichment ===');
 
-  console.log(`\nFile: ${filePath}`);
-  console.log(`  Total entries: ${data.entries.length}`);
-  console.log(`  Need enrichment: ${toEnrich.length}`);
-  console.log(`  Already enriched: ${data.entries.length - toEnrich.length}`);
+  if (DRY_RUN) {
+    console.log('[DRY RUN MODE — no API calls will be made]\n');
+  }
+
+  if (!process.env.ANTHROPIC_API_KEY && !DRY_RUN) {
+    console.error('Error: ANTHROPIC_API_KEY environment variable is required.');
+    console.error('Set it with: export ANTHROPIC_API_KEY=sk-ant-...');
+    process.exit(1);
+  }
+
+  const client = DRY_RUN ? null : new Anthropic();
+  const db = openDb();
+
+  // Find entries needing enrichment
+  const toEnrich = db.prepare(`
+    SELECT * FROM vocabulary WHERE enriched = 0
+    ORDER BY source_language, id
+  `).all();
+
+  console.log(`Total entries: ${db.prepare('SELECT COUNT(*) as n FROM vocabulary').get().n}`);
+  console.log(`Need enrichment: ${toEnrich.length}`);
+  console.log(`Already enriched: ${db.prepare('SELECT COUNT(*) as n FROM vocabulary WHERE enriched = 1').get().n}`);
 
   if (toEnrich.length === 0) {
-    console.log('  Nothing to do.');
-    return { processed: 0, failed: 0 };
+    console.log('Nothing to do.');
+    db.close();
+    return;
   }
 
   if (DRY_RUN) {
-    console.log(`  [DRY RUN] Would process ${toEnrich.length} entries in ${Math.ceil(toEnrich.length / BATCH_SIZE)} batches.`);
-    return { processed: 0, failed: 0 };
+    console.log(`[DRY RUN] Would process ${toEnrich.length} entries in ${Math.ceil(toEnrich.length / BATCH_SIZE)} batches.`);
+    db.close();
+    return;
   }
 
-  const errors = [];
-  let processed = 0;
-  const batches = [];
+  // Prepare update statement
+  const updateStmt = db.prepare(`
+    UPDATE vocabulary SET
+      translation_en = @translation_en,
+      translation_sr = @translation_sr,
+      translation_ru = @translation_ru,
+      examples_en = @examples_en,
+      examples_sr = @examples_sr,
+      examples_ru = @examples_ru,
+      explanation = @explanation,
+      enriched = 1,
+      enriched_at = @enriched_at
+    WHERE id = @id
+  `);
 
+  // Process in batches
+  const batches = [];
   for (let i = 0; i < toEnrich.length; i += BATCH_SIZE) {
     batches.push(toEnrich.slice(i, i + BATCH_SIZE));
   }
 
-  console.log(`  Processing ${batches.length} batches of up to ${BATCH_SIZE} entries...`);
+  console.log(`Processing ${batches.length} batches of up to ${BATCH_SIZE} entries...`);
+
+  let processed = 0;
+  let failed = 0;
 
   for (let batchIdx = 0; batchIdx < batches.length; batchIdx++) {
     const batch = batches[batchIdx];
-    console.log(`  Batch ${batchIdx + 1}/${batches.length} (${batch.length} entries)...`);
+    console.log(`Batch ${batchIdx + 1}/${batches.length} (${batch.length} entries)...`);
 
     let response;
     let retries = 0;
@@ -168,10 +163,10 @@ async function enrichFile(filePath, client) {
       } catch (err) {
         retries++;
         const waitMs = DELAY_MS * Math.pow(2, retries);
-        console.log(`    Retry ${retries}/${MAX_RETRIES} after ${waitMs}ms: ${err.message}`);
+        console.log(`  Retry ${retries}/${MAX_RETRIES} after ${waitMs}ms: ${err.message}`);
         if (retries >= MAX_RETRIES) {
-          console.log(`    FAILED batch ${batchIdx + 1} — saving to errors.json`);
-          errors.push({ batch: batchIdx, entries: batch.map((e) => e.id), error: err.message });
+          console.log(`  FAILED batch ${batchIdx + 1}`);
+          failed++;
           break;
         }
         await sleep(waitMs);
@@ -179,18 +174,52 @@ async function enrichFile(filePath, client) {
     }
 
     if (response) {
-      // Apply enrichments
       const enrichMap = new Map(response.map((r) => [r.id, r]));
-      for (const entry of batch) {
-        const enriched = enrichMap.get(entry.id);
-        if (enriched) {
-          applyEnrichment(entry, enriched);
+      const now = new Date().toISOString();
+
+      const applyBatch = db.transaction(() => {
+        for (const row of batch) {
+          const enriched = enrichMap.get(row.id);
+          if (!enriched) continue;
+
+          // Merge translations: keep existing, fill nulls
+          const translation_en = row.translation_en ?? enriched.translations?.en ?? null;
+          const translation_sr = row.translation_sr ?? enriched.translations?.sr ?? null;
+          const translation_ru = row.translation_ru ?? enriched.translations?.ru ?? null;
+
+          // Merge examples: append new, avoid duplicates
+          const existEn = JSON.parse(row.examples_en);
+          const existSr = JSON.parse(row.examples_sr);
+          const existRu = JSON.parse(row.examples_ru);
+
+          for (const ex of enriched.examples?.en ?? []) {
+            if (!existEn.includes(ex)) existEn.push(ex);
+          }
+          for (const ex of enriched.examples?.sr ?? []) {
+            if (!existSr.includes(ex)) existSr.push(ex);
+          }
+          for (const ex of enriched.examples?.ru ?? []) {
+            if (!existRu.includes(ex)) existRu.push(ex);
+          }
+
+          const explanation = row.explanation ?? enriched.explanation ?? null;
+
+          updateStmt.run({
+            id: row.id,
+            translation_en,
+            translation_sr,
+            translation_ru,
+            examples_en: JSON.stringify(existEn),
+            examples_sr: JSON.stringify(existSr),
+            examples_ru: JSON.stringify(existRu),
+            explanation,
+            enriched_at: now,
+          });
           processed++;
         }
-      }
+      });
 
-      // Save progress after each batch
-      writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
+      applyBatch();
     }
 
     // Rate limit delay
@@ -199,45 +228,11 @@ async function enrichFile(filePath, client) {
     }
   }
 
-  // Final save
-  writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-
-  if (errors.length > 0) {
-    const errPath = join(dirname(filePath), 'errors.json');
-    writeFileSync(errPath, JSON.stringify(errors, null, 2), 'utf-8');
-    console.log(`  Errors saved to ${errPath}`);
-  }
-
-  return { processed, failed: errors.length };
-}
-
-async function main() {
-  console.log('=== Language Study AI Enrichment ===');
-
-  if (DRY_RUN) {
-    console.log('[DRY RUN MODE — no API calls will be made]\n');
-  }
-
-  if (!process.env.ANTHROPIC_API_KEY && !DRY_RUN) {
-    console.error('Error: ANTHROPIC_API_KEY environment variable is required.');
-    console.error('Set it with: export ANTHROPIC_API_KEY=sk-ant-...');
-    process.exit(1);
-  }
-
-  const client = DRY_RUN ? null : new Anthropic();
-
-  const enPath = join(projectRoot, 'public', 'data', 'vocabulary-en.json');
-  const srPath = join(projectRoot, 'public', 'data', 'vocabulary-sr.json');
-
-  const enResult = await enrichFile(enPath, client);
-  const srResult = await enrichFile(srPath, client);
-
-  const totalProcessed = enResult.processed + srResult.processed;
-  const totalFailed = enResult.failed + srResult.failed;
+  db.close();
 
   console.log('\n=== Summary ===');
-  console.log(`  Processed: ${totalProcessed}`);
-  console.log(`  Failed batches: ${totalFailed}`);
+  console.log(`  Processed: ${processed}`);
+  console.log(`  Failed batches: ${failed}`);
   console.log('  Done!');
 }
 

@@ -12,7 +12,9 @@
     "test:watch": "vitest",
     "parse": "node scripts/parse-words.js",
     "enrich": "node scripts/enrich-vocabulary.js",
-    "migrate": "node scripts/migrate-to-sqlite.js"
+    "migrate": "node scripts/migrate-to-sqlite.js",
+    "db:export": "node scripts/db-export.js",
+    "vocab": "node scripts/vocab-cli.js"
   },
   "devDependencies": {
     "better-sqlite3": "^12.6.2",
