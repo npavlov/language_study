@@ -1032,24 +1032,12 @@
   margin-top: var(--spacing-xs);
 }
 
-/* Direction prompt + masked answer */
-.typing__prompt {
-  text-align: center;
-}
-
+/* Direction prompt */
 .typing__prompt-label {
+  text-align: center;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   font-weight: 600;
-  margin-bottom: var(--spacing-xs);
-}
-
-.typing__masked-hint {
-  font-size: var(--font-size-lg);
-  letter-spacing: 0.15em;
-  color: var(--color-border);
-  font-weight: 700;
-  user-select: none;
 }
 
 .typing__hint-area {
@@ -1066,9 +1054,23 @@
   background-color: var(--color-bg-secondary);
 }
 
+.typing__hint--masked {
+  border-left: 3px solid var(--color-text-secondary);
+  font-family: monospace;
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.1em;
+}
+
+.typing__hint-count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  letter-spacing: normal;
+  font-family: var(--font-family);
+  margin-left: var(--spacing-sm);
+}
+
 .typing__hint--level-1 { border-left: 3px solid var(--color-primary); }
 .typing__hint--level-2 { border-left: 3px solid var(--color-warning); }
-.typing__hint--letters { border-left: 3px solid var(--color-text-secondary); font-family: monospace; }
 
 .typing__hint-lang {
   font-weight: 700;

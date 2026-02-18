@@ -36,11 +36,8 @@ export const t = {
   translate_to: 'Переведи на',
   type_translation: 'Напиши перевод…',
   submit: 'Ответ',
-  show_hint: 'Подсказка',
-  show_russian_hint: 'Русская подсказка',
+  hint: 'Подсказка',
   no_more_hints: 'Подсказок нет',
-  reveal_letter: 'Буква',
-  all_revealed: 'Всё открыто',
   skip: 'Пропустить',
   next_word: 'Дальше',
   correct_answer: 'Правильно! \u2713',
@@ -49,6 +46,7 @@ export const t = {
   type_answer_first: 'Сначала напиши ответ.',
   review_these: 'Повтори эти слова:',
   you_said: 'ты написал:',
+  n_letters: 'букв',
 
   // Match
   round: 'Раунд',

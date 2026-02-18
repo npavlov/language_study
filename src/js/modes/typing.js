@@ -4,11 +4,12 @@
  * Players are shown a word term and must type the translation.
  * Answers are checked with fuzzy matching; close answers get a yellow warning.
  *
- * Features:
- * - Two-tier hint system (sister language -> Russian)
- * - Letter-by-letter progressive reveal
- * - Progress bar and live score
- * - End-of-session summary with mistakes list
+ * Progressive hint system (single button, 5 stages):
+ *   1. Show word length as stars ★★★★★★
+ *   2. Reveal first letter         и★★★★★
+ *   3. Reveal first + last         и★★★★и
+ *   4. Sister language translation  (SR or EN)
+ *   5. Russian fallback meaning
  */
 
 import { fuzzyMatch, serbianCyrillicToLatin } from '../engine.js';
@@ -17,6 +18,7 @@ import { t, langLabel } from '../i18n.js';
 // --- Constants ---------------------------------------------------------------
 
 const FEEDBACK_CORRECT_DELAY_MS = 1000;
+const MAX_HINT_STAGE = 5;
 
 // --- TypingMode class --------------------------------------------------------
 
@@ -28,10 +30,12 @@ export class TypingMode {
     this._engine = null;
 
     this._currentEntry = null;
-    this._hintsShown = 0;
-    this._lettersRevealed = 0;
     this._answered = false;
     this._closeAnswerGiven = false;
+
+    // Progressive hint state
+    this._hintStage = 0;    // 0 = no hints, 1..5 = progressive
+    this._expected = '';     // cached expected answer for current word
 
     this._score = 0;
     this._totalWords = 0;
@@ -83,10 +87,9 @@ export class TypingMode {
 
   _render() {
     this._container.innerHTML = '';
-    // Fix: use classList.add instead of className clobber
     this._container.classList.add('typing');
 
-    // Header: back button + progress + score
+    // Header
     const header = el('div', 'typing__header');
 
     const backBtn = el('button', 'typing__back-btn');
@@ -113,18 +116,13 @@ export class TypingMode {
     const card = el('div', 'typing__card');
     const wordType = el('span', 'typing__word-type');
     const wordTerm = el('div', 'typing__word-term');
-    wordTerm.setAttribute('aria-label', 'Word to translate');
     card.appendChild(wordType);
     card.appendChild(wordTerm);
 
-    // Direction prompt: "Переведи на сербский:" + masked answer
-    const promptArea = el('div', 'typing__prompt');
+    // Direction prompt (just the label, no initial stars)
     const promptLabel = el('div', 'typing__prompt-label');
-    const maskedHint = el('div', 'typing__masked-hint');
-    promptArea.appendChild(promptLabel);
-    promptArea.appendChild(maskedHint);
 
-    // Hint area
+    // Hint area — progressive hints appear here
     const hintArea = el('div', 'typing__hint-area');
     hintArea.setAttribute('aria-live', 'polite');
 
@@ -137,7 +135,6 @@ export class TypingMode {
     input.setAttribute('autocorrect', 'off');
     input.setAttribute('autocapitalize', 'none');
     input.setAttribute('spellcheck', 'false');
-    input.setAttribute('aria-label', 'Your translation');
     input.setAttribute('placeholder', t.type_translation);
 
     const submitBtn = el('button', 'typing__btn typing__btn--submit');
@@ -152,29 +149,24 @@ export class TypingMode {
     feedback.setAttribute('aria-live', 'assertive');
     feedback.setAttribute('role', 'status');
 
-    // Action buttons
+    // Action buttons: one hint button + skip
     const actions = el('div', 'typing__actions');
 
     const hintBtn = el('button', 'typing__btn typing__btn--hint');
-    hintBtn.textContent = t.show_hint;
+    hintBtn.textContent = `${t.hint} ❶`;
     hintBtn.type = 'button';
-
-    const letterBtn = el('button', 'typing__btn typing__btn--letter');
-    letterBtn.textContent = t.reveal_letter;
-    letterBtn.type = 'button';
 
     const skipBtn = el('button', 'typing__btn typing__btn--skip');
     skipBtn.textContent = t.skip;
     skipBtn.type = 'button';
 
     actions.appendChild(hintBtn);
-    actions.appendChild(letterBtn);
     actions.appendChild(skipBtn);
 
     // Assemble
     this._container.appendChild(header);
     this._container.appendChild(card);
-    this._container.appendChild(promptArea);
+    this._container.appendChild(promptLabel);
     this._container.appendChild(hintArea);
     this._container.appendChild(inputArea);
     this._container.appendChild(feedback);
@@ -182,16 +174,15 @@ export class TypingMode {
 
     this._dom = {
       progressFill, progressLabel, scoreEl,
-      wordType, wordTerm, promptLabel, maskedHint, hintArea,
+      wordType, wordTerm, promptLabel, hintArea,
       input, submitBtn, feedback,
-      hintBtn, letterBtn, skipBtn,
+      hintBtn, skipBtn,
       actions, inputArea,
     };
 
     // Wire listeners
     submitBtn.addEventListener('click', () => this._handleSubmit());
     hintBtn.addEventListener('click', () => this._handleHint());
-    letterBtn.addEventListener('click', () => this._handleLetterHint());
     skipBtn.addEventListener('click', () => this._handleSkip());
     input.addEventListener('input', () => this._clearFeedback());
   }
@@ -205,35 +196,38 @@ export class TypingMode {
     }
 
     this._currentEntry = entry;
-    this._hintsShown = 0;
-    this._lettersRevealed = 0;
+    this._hintStage = 0;
     this._answered = false;
     this._closeAnswerGiven = false;
+
+    // Cache the expected answer
+    const answerLang = this._engine.hintLang;
+    this._expected = entry.translations[answerLang] || entry.term || '';
 
     this._currentIndex = this._engine.session?.currentIndex ?? this._currentIndex;
     this._updateProgress();
 
-    const { wordType, wordTerm, promptLabel, maskedHint, hintArea, input, feedback, hintBtn, letterBtn, skipBtn, submitBtn, inputArea } = this._dom;
+    const { wordType, wordTerm, promptLabel, hintArea, input, feedback,
+            hintBtn, skipBtn, submitBtn, inputArea } = this._dom;
 
     wordType.textContent = entry.type ? entry.type.toUpperCase() : '';
     wordTerm.textContent = entry.term;
 
-    // Show direction prompt and masked answer
-    const answerLang = this._engine.hintLang;
+    // Direction prompt
     promptLabel.textContent = `${t.translate_to} ${langLabel(answerLang).toLowerCase()}:`;
-    const expected = entry.translations[answerLang] || entry.term || '';
-    maskedHint.textContent = expected.replace(/\S/g, '★');
 
+    // Reset hint area
     hintArea.innerHTML = '';
+
     feedback.textContent = '';
     feedback.className = 'typing__feedback';
     input.value = '';
     input.disabled = false;
     submitBtn.disabled = false;
     hintBtn.disabled = false;
-    hintBtn.textContent = t.show_hint;
-    letterBtn.disabled = false;
+    this._updateHintButton();
     skipBtn.disabled = false;
+    skipBtn.textContent = t.skip;
     inputArea.className = 'typing__input-area';
 
     input.focus();
@@ -245,9 +239,111 @@ export class TypingMode {
     const pct = this._totalWords > 0 ? Math.round((idx / this._totalWords) * 100) : 0;
 
     progressFill.style.width = `${pct}%`;
-    progressFill.setAttribute('aria-valuenow', pct);
     progressLabel.textContent = `${idx} / ${this._totalWords}`;
     scoreEl.textContent = `${t.score}: ${this._score}`;
+  }
+
+  // --- Progressive hint system -----------------------------------------------
+
+  /**
+   * Single button drives all 5 stages:
+   *   1. Stars (word length)
+   *   2. First letter
+   *   3. First + last letter
+   *   4. Sister language translation
+   *   5. Russian fallback
+   */
+  _handleHint() {
+    if (this._hintStage >= MAX_HINT_STAGE) return;
+
+    this._hintStage++;
+    const { hintArea, hintBtn } = this._dom;
+    const expected = this._expected;
+
+    if (this._hintStage === 1) {
+      // Stage 1: show stars + letter count
+      const maskedRow = el('div', 'typing__hint typing__hint--masked');
+      maskedRow.textContent = this._buildMasked(expected, 0, false);
+      const countEl = el('span', 'typing__hint-count');
+      countEl.textContent = ` (${expected.length} ${t.n_letters})`;
+      maskedRow.appendChild(countEl);
+      hintArea.appendChild(maskedRow);
+    } else if (this._hintStage === 2) {
+      // Stage 2: reveal first letter
+      this._updateMaskedRow(this._buildMasked(expected, 1, false));
+    } else if (this._hintStage === 3) {
+      // Stage 3: reveal first + last letter
+      this._updateMaskedRow(this._buildMasked(expected, 1, true));
+    } else if (this._hintStage === 4) {
+      // Stage 4: sister language hint from engine
+      const hint = this._engine.getHint();
+      if (hint) {
+        const row = el('div', 'typing__hint typing__hint--level-1');
+        const lang = el('span', 'typing__hint-lang');
+        lang.textContent = langLabel(hint.lang) + ': ';
+        const text = el('span', 'typing__hint-text');
+        text.textContent = hint.text;
+        row.appendChild(lang);
+        row.appendChild(text);
+        hintArea.appendChild(row);
+      }
+    } else if (this._hintStage === 5) {
+      // Stage 5: Russian fallback from engine
+      const hint = this._engine.getHint();
+      if (hint) {
+        const row = el('div', 'typing__hint typing__hint--level-2');
+        const lang = el('span', 'typing__hint-lang');
+        lang.textContent = langLabel(hint.lang) + ': ';
+        const text = el('span', 'typing__hint-text');
+        text.textContent = hint.text;
+        row.appendChild(lang);
+        row.appendChild(text);
+        hintArea.appendChild(row);
+      }
+    }
+
+    this._updateHintButton();
+  }
+
+  /**
+   * Build a masked string with stars, optionally revealing first/last chars.
+   * Preserves spaces and punctuation.
+   */
+  _buildMasked(word, revealFirst, revealLast) {
+    const chars = [...word];
+    const len = chars.length;
+    return chars.map((ch, i) => {
+      if (/\s/.test(ch)) return ' ';
+      if (revealFirst && i < revealFirst) return ch;
+      if (revealLast && i === len - 1) return ch;
+      return '★';
+    }).join('');
+  }
+
+  /**
+   * Update the existing masked-hint row text (keep the count span).
+   */
+  _updateMaskedRow(maskedText) {
+    const row = this._dom.hintArea.querySelector('.typing__hint--masked');
+    if (!row) return;
+    const countEl = row.querySelector('.typing__hint-count');
+    row.textContent = maskedText;
+    if (countEl) row.appendChild(countEl);
+  }
+
+  /**
+   * Update hint button label with circled number for next stage.
+   */
+  _updateHintButton() {
+    const { hintBtn } = this._dom;
+    const nextStage = this._hintStage + 1;
+    if (nextStage > MAX_HINT_STAGE) {
+      hintBtn.disabled = true;
+      hintBtn.textContent = t.no_more_hints;
+    } else {
+      const circles = ['❶', '❷', '❸', '❹', '❺'];
+      hintBtn.textContent = `${t.hint} ${circles[nextStage - 1]}`;
+    }
   }
 
   // --- Answer handling -------------------------------------------------------
@@ -287,6 +383,7 @@ export class TypingMode {
     this._dom.input.disabled = true;
     this._dom.submitBtn.disabled = true;
     this._dom.skipBtn.disabled = true;
+    this._dom.hintBtn.disabled = true;
     this._updateProgress();
 
     this._autoAdvanceTimer = setTimeout(() => this._advance(), FEEDBACK_CORRECT_DELAY_MS);
@@ -300,6 +397,7 @@ export class TypingMode {
 
     this._dom.input.disabled = true;
     this._dom.submitBtn.disabled = true;
+    this._dom.hintBtn.disabled = true;
 
     const alreadyLogged = this._mistakes.some(m => m.term === this._currentEntry.term);
     if (!alreadyLogged) {
@@ -312,58 +410,6 @@ export class TypingMode {
     this._setFeedback('close', `${t.close_answer} ${expected}`);
     this._dom.input.value = given;
     this._dom.input.focus();
-  }
-
-  // --- Hint handling ---------------------------------------------------------
-
-  _handleHint() {
-    if (this._hintsShown >= 2) return;
-    const hint = this._engine.getHint();
-    if (!hint) return;
-
-    this._hintsShown++;
-    const { hintArea, hintBtn } = this._dom;
-
-    const hintEl = el('div', `typing__hint typing__hint--level-${hint.level}`);
-    const hintLangEl = el('span', 'typing__hint-lang');
-    hintLangEl.textContent = hint.lang.toUpperCase() + ': ';
-    const hintText = el('span', 'typing__hint-text');
-    hintText.textContent = hint.text;
-    hintEl.appendChild(hintLangEl);
-    hintEl.appendChild(hintText);
-    hintArea.appendChild(hintEl);
-
-    if (this._hintsShown >= 2) {
-      hintBtn.disabled = true;
-      hintBtn.textContent = t.no_more_hints;
-    } else {
-      hintBtn.textContent = t.show_russian_hint;
-    }
-  }
-
-  _handleLetterHint() {
-    if (!this._currentEntry) return;
-    const entry = this._currentEntry;
-    const hintLang = this._engine.hintLang;
-    const expected = entry.translations[hintLang] || entry.term || '';
-
-    this._lettersRevealed = Math.min(this._lettersRevealed + 1, expected.length);
-    const revealed = expected.slice(0, this._lettersRevealed);
-    const remaining = '_'.repeat(expected.length - this._lettersRevealed);
-
-    const { hintArea, letterBtn } = this._dom;
-
-    let letterRow = hintArea.querySelector('.typing__hint--letters');
-    if (!letterRow) {
-      letterRow = el('div', 'typing__hint typing__hint--letters');
-      hintArea.appendChild(letterRow);
-    }
-    letterRow.textContent = `${revealed}${remaining}`;
-
-    if (this._lettersRevealed >= expected.length) {
-      letterBtn.disabled = true;
-      letterBtn.textContent = t.all_revealed;
-    }
   }
 
   _handleSkip() {
@@ -429,7 +475,6 @@ export class TypingMode {
     this._container.appendChild(title);
     this._container.appendChild(stats);
 
-    // Mistakes list
     if (this._mistakes.length > 0) {
       const mistakesSection = el('div', 'typing__mistakes');
       const mistakesTitle = el('h3', 'typing__mistakes-title');
@@ -441,7 +486,7 @@ export class TypingMode {
         const item = el('li', 'typing__mistake-item');
         const termEl = el('span', 'typing__mistake-term');
         termEl.textContent = m.term;
-        const arrow = document.createTextNode(' → ');
+        const arrow = document.createTextNode(' \u2192 ');
         const expectedEl = el('span', 'typing__mistake-expected');
         expectedEl.textContent = m.expected;
         item.appendChild(termEl);
@@ -458,7 +503,6 @@ export class TypingMode {
       this._container.appendChild(mistakesSection);
     }
 
-    // Play again button
     const playAgainBtn = el('button', 'typing__btn typing__btn--play-again');
     playAgainBtn.textContent = t.play_again;
     playAgainBtn.type = 'button';
@@ -468,7 +512,6 @@ export class TypingMode {
     });
     this._container.appendChild(playAgainBtn);
 
-    // Back to menu
     const menuBtn = el('button', 'typing__btn typing__btn--menu');
     menuBtn.textContent = t.back_to_menu;
     menuBtn.type = 'button';
