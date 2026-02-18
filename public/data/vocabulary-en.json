@@ -212,7 +212,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "sa pistoljima",
+        "sr": "sa pistaćima",
         "ru": "с фисташками"
       },
       "examples": {
@@ -314,7 +314,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "besničav",
+        "sr": "besan",
         "ru": "бешеный"
       },
       "examples": {
@@ -450,7 +450,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "prelijep",
+        "sr": "napakao",
         "ru": "прелестный"
       },
       "examples": {
@@ -1066,7 +1066,7 @@
       "translations": {
         "en": null,
         "sr": "Plemenitost",
-        "ru": "Дворянство"
+        "ru": "благородство"
       },
       "examples": {
         "en": [
@@ -1298,11 +1298,11 @@
     },
     {
       "id": "en-0039",
-      "term": "Fabuluous",
+      "term": "Fabulous",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "Fabulous",
+        "en": null,
         "sr": "Fantastičan",
         "ru": "сказочный"
       },
@@ -1366,11 +1366,11 @@
     },
     {
       "id": "en-0041",
-      "term": "Vicitm",
+      "term": "Victim",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "victim",
+        "en": null,
         "sr": "žrtva",
         "ru": "жертва"
       },
@@ -1400,11 +1400,11 @@
     },
     {
       "id": "en-0042",
-      "term": "Suferer",
+      "term": "Sufferer",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "sufferer",
+        "en": null,
         "sr": "stradalac",
         "ru": "страдающий"
       },
@@ -1576,7 +1576,7 @@
       "translations": {
         "en": null,
         "sr": "neugodno",
-        "ru": "неловко"
+        "ru": "смущающий"
       },
       "examples": {
         "en": [
@@ -2187,7 +2187,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "red čekanja",
+        "sr": "redosled/linija",
         "ru": "очередь"
       },
       "examples": {
@@ -2323,7 +2323,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Pala mi je do srca tvoja kompliment.",
+        "sr": "Льстишь ми.",
         "ru": "Ты мне льстишь."
       },
       "examples": {
@@ -2460,7 +2460,7 @@
       "translations": {
         "en": null,
         "sr": "nagađanje",
-        "ru": "гадание"
+        "ru": "угадывание"
       },
       "examples": {
         "en": [
@@ -2767,7 +2767,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Ja sam se bojala",
+        "sr": "Ja sam se plašila",
         "ru": "Я боялась"
       },
       "examples": {
@@ -2966,12 +2966,12 @@
     },
     {
       "id": "en-0088",
-      "term": "i dont despite ordinary peopl",
+      "term": "I don't despise ordinary people",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "I don't despise ordinary people",
-        "sr": "Ne prezirеm običне ljude",
+        "en": null,
+        "sr": "Ne prezireм obične ljude",
         "ru": "Я не презираю обычных людей"
       },
       "examples": {
@@ -3108,7 +3108,7 @@
       "translations": {
         "en": null,
         "sr": "bekstvo, begunac",
-        "ru": "беглец, беженец"
+        "ru": "беглец"
       },
       "examples": {
         "en": [
@@ -3176,7 +3176,7 @@
       "translations": {
         "en": null,
         "sr": "predrasude",
-        "ru": "предрасуде"
+        "ru": "предрассудки"
       },
       "examples": {
         "en": [
@@ -3210,7 +3210,7 @@
       "translations": {
         "en": null,
         "sr": "iskreno pitanje, pravo pitanje",
-        "ru": "искреннее вопрос, честный вопрос"
+        "ru": "искренний вопрос, честный вопрос"
       },
       "examples": {
         "en": [
@@ -3277,7 +3277,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Možeš čuvati oko",
+        "sr": "Možeš paziti/čuvati oko",
         "ru": "Ты можешь следить, быть начеку"
       },
       "examples": {
@@ -3516,7 +3516,7 @@
       "translations": {
         "en": null,
         "sr": "Budi uporan",
-        "ru": "упорстовать, проявлять настойчивость"
+        "ru": "упорствовать, проявлять настойчивость"
       },
       "examples": {
         "en": [
@@ -3618,7 +3618,7 @@
       "translations": {
         "en": null,
         "sr": "žaliti se, oni se žale",
-        "ru": "ныть, они нытьё"
+        "ru": "ныть, они нытьё / они ноют"
       },
       "examples": {
         "en": [
@@ -3685,7 +3685,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "suptilno",
+        "sr": "suptilno / tanko",
         "ru": "тонко"
       },
       "examples": {
@@ -3753,7 +3753,7 @@
       "type": "phrase",
       "translations": {
         "en": "I feel crushed or I'm devastated",
-        "sr": "Osjećam se slomljeno ili Sam devastiran",
+        "sr": "Osjećam se slomljeno ili sam devastiran",
         "ru": "Я чувствую себя раздавленным или я опустошён"
       },
       "examples": {
@@ -3855,7 +3855,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Izvadjam",
+        "sr": "Izvlačim",
         "ru": "Я выщипываю"
       },
       "examples": {
@@ -4088,11 +4088,11 @@
     },
     {
       "id": "en-0123",
-      "term": "fosterig",
+      "term": "fostering",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "fostering",
+        "en": null,
         "sr": "negovanje",
         "ru": "развитие"
       },
@@ -5148,7 +5148,7 @@
       "translations": {
         "en": null,
         "sr": "Stav, pozicija, držanje tela",
-        "ru": "Позиция, позиция, осанка, позиционирование"
+        "ru": "Позиция, стойка, осанка"
       },
       "examples": {
         "en": [
@@ -5216,7 +5216,7 @@
       "translations": {
         "en": null,
         "sr": "izmeniti",
-        "ru": "изменить"
+        "ru": "изменить, поправить, внести поправки"
       },
       "examples": {
         "en": [
@@ -5352,7 +5352,7 @@
       "translations": {
         "en": null,
         "sr": "zahvalnost",
-        "ru": "признательность"
+        "ru": "признательность, оценка, благодарность"
       },
       "examples": {
         "en": [
@@ -5555,7 +5555,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "molio me",
+        "sr": "molio bi me, umoljavam me",
         "ru": "умолять меня"
       },
       "examples": {
@@ -5589,7 +5589,7 @@
       "type": "phrase",
       "translations": {
         "en": "Now I'm in charge",
-        "sr": "Sada ja vodim",
+        "sr": "Sada ja vodim / Sada ja sam nadležan / Sada ja sam odgovoran",
         "ru": "Теперь я отвечаю"
       },
       "examples": {
@@ -5759,7 +5759,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Neodgovarajući mali dečak",
+        "sr": "Rozpasan dečak, neodgovarajući dečak",
         "ru": "Избалованный ребёнок"
       },
       "examples": {
@@ -5827,7 +5827,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Rado",
+        "sr": "Odljućan, rado, željno",
         "ru": "Стремящийся"
       },
       "examples": {
@@ -6744,7 +6744,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "I harass people",
+        "en": null,
         "sr": "Ja smaravam ljude",
         "ru": "Я беспокою людей"
       },
@@ -6876,7 +6876,7 @@
     },
     {
       "id": "en-0206",
-      "term": "imposered",
+      "term": "imposed",
       "source_language": "en",
       "type": "word",
       "translations": {
@@ -7153,7 +7153,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Prevara",
+        "sr": "Prevara / Varanje",
         "ru": "Обман"
       },
       "examples": {
@@ -7221,7 +7221,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Lenja osoba",
+        "sr": "Lenjivac",
         "ru": "Лентяй"
       },
       "examples": {
@@ -7257,7 +7257,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Osakućen",
+        "sr": "Izmasakriran / Zaboravljan",
         "ru": "Изуродованный"
       },
       "examples": {
@@ -7292,7 +7292,7 @@
       "translations": {
         "en": null,
         "sr": "Ogroman",
-        "ru": "огромная"
+        "ru": "огромный"
       },
       "examples": {
         "en": [
@@ -7359,7 +7359,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Žudnje",
+        "sr": "Čežnje / Nagone",
         "ru": "Страстные желания"
       },
       "examples": {
@@ -7869,7 +7869,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Moje listove me bole",
+        "sr": "Moje mišice golenja me bole",
         "ru": "Мои икры убивают меня"
       },
       "examples": {
@@ -8034,11 +8034,11 @@
     },
     {
       "id": "en-0240",
-      "term": "treking polls",
+      "term": "trekking poles",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "Trekking poles",
+        "en": null,
         "sr": "Štapovi za pešačenje",
         "ru": "Палки для трекинга"
       },
@@ -8073,7 +8073,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Bacio sa силом",
+        "sr": "Bacio sa silom",
         "ru": "Захлопнул"
       },
       "examples": {
@@ -8209,7 +8209,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Priznaće",
+        "sr": "Priznanje",
         "ru": "Признание"
       },
       "examples": {
@@ -8345,7 +8345,7 @@
       "type": "phrase",
       "translations": {
         "en": "But some smashed burgers certainly wouldn't hurt",
-        "sr": "Ali neki smeđeni burgeri sigurno ne bi škodili",
+        "sr": "Ali neki pljoskavani burgeri sigurno ne bi škodili",
         "ru": "Но несколько сдавленных бургеров точно не повредили бы"
       },
       "examples": {
@@ -8855,7 +8855,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "gostoprimlјiv",
+        "sr": "gostoprimlјiv or gostoprimljiv",
         "ru": "Гостеприимный"
       },
       "examples": {
@@ -9093,7 +9093,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "mestimice",
+        "sr": "mjesta or lokacije",
         "ru": "площадки"
       },
       "examples": {
@@ -9127,7 +9127,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "stil",
+        "sr": "moda or stil odijevanja",
         "ru": "стиль"
       },
       "examples": {
@@ -9161,7 +9161,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "iskren fotografije",
+        "sr": "iskrene fotografije",
         "ru": "искренние фотографии"
       },
       "examples": {
@@ -9224,12 +9224,12 @@
     },
     {
       "id": "en-0276",
-      "term": "I'm not exaggeratine",
+      "term": "I'm not exaggerating",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "I'm not exaggerating",
-        "sr": "Nije преувеличавам",
+        "en": null,
+        "sr": "Nisam преувеличавам or Ne преувеличавам",
         "ru": "Я не преувеличиваю"
       },
       "examples": {
@@ -9433,7 +9433,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Koliko je on uređen",
+        "sr": "Koliko je on uvređen",
         "ru": "Как он обижен"
       },
       "examples": {
@@ -9569,7 +9569,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "neki Put sa vinom i dobrom hranom",
+        "sr": "neki odmorišni dom/gostilnica sa vinom i dobrom hranom",
         "ru": "какой-то трактир с вином и хорошей едой"
       },
       "examples": {
@@ -9604,7 +9604,7 @@
       "translations": {
         "en": null,
         "sr": "Mogu ga tužiti",
-        "ru": "Я могу его подать в суд"
+        "ru": "Я могу подать на него в суд"
       },
       "examples": {
         "en": [
@@ -9671,7 +9671,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "očajnik",
+        "sr": "očajan",
         "ru": "отчаянный"
       },
       "examples": {
@@ -9807,7 +9807,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Глотак",
+        "sr": "Gutljaj",
         "ru": "Глоток"
       },
       "examples": {
@@ -10353,7 +10353,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "biti napušten",
+        "sr": "biti napušten/drogiran",
         "ru": "находиться под кайфом"
       },
       "examples": {
@@ -10897,7 +10897,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "planinarskih štapova",
+        "sr": "planinarski štapovi",
         "ru": "треккинговые палки"
       },
       "examples": {
@@ -11068,7 +11068,7 @@
       "translations": {
         "en": null,
         "sr": "taksiji",
-        "ru": "икры"
+        "ru": "такси"
       },
       "examples": {
         "en": [
@@ -11101,7 +11101,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Pertle",
+        "sr": "pertlje",
         "ru": "Шнурки"
       },
       "examples": {
@@ -11476,7 +11476,7 @@
       "translations": {
         "en": null,
         "sr": "to koristi",
-        "ru": "это использует"
+        "ru": "использует"
       },
       "examples": {
         "en": [
@@ -11510,7 +11510,7 @@
       "translations": {
         "en": null,
         "sr": "Koristi novu tehnologiju",
-        "ru": "Это использует новые технологии"
+        "ru": "Использует новые технологии"
       },
       "examples": {
         "en": [
@@ -11713,7 +11713,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "i obujem svoje papuče",
+        "sr": "i navlačim svoj štrap",
         "ru": "и я надел свои вьетнамки"
       },
       "examples": {
@@ -12087,7 +12087,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "bezešav",
+        "sr": "bešavan",
         "ru": "беспрепятственный"
       },
       "examples": {
@@ -12189,7 +12189,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "organizacijska neusklađenost",
+        "sr": "organizacijska neusklađenost ili organizacijska dvosmislenost",
         "ru": "организационная неопределённость"
       },
       "examples": {
@@ -12223,7 +12223,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "odvajanje",
+        "sr": "odvajanje se ili distanciranje",
         "ru": "отключение"
       },
       "examples": {
@@ -12325,7 +12325,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Prestani da lizaš",
+        "sr": "Prestani da me lizaš / Prestani da mene gališ",
         "ru": "Перестань льстить"
       },
       "examples": {
@@ -12694,11 +12694,11 @@
     },
     {
       "id": "en-0380",
-      "term": "i unsure that everybody is onboard with our decision",
+      "term": "I'm unsure that everybody is onboard with our decision",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "I'm unsure that everybody is onboard with our decision",
+        "en": null,
         "sr": "Nisam siguran da su svi saglasni sa našom odlukom",
         "ru": "Я не уверен, что все согласны с нашим решением"
       },
@@ -12767,7 +12767,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "rešenje ključ u ruke",
+        "sr": "rešenje ključ u rukama",
         "ru": "готовое решение"
       },
       "examples": {
@@ -12898,11 +12898,11 @@
     },
     {
       "id": "en-0386",
-      "term": "Foat milk",
+      "term": "Goat milk",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "Goat milk",
+        "en": null,
         "sr": "Kozje mleko",
         "ru": "Козье молоко"
       },
@@ -13039,7 +13039,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Prelepan / uživancija",
+        "sr": "Prelepan / uživljiv",
         "ru": "Восхитительный"
       },
       "examples": {
@@ -13277,7 +13277,7 @@
       "type": "phrase",
       "translations": {
         "en": "We can take a shot.",
-        "sr": "Možemo pokušati.",
+        "sr": "Možemo da pijemo. / Možemo da popijemo nešto.",
         "ru": "Можем попробовать."
       },
       "examples": {
@@ -13340,11 +13340,11 @@
     },
     {
       "id": "en-0400",
-      "term": "tree that yield an abundance of fruit.",
+      "term": "tree that yields an abundance of fruit",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "tree that yields an abundance of fruit",
+        "en": null,
         "sr": "stablo koje daje bogatstvo voća",
         "ru": "Дерево, которое приносит много плодов."
       },
@@ -13481,7 +13481,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "унизан",
+        "sr": "ponižavajući",
         "ru": "унизительный"
       },
       "examples": {
@@ -13787,7 +13787,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "izbor",
+        "sr": "istaknutost",
         "ru": "известность"
       },
       "examples": {
@@ -13855,7 +13855,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "odgovornost",
+        "sr": "odgovornost / obaveza",
         "ru": "ответственность"
       },
       "examples": {
@@ -13957,7 +13957,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "brzina",
+        "sr": "promptnost",
         "ru": "оперативность"
       },
       "examples": {
@@ -14093,7 +14093,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "iznenaditi ih",
+        "sr": "razveseliti ih",
         "ru": "обрадовать их"
       },
       "examples": {
@@ -14162,7 +14162,7 @@
       "translations": {
         "en": null,
         "sr": "zakleo se",
-        "ru": "я поклался"
+        "ru": "поклялся"
       },
       "examples": {
         "en": [
@@ -14326,11 +14326,11 @@
     },
     {
       "id": "en-0429",
-      "term": "avangers",
+      "term": "avengers",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "avengers",
+        "en": null,
         "sr": "osvetnici",
         "ru": "мстители"
       },
@@ -14501,7 +14501,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "возмездие",
+        "sr": "osveta",
         "ru": "возмездие"
       },
       "examples": {
@@ -14604,7 +14604,7 @@
       "translations": {
         "en": null,
         "sr": "nametnuti",
-        "ru": "nametnuti - наложить"
+        "ru": "наложить"
       },
       "examples": {
         "en": [
@@ -15082,7 +15082,7 @@
       "translations": {
         "en": null,
         "sr": "zamereno je na igru reči",
-        "ru": "каламбур намеренный"
+        "ru": "каламбур намерен"
       },
       "examples": {
         "en": [
@@ -15382,11 +15382,11 @@
     },
     {
       "id": "en-0460",
-      "term": "get ridding of something",
+      "term": "get rid of something",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "get rid of something",
+        "en": null,
         "sr": "osloboditi se nečega",
         "ru": "избавиться от чего-либо"
       },
@@ -15625,7 +15625,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Zaostala dohodovina",
+        "sr": "Pasivni dohodak",
         "ru": "Остаточный доход"
       },
       "examples": {
@@ -15727,7 +15727,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "vratio",
+        "sr": "vikao",
         "ru": "кричал"
       },
       "examples": {
@@ -15829,7 +15829,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "zamene",
+        "sr": "zamenske osobe/stvari",
         "ru": "заменители"
       },
       "examples": {
@@ -16033,7 +16033,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "hladna susret",
+        "sr": "hladan susret",
         "ru": "холодная встреча"
       },
       "examples": {
@@ -16305,7 +16305,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Sa sveom dostojanstvom prema Oklendu",
+        "sr": "Sa svim poštovanjem prema Oklendu",
         "ru": "При всём уважении к Окленду"
       },
       "examples": {
@@ -16339,7 +16339,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "povukao se",
+        "sr": "odustao, porekao",
         "ru": "отступил"
       },
       "examples": {
@@ -16409,7 +16409,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "javorov sirup",
+        "sr": "klonov sirup",
         "ru": "кленовый сироп"
       },
       "examples": {
@@ -16511,7 +16511,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "sličiti se",
+        "sr": "ličiti se",
         "ru": "напоминать"
       },
       "examples": {
@@ -16579,7 +16579,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "umiriti",
+        "sr": "uveriti, tešiti",
         "ru": "успокоить"
       },
       "examples": {
@@ -16751,7 +16751,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "nagon trenutka",
+        "sr": "na impuls trenutka",
         "ru": "спонтанный, импульсивный"
       },
       "examples": {
@@ -16820,7 +16820,7 @@
       "translations": {
         "en": null,
         "sr": "preuveličavanje",
-        "ru": "Преувеличение"
+        "ru": "преувеличение"
       },
       "examples": {
         "en": [
@@ -16854,7 +16854,7 @@
       "translations": {
         "en": null,
         "sr": "nevera",
-        "ru": "Недоверчивость"
+        "ru": "недоверчивость"
       },
       "examples": {
         "en": [
@@ -17052,11 +17052,11 @@
     },
     {
       "id": "en-0510",
-      "term": "braggin",
+      "term": "bragging",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "bragging",
+        "en": null,
         "sr": "hvalisanje",
         "ru": "хвастовство"
       },
@@ -17432,7 +17432,7 @@
       "translations": {
         "en": null,
         "sr": "privrženici",
-        "ru": "приверженцы [they follow that way of live]"
+        "ru": "приверженцы"
       },
       "examples": {
         "en": [
@@ -17534,7 +17534,7 @@
       "translations": {
         "en": null,
         "sr": "ambiciozan",
-        "ru": "абмициозных [ambitios]"
+        "ru": "амбициозный"
       },
       "examples": {
         "en": [
@@ -17670,7 +17670,7 @@
       "translations": {
         "en": null,
         "sr": "tvrdnje",
-        "ru": "претензии"
+        "ru": "утверждения"
       },
       "examples": {
         "en": [
@@ -17840,7 +17840,7 @@
       "translations": {
         "en": null,
         "sr": "kapelan",
-        "ru": "священний"
+        "ru": "капеллан"
       },
       "examples": {
         "en": [
@@ -18077,7 +18077,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "otvorski",
+        "sr": "usamljiv or klaustrofobičan",
         "ru": "замкнутый"
       },
       "examples": {
@@ -18145,7 +18145,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Ogromno",
+        "sr": "Enormno or Ogromno (as adverb)",
         "ru": "Огромно"
       },
       "examples": {
@@ -18179,7 +18179,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "partner nizvodno",
+        "sr": "nizvodna partners or partner u nižem stadijumu",
         "ru": "партнер на нижестоящем уровне"
       },
       "examples": {
@@ -18242,7 +18242,7 @@
     },
     {
       "id": "en-0545",
-      "term": "you're exaggerating\\\\",
+      "term": "you're exaggerating",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -18622,7 +18622,7 @@
       "translations": {
         "en": null,
         "sr": "zvučnik",
-        "ru": "бзззззззз"
+        "ru": "зуммер or гудок"
       },
       "examples": {
         "en": [
@@ -18655,7 +18655,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Njegove misli su pobegле u panici",
+        "sr": "Njegove misli su pobegle u panici",
         "ru": "Его мысли в панике разбежались"
       },
       "examples": {
@@ -18684,13 +18684,13 @@
     },
     {
       "id": "en-0559",
-      "term": "flee , fled fled",
+      "term": "flee, fled, fled",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "flee, fled, fled",
+        "en": null,
         "sr": "bežati, bežao, bežao",
-        "ru": "бежать от того что за тобой гониться"
+        "ru": "бежать, бежал, бежал"
       },
       "examples": {
         "en": [
@@ -18722,7 +18722,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "criminals",
+        "en": null,
         "sr": "banditi",
         "ru": "бандиты"
       },
@@ -18792,7 +18792,7 @@
       "translations": {
         "en": null,
         "sr": "provalnik",
-        "ru": "грабитель"
+        "ru": "вор"
       },
       "examples": {
         "en": [
@@ -19204,7 +19204,7 @@
       "translations": {
         "en": null,
         "sr": "zavistan",
-        "ru": "завистливо"
+        "ru": "завистливый"
       },
       "examples": {
         "en": [
@@ -19232,11 +19232,11 @@
     },
     {
       "id": "en-0575",
-      "term": "think up -",
+      "term": "think up",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "think up",
+        "en": null,
         "sr": "smisliti",
         "ru": "придумать"
       },
@@ -19374,7 +19374,7 @@
       "translations": {
         "en": null,
         "sr": "zvona",
-        "ru": "перезвон , такие палочки со звуком"
+        "ru": "перезвон"
       },
       "examples": {
         "en": [
@@ -19509,8 +19509,8 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "oni su držali svoje висoke",
-        "ru": "они держали свои вески"
+        "sr": "oni su držali svoje viskove",
+        "ru": "они держали свои виски"
       },
       "examples": {
         "en": [
@@ -19747,7 +19747,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "prepreka",
+        "sr": "smetnja",
         "ru": "препятствие"
       },
       "examples": {
@@ -19885,7 +19885,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "od planova",
+        "sr": "od zaraze",
         "ru": "по заговору"
       },
       "examples": {
@@ -19953,7 +19953,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "zavera",
+        "sr": "zavjera",
         "ru": "заговор"
       },
       "examples": {
@@ -20056,7 +20056,7 @@
       "translations": {
         "en": null,
         "sr": "oprézan",
-        "ru": "Осторожны."
+        "ru": "осторожный"
       },
       "examples": {
         "en": [
@@ -20089,7 +20089,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "pocepa",
+        "sr": "pocepao",
         "ru": "порвал"
       },
       "examples": {
@@ -20566,7 +20566,7 @@
       "translations": {
         "en": null,
         "sr": "čudesan",
-        "ru": "чудсный"
+        "ru": "чудесный"
       },
       "examples": {
         "en": [
@@ -20599,7 +20599,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "samo su slusali",
+        "sr": "samo su slušali",
         "ru": "просто слушали"
       },
       "examples": {
@@ -20702,7 +20702,7 @@
       "translations": {
         "en": null,
         "sr": "pamučni štapić",
-        "ru": "палочка для носа или ушей"
+        "ru": "ватная палочка"
       },
       "examples": {
         "en": [
@@ -20769,7 +20769,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "бдительности agenata Opšteg ograničavača Sjedinjenih Država.",
+        "sr": "бдительности agenata",
         "ru": "бдительности агентов Генерального уравнителя Соединённых Штатов."
       },
       "examples": {
@@ -20838,7 +20838,7 @@
       "translations": {
         "en": null,
         "sr": "pukotine",
-        "ru": "всплск"
+        "ru": "всплеск"
       },
       "examples": {
         "en": [
@@ -20872,7 +20872,7 @@
       "translations": {
         "en": null,
         "sr": "opterećen",
-        "ru": "обременны"
+        "ru": "обремененный"
       },
       "examples": {
         "en": [
@@ -20939,7 +20939,7 @@
       "type": "phrase",
       "translations": {
         "en": "glimmeringly",
-        "sr": "blistaво, sjajno",
+        "sr": "blještavo, sjajno",
         "ru": "мерцая, с блеском"
       },
       "examples": {
@@ -21040,7 +21040,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "a assume",
+        "en": "assume",
         "sr": "pretpostavljati",
         "ru": "предполагать"
       },
@@ -21070,12 +21070,12 @@
     },
     {
       "id": "en-0629",
-      "term": "plotting= plannign",
+      "term": "plotting = planning",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "plotting = planning",
-        "sr": "šta = planiranje",
+        "en": null,
+        "sr": "planiranje = planiranje",
         "ru": "замышление = планирование"
       },
       "examples": {
@@ -21109,7 +21109,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "I da bi uravnotežio his dobru izgled",
+        "sr": "I da bi uravnotežio his dobru izgled ili I da bi uravnotežio njegov dobur izgled",
         "ru": "И чтобы компенсировать его привлекательность"
       },
       "examples": {
@@ -21212,7 +21212,7 @@
       "translations": {
         "en": "ripped",
         "sr": "porvano",
-        "ru": "порвал"
+        "ru": "порванный"
       },
       "examples": {
         "en": [
@@ -21348,7 +21348,7 @@
       "translations": {
         "en": "Uprooted door",
         "sr": "Izvučena vrata",
-        "ru": "вырванная"
+        "ru": "вырванная дверь"
       },
       "examples": {
         "en": [
@@ -21414,7 +21414,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "any damaged with legs",
+        "en": "anyone damaged with legs or limping",
         "sr": "hromao",
         "ru": "увеченный"
       },
@@ -21482,7 +21482,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "quick brake",
+        "en": "quick break",
         "sr": "brzo prekidanje",
         "ru": "резкий перелом"
       },
@@ -21546,11 +21546,11 @@
     },
     {
       "id": "en-0643",
-      "term": "substitue",
+      "term": "substitute",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "substitute",
+        "en": null,
         "sr": "zameniti",
         "ru": "замещать"
       },
@@ -21619,7 +21619,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "preplašen",
+        "sr": "zadivljen or zapanjen",
         "ru": "поражен"
       },
       "examples": {
@@ -21890,7 +21890,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "to convinced from one side to another side",
+        "en": "to convince someone to believe or do something",
         "sr": "uvjerio",
         "ru": "убедил"
       },
@@ -21924,7 +21924,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "everyone wants to see it.",
+        "en": "greatly desired or looked forward to",
         "sr": "iščekivano sa velikim interesom",
         "ru": "долгожданный"
       },
@@ -21994,7 +21994,7 @@
       "translations": {
         "en": null,
         "sr": "bolan",
-        "ru": "ноющая боль"
+        "ru": "ноющий or болящий"
       },
       "examples": {
         "en": [
@@ -22095,7 +22095,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "trenirao sam svoj list",
+        "sr": "trenirao sam svoju lisicu (or svoj list mišića)",
         "ru": "я тренировал икроножную мышцу"
       },
       "examples": {
@@ -22129,7 +22129,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "završavajući период интензивне комерцијалне",
+        "sr": "završavajući period intenzivne komercijalne",
         "ru": "заканчивая период интенсивной коммерческой"
       },
       "examples": {
@@ -22164,7 +22164,7 @@
       "translations": {
         "en": null,
         "sr": "dostignuća",
-        "ru": "достижения, technical advancements"
+        "ru": "достижения"
       },
       "examples": {
         "en": [
@@ -22230,7 +22230,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "in highlu expected waiting",
+        "en": "in highly expected waiting or in eager anticipation",
         "sr": "u očekivanju",
         "ru": "в ожидании"
       },
@@ -22265,7 +22265,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "rival",
+        "sr": "suparnik or rival (if used as loanword)",
         "ru": "соперник"
       },
       "examples": {
@@ -22299,7 +22299,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "manje preljuljno",
+        "sr": "manje lukavo or manje prevarne",
         "ru": "менее обманчивым"
       },
       "examples": {
@@ -22537,7 +22537,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "nameravaati",
+        "sr": "nameravatati or nameravati",
         "ru": "намереваться"
       },
       "examples": {
@@ -22809,7 +22809,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "kriva zub",
+        "sr": "kriva zuba",
         "ru": "кривой зуб"
       },
       "examples": {
@@ -22844,7 +22844,7 @@
       "translations": {
         "en": null,
         "sr": "nemojte",
-        "ru": "try to reason with him. - не пытайтесь его убедить"
+        "ru": "не пытайтесь его убедить"
       },
       "examples": {
         "en": [
@@ -23115,7 +23115,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "bolestan",
+        "sr": "zgađen",
         "ru": "больной"
       },
       "examples": {
@@ -23183,7 +23183,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "похваљан",
+        "sr": "hvaljedan",
         "ru": "похвальный"
       },
       "examples": {
@@ -23252,7 +23252,7 @@
       "translations": {
         "en": null,
         "sr": "ustanova",
-        "ru": "учеререждение"
+        "ru": "учреждение"
       },
       "examples": {
         "en": [
@@ -23286,7 +23286,7 @@
       "translations": {
         "en": null,
         "sr": "radoznao",
-        "ru": "пытлиый"
+        "ru": "пытливый"
       },
       "examples": {
         "en": [
@@ -23422,7 +23422,7 @@
       "translations": {
         "en": null,
         "sr": "alfabet koji smo izmislili",
-        "ru": "с алфамитом который мы придумали"
+        "ru": "алфавит, который мы придумали"
       },
       "examples": {
         "en": [
@@ -23522,7 +23522,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "simple task",
+        "en": null,
         "sr": "jednostavno pitanje",
         "ru": "простое дело"
       },
@@ -23626,7 +23626,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "weak",
+        "en": null,
         "sr": "slab",
         "ru": "слабых"
       },
@@ -23797,7 +23797,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "богохуљење",
+        "sr": "bogohuljenj",
         "ru": "богохульство"
       },
       "examples": {
@@ -23933,7 +23933,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "siluetiran",
+        "sr": "siluetiran or siliueiran",
         "ru": "выресовывался"
       },
       "examples": {
@@ -24035,7 +24035,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Tu i tamo, svetla su blistala kao iluминatori na boku oceanskog broda.",
+        "sr": "Tu i tamo, svetla su blistala kao ilumiatori na boku oceanskog broda.",
         "ru": "Тут и там мерцали огни, словно иллюминаторы на борту океанского лайнера."
       },
       "examples": {
@@ -24307,7 +24307,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Porvasao sam ligamente u ramenu",
+        "sr": "Porvasao sam ligamente u ramenu or Poderao sam ligamente u ramenu",
         "ru": "Я разорвал связки в плече"
       },
       "examples": {
@@ -24472,11 +24472,11 @@
     },
     {
       "id": "en-0733",
-      "term": "in succession.",
+      "term": "in succession",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "in succession",
+        "en": null,
         "sr": "jedan za drugim",
         "ru": "один за другим"
       },
@@ -24510,7 +24510,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "very quickly",
+        "en": "hastily or quickly",
         "sr": "rekao je Vagner brzo",
         "ru": "сказал Вагнер поспешно"
       },
@@ -24544,7 +24544,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "not much",
+        "en": "barely or hardly",
         "sr": "jedva",
         "ru": "едва"
       },
@@ -24956,7 +24956,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "simply",
+        "en": "a mere young man",
         "sr": "samo mali mladić",
         "ru": "просто молодой человек"
       },
@@ -25060,7 +25060,7 @@
       "translations": {
         "en": null,
         "sr": "neuređen",
-        "ru": "помятый человек"
+        "ru": "помятый"
       },
       "examples": {
         "en": [
@@ -25128,7 +25128,7 @@
       "translations": {
         "en": null,
         "sr": "zaštitne krpe",
-        "ru": "для защиты пола"
+        "ru": "защитные тряпки"
       },
       "examples": {
         "en": [
@@ -25162,7 +25162,7 @@
       "translations": {
         "en": null,
         "sr": "popločan",
-        "ru": "устлан пол, покрыт"
+        "ru": "мощеный"
       },
       "examples": {
         "en": [
@@ -25230,7 +25230,7 @@
       "translations": {
         "en": null,
         "sr": "bolešljiv",
-        "ru": "болезенный"
+        "ru": "болезненный"
       },
       "examples": {
         "en": [
@@ -25398,7 +25398,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "soil for platns",
+        "en": "soil for plants",
         "sr": "ilovača",
         "ru": "суглинок"
       },
@@ -25466,7 +25466,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "hospital stuff",
+        "en": "hospital attendant",
         "sr": "rekao je bolničar.",
         "ru": "сказал санитар."
       },
@@ -25502,7 +25502,7 @@
       "translations": {
         "en": null,
         "sr": "skisnut",
-        "ru": "curdle - свернуться (молоко)"
+        "ru": "свернуться"
       },
       "examples": {
         "en": [
@@ -25570,7 +25570,7 @@
       "translations": {
         "en": null,
         "sr": "orao na grani",
-        "ru": "орел стоят"
+        "ru": "орел сидит на ветке"
       },
       "examples": {
         "en": [
@@ -25740,7 +25740,7 @@
       "translations": {
         "en": null,
         "sr": "prljava zaštitna tkanina",
-        "ru": "грязная тряпка (dirty cloth)"
+        "ru": "грязная тряпка"
       },
       "examples": {
         "en": [
@@ -25774,7 +25774,7 @@
       "translations": {
         "en": null,
         "sr": "fantazijski",
-        "ru": "причудливый (kinda dreamy)"
+        "ru": "причудливый"
       },
       "examples": {
         "en": [
@@ -25808,7 +25808,7 @@
       "translations": {
         "en": null,
         "sr": "nadimci",
-        "ru": "прозвища (nick names)"
+        "ru": "прозвища"
       },
       "examples": {
         "en": [
@@ -25842,7 +25842,7 @@
       "translations": {
         "en": null,
         "sr": "komora",
-        "ru": "палата (can be a prison, can be a room, chamber of secrets)"
+        "ru": "палата"
       },
       "examples": {
         "en": [
@@ -25874,7 +25874,7 @@
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "i dont care",
+        "en": "showed contempt / thumbed his nose at",
         "sr": "pokazao je prezir",
         "ru": "плюнул на это (показал неуважение)"
       },
@@ -25977,7 +25977,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "promrmljao",
+        "sr": "promrmljao or prommumlao",
         "ru": "пробормотал"
       },
       "examples": {
@@ -26012,7 +26012,7 @@
       "translations": {
         "en": null,
         "sr": "moćan",
-        "ru": "грозный (very strong) внушительная"
+        "ru": "грозный"
       },
       "examples": {
         "en": [
@@ -26046,7 +26046,7 @@
       "translations": {
         "en": null,
         "sr": "kročio",
-        "ru": "шагал (walking with purpose and authority)"
+        "ru": "шагал"
       },
       "examples": {
         "en": [
@@ -26114,7 +26114,7 @@
       "translations": {
         "en": null,
         "sr": "trajnoplašt",
-        "ru": "long coat (плащ)"
+        "ru": "плащ"
       },
       "examples": {
         "en": [
@@ -26889,40 +26889,6 @@
       }
     },
     {
-      "id": "en-0805",
-      "term": "sobriquetues",
-      "source_language": "en",
-      "type": "word",
-      "translations": {
-        "en": "sobriquets",
-        "sr": "nadimci",
-        "ru": "прозвища"
-      },
-      "examples": {
-        "en": [
-          "The soldiers had various sobriquets based on their personalities."
-        ],
-        "sr": [
-          "Vojnici su imali različite nadimke na osnovu svojih ličnosti."
-        ],
-        "ru": [
-          "Солдаты имели различные прозвища на основе своего характера."
-        ]
-      },
-      "explanation": "Забавное или оскорбительное прозвище, которым люди называют друг друга. Часто используется в военной среде или в дружеских группах.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:23:02.234Z"
-      }
-    },
-    {
       "id": "en-0807",
       "term": "tribulations",
       "source_language": "en",
@@ -26997,7 +26963,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "niklo brkove",
+        "sr": "nikli brkovi",
         "ru": "проросшие усы"
       },
       "examples": {
@@ -27171,7 +27137,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "mesnati zrna",
+        "sr": "pulpozna zrna",
         "ru": "мясистые зерна"
       },
       "examples": {
@@ -27239,7 +27205,7 @@
       "type": "phrase",
       "translations": {
         "en": "I train calves",
-        "sr": "Treniram listove",
+        "sr": "Treniram listove mišića",
         "ru": "Я тренирую икры"
       },
       "examples": {
@@ -27404,11 +27370,11 @@
     },
     {
       "id": "en-0821",
-      "term": "cashier,",
+      "term": "cashier",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "cashier",
+        "en": null,
         "sr": "blagajnik",
         "ru": "кассир"
       },
@@ -27545,7 +27511,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "obilan",
+        "sr": "obilno",
         "ru": "обильно"
       },
       "examples": {
@@ -27681,7 +27647,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "pravo",
+        "sr": "privilegija or pravo na nešto",
         "ru": "право"
       },
       "examples": {
@@ -28055,7 +28021,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Покровитељски",
+        "sr": "Pokroviteljski",
         "ru": "снисходительный"
       },
       "examples": {
@@ -28329,7 +28295,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "on je postao anksiozан",
+        "sr": "on je postao ankiozан",
         "ru": "он стал беспокоиться"
       },
       "examples": {
@@ -28636,7 +28602,7 @@
       "translations": {
         "en": null,
         "sr": "on se udalio od vrata",
-        "ru": "он отступил он двери"
+        "ru": "он отступил от двери"
       },
       "examples": {
         "en": [
@@ -28669,7 +28635,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "On je pogrbljen nalegan na zid",
+        "sr": "On je pogrbljen nalonjčen na zid",
         "ru": "он прослонился к стене"
       },
       "examples": {
@@ -28941,7 +28907,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "trune",
+        "sr": "trune (gni)",
         "ru": "сгнивает"
       },
       "examples": {
@@ -29319,7 +29285,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "žovijaln",
+        "sr": "jovijalan",
         "ru": "веселый"
       },
       "examples": {
@@ -29387,8 +29353,8 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Priseo sam da nikada više ne optužim Tema da je manje hrabar.",
-        "ru": "я клянусь больше никто не обвинять Тема в отсутствии мужества"
+        "sr": "Prisegao sam",
+        "ru": "я поклялся больше никогда не обвинять Тема в отсутствии мужества"
       },
       "examples": {
         "en": [
@@ -29455,8 +29421,8 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "bolestno-zelena voda",
-        "ru": "болестно-зеленая вода"
+        "sr": "bolestno zelena voda",
+        "ru": "болезненно-зеленая вода"
       },
       "examples": {
         "en": [
@@ -29489,7 +29455,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "komadi",
+        "sr": "остаци",
         "ru": "обрезки"
       },
       "examples": {
@@ -29932,7 +29898,7 @@
       "translations": {
         "en": null,
         "sr": "njegov mir je nestao",
-        "ru": "его спокойствие изчузло"
+        "ru": "его спокойствие исчезло"
       },
       "examples": {
         "en": [
@@ -30067,7 +30033,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "snishodljivost",
+        "sr": "popustljivost",
         "ru": "снисходительность"
       },
       "examples": {
@@ -30172,7 +30138,7 @@
       "translations": {
         "en": null,
         "sr": "sitan",
-        "ru": "тонкий утонченный"
+        "ru": "тонкий"
       },
       "examples": {
         "en": [
@@ -30376,7 +30342,7 @@
       "translations": {
         "en": "in between",
         "sr": "među",
-        "ru": "around - среди"
+        "ru": "среди"
       },
       "examples": {
         "en": [
@@ -30547,7 +30513,7 @@
       "type": "phrase",
       "translations": {
         "en": "TRANSLATE",
-        "sr": "Bol može biti ostra, a bol je bolna",
+        "sr": "Bol može biti ostra, a bolna je bol",
         "ru": "Боль может быть острой, а ноющая боль — тупой"
       },
       "examples": {
@@ -30644,11 +30610,11 @@
     },
     {
       "id": "en-0916",
-      "term": "my dread.",
+      "term": "my dread",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "my dread",
+        "en": null,
         "sr": "moj strah",
         "ru": "мой страх"
       },
@@ -30718,7 +30684,7 @@
       "translations": {
         "en": null,
         "sr": "sjajan",
-        "ru": "cияющая, glowing"
+        "ru": "сияющая, светящаяся"
       },
       "examples": {
         "en": [
@@ -30881,40 +30847,6 @@
       }
     },
     {
-      "id": "en-0924",
-      "term": "my dread",
-      "source_language": "en",
-      "type": "phrase",
-      "translations": {
-        "en": null,
-        "sr": "moj strahu",
-        "ru": "my doom - мой страх"
-      },
-      "examples": {
-        "en": [
-          "My dread about the surgery kept me awake all night."
-        ],
-        "sr": [
-          "Moj strah od operacije me čuvao budnim svu noć."
-        ],
-        "ru": [
-          "Мой страх перед операцией не давал мне спать всю ночь."
-        ]
-      },
-      "explanation": "Глубокое чувство страха, тревоги или предчувствия чего-то плохого; сильный и часто неопределенный страх.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:26:16.079Z"
-      }
-    },
-    {
       "id": "en-0925",
       "term": "light bulb",
       "source_language": "en",
@@ -30984,11 +30916,11 @@
     },
     {
       "id": "en-0927",
-      "term": "metAfor",
+      "term": "metaphor",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "metaphor",
+        "en": null,
         "sr": "metafora",
         "ru": "метафора"
       },
@@ -31023,7 +30955,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Strah se proslavio iz moga utrobama dok nije cijelo telo bilo vruće i hladno.",
+        "sr": "Strah je izbijao iz moga nitra dok nije cijelo telo bilo vruće i hladno.",
         "ru": "Страх хлынул из моего нутра и охватил всё тело жаром и холодом."
       },
       "examples": {
@@ -31125,7 +31057,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "извијајући се",
+        "sr": "vijući se",
         "ru": "извиваясь"
       },
       "examples": {
@@ -31159,8 +31091,8 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "окамењен",
-        "ru": "stoned- окоменевший"
+        "sr": "okaменjen",
+        "ru": "окаменевший"
       },
       "examples": {
         "en": [
@@ -31262,7 +31194,7 @@
       "translations": {
         "en": null,
         "sr": "vrlo oprezan",
-        "ru": "Vigilant.- Бдительный"
+        "ru": "бдительный"
       },
       "examples": {
         "en": [
@@ -31296,7 +31228,7 @@
       "translations": {
         "en": null,
         "sr": "Tem se rugao.",
-        "ru": "Тем усмехнулся"
+        "ru": "Тем насмехался"
       },
       "examples": {
         "en": [
@@ -31432,7 +31364,7 @@
       "translations": {
         "en": null,
         "sr": "šetali smo",
-        "ru": "gentle walk (мы прогулировались)"
+        "ru": "мы прогулировались"
       },
       "examples": {
         "en": [
@@ -31533,7 +31465,7 @@
       "type": "phrase",
       "translations": {
         "en": "staring at/looking at",
-        "sr": "gledanje gore na змajeve",
+        "sr": "gledanje gore na zmajeve",
         "ru": "смотрение вверх на воздушные змеи"
       },
       "examples": {
@@ -31602,7 +31534,7 @@
       "translations": {
         "en": "calm and peaceful",
         "sr": "miran",
-        "ru": "calm/peaceful - безмятженый"
+        "ru": "спокойный и мирный"
       },
       "examples": {
         "en": [
@@ -31636,7 +31568,7 @@
       "translations": {
         "en": null,
         "sr": "žujao",
-        "ru": "жужжал -making noise"
+        "ru": "жужжал"
       },
       "examples": {
         "en": [
@@ -31669,7 +31601,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Ja sam se pobaloviala",
+        "sr": "Ja sam se pobalovaala",
         "ru": "я побаловал себя"
       },
       "examples": {
@@ -32244,7 +32176,7 @@
     },
     {
       "id": "en-0965",
-      "term": "Revolve -",
+      "term": "Revolve",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -32488,7 +32420,7 @@
       "translations": {
         "en": null,
         "sr": "Udariti, udario",
-        "ru": "Ударять, ударил"
+        "ru": "Ударить, ударил"
       },
       "examples": {
         "en": [
@@ -32555,7 +32487,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Elijas je pokrenuo glavu",
+        "sr": "Elijas je tresao glavu",
         "ru": "Элиас покачал головой"
       },
       "examples": {
@@ -32827,7 +32759,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "često učavao",
+        "sr": "često učio",
         "ru": "часто учил"
       },
       "examples": {
@@ -32861,7 +32793,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "učiti / učavao",
+        "sr": "učiti / učio",
         "ru": "учить / учил"
       },
       "examples": {
@@ -33067,7 +32999,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "zapljuvan",
+        "sr": "preplavljan",
         "ru": "переполненный"
       },
       "examples": {
@@ -33102,7 +33034,7 @@
       "translations": {
         "en": null,
         "sr": "neodređeno",
-        "ru": "неопределенный"
+        "ru": "неопределённо"
       },
       "examples": {
         "en": [
@@ -33374,7 +33306,7 @@
       "translations": {
         "en": null,
         "sr": "zakonito",
-        "ru": "законный"
+        "ru": "законно"
       },
       "examples": {
         "en": [
@@ -33408,7 +33340,7 @@
       "translations": {
         "en": null,
         "sr": "učenjaci",
-        "ru": "юристы"
+        "ru": "учёные"
       },
       "examples": {
         "en": [
@@ -33441,7 +33373,7 @@
       "type": "phrase",
       "translations": {
         "en": "you study the law",
-        "sr": "vi studirate pravo",
+        "sr": "Vi studirate pravo",
         "ru": "вы изучаете право"
       },
       "examples": {
@@ -33646,7 +33578,7 @@
       "translations": {
         "en": null,
         "sr": "tužioci",
-        "ru": "прок уроры"
+        "ru": "прокуроры"
       },
       "examples": {
         "en": [
@@ -33680,7 +33612,7 @@
       "translations": {
         "en": null,
         "sr": "istaknut",
-        "ru": "видные, leaders"
+        "ru": "видные, влиятельные"
       },
       "examples": {
         "en": [
@@ -33810,11 +33742,11 @@
     },
     {
       "id": "en-1013",
-      "term": "Accusing without cause or reason -",
+      "term": "Accusing without cause or reason",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "Accusing without cause or reason",
+        "en": null,
         "sr": "Optuženje bez razloga ili osnove",
         "ru": "Обвинение без причины или оснований"
       },
@@ -33844,11 +33776,11 @@
     },
     {
       "id": "en-1014",
-      "term": "Choose your battles -",
+      "term": "Choose your battles",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "Choose your battles",
+        "en": null,
         "sr": "Biraj svoje bitke",
         "ru": "Выбирай свои битвы"
       },
@@ -33946,11 +33878,11 @@
     },
     {
       "id": "en-1017",
-      "term": "Oppressed -",
+      "term": "Oppressed",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "oppressed",
+        "en": null,
         "sr": "potisnut",
         "ru": "угнетённый"
       },
@@ -34089,7 +34021,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "prevodno",
+        "sr": "navodljivo",
         "ru": "вводящее в заблуждение"
       },
       "examples": {
@@ -34196,7 +34128,7 @@
       "translations": {
         "en": null,
         "sr": "uzimajući u obzir",
-        "ru": "принимая во внимание, taking into consideration"
+        "ru": "принимая во внимание, учитывая"
       },
       "examples": {
         "en": [
@@ -34292,7 +34224,7 @@
     },
     {
       "id": "en-1027",
-      "term": "perhaps(maybe)",
+      "term": "perhaps / maybe",
       "source_language": "en",
       "type": "word",
       "translations": {
@@ -34331,7 +34263,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "želim da podnesen žalbu, da zavedem žalbu",
+        "sr": "želim da podnesem žalbu, da zavedem žalbu",
         "ru": "я хочу подать жалобу, зарегистрировать жалобу"
       },
       "examples": {
@@ -34364,7 +34296,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "messanger",
+        "en": "messenger",
         "sr": "glasnik, vesnik",
         "ru": "вестник, глашатай"
       },
@@ -34503,7 +34435,7 @@
       "type": "phrase",
       "translations": {
         "en": "bugging / bothering / hassling",
-        "sr": "nadоsađivanje / smetanje / gnjavenje",
+        "sr": "nadosađivanje / smetanje / gnjavenje",
         "ru": "докучание / приставание / надоедание"
       },
       "examples": {
@@ -34605,7 +34537,7 @@
       "type": "phrase",
       "translations": {
         "en": "You're not meant in general",
-        "sr": "Nisu te mislili uopšte",
+        "sr": "Nisi mišljenje uopšte / Nije se misljelo na tebe",
         "ru": "Ты не имеешь в виду в целом"
       },
       "examples": {
@@ -34775,7 +34707,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "ućutkan",
+        "sr": "uočanjen / oključan",
         "ru": "онемевший"
       },
       "examples": {
@@ -35014,7 +34946,7 @@
       "translations": {
         "en": null,
         "sr": "naglasak",
-        "ru": "акцент"
+        "ru": "акцент, ударение"
       },
       "examples": {
         "en": [
@@ -35218,7 +35150,7 @@
       "translations": {
         "en": "closely monitoring someone, creating pressure or stress",
         "sr": "pažljivo pratiti nekog, stvarati pritisak ili stres",
-        "ru": "дышать мне в затылок"
+        "ru": "дышать мне в шею/спину"
       },
       "examples": {
         "en": [
@@ -35350,11 +35282,11 @@
     },
     {
       "id": "en-1059",
-      "term": "severence package",
+      "term": "severance package",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "severance package",
+        "en": null,
         "sr": "paket otpremnine",
         "ru": "выходное пособие"
       },
@@ -35593,7 +35525,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "na leći (muljažu)",
+        "sr": "u застою, без помицања",
         "ru": "в застое, без движения"
       },
       "examples": {
@@ -35676,40 +35608,6 @@
         ]
       },
       "explanation": "Люди, которые работают под руководством и в подчинении у начальника или лица более высокого ранга в организации.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "english_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:30:14.622Z"
-      }
-    },
-    {
-      "id": "en-1069",
-      "term": "imposed",
-      "source_language": "en",
-      "type": "word",
-      "translations": {
-        "en": null,
-        "sr": "nametnut",
-        "ru": "навязынный"
-      },
-      "examples": {
-        "en": [
-          "The new rules were imposed on the employees without consultation."
-        ],
-        "sr": [
-          "Nova pravila su nametuta zaposlenima bez konsultacije."
-        ],
-        "ru": [
-          "Новые правила были навязаны сотрудникам без консультации."
-        ]
-      },
-      "explanation": "Прошедшее время глагола impose; означает, что что-то было принудительно применено или навязано без согласия.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -35831,7 +35729,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "okvir reference",
+        "sr": "referentni okvir",
         "ru": "система отсчета"
       },
       "examples": {
@@ -35865,7 +35763,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "sadržajan",
+        "sr": "svojstven",
         "ru": "внутренний/ присущий"
       },
       "examples": {
@@ -35899,7 +35797,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Žalosno",
+        "sr": "Nažalost",
         "ru": "к сожалению"
       },
       "examples": {
@@ -36001,7 +35899,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Šešir",
+        "sr": "Kapa",
         "ru": "Чепец"
       },
       "examples": {
@@ -36307,7 +36205,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Nepredvidiv",
+        "sr": "Hirovit",
         "ru": "Капризный"
       },
       "examples": {
@@ -36341,7 +36239,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Blagi gurak",
+        "sr": "Lagani pritisak",
         "ru": "Толкнуть локтем"
       },
       "examples": {
@@ -36544,7 +36442,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "convice",
+        "en": "convince",
         "sr": "ubeđivati",
         "ru": "убеждать"
       },
@@ -36817,7 +36715,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Impresionirati",
+        "sr": "Zaprepastiti, silno impresionirati",
         "ru": "Поражать"
       },
       "examples": {
@@ -37123,7 +37021,7 @@
       "type": "phrase",
       "translations": {
         "en": "Winter is officially upon us",
-        "sr": "Zima je službe domaćina stigla",
+        "sr": "Zima je službeno stigla",
         "ru": "Зима официально пришла к нам"
       },
       "examples": {
@@ -37361,7 +37259,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "великодušan",
+        "sr": "velikodušan",
         "ru": "щедрый"
       },
       "examples": {
@@ -37395,7 +37293,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "krut tržište rada",
+        "sr": "kruto tržište rada",
         "ru": "жесткий рынок труда"
       },
       "examples": {
@@ -37497,7 +37395,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Simpatičan mi je koncepti slobodnog tržišta",
+        "sr": "Simpatičan mi je koncept slobodnog tržišta",
         "ru": "Я сочувствую идеям свободного рынка"
       },
       "examples": {
@@ -37532,7 +37430,7 @@
       "translations": {
         "en": null,
         "sr": "deprijacacija",
-        "ru": "амортизация"
+        "ru": "износ, девальвация, снижение стоимости"
       },
       "examples": {
         "en": [
@@ -37764,11 +37662,11 @@
     },
     {
       "id": "en-1131",
-      "term": "well-meanign",
+      "term": "well-meaning",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "well-meaning",
+        "en": null,
         "sr": "dobronameran",
         "ru": "с благими намерениями"
       },
@@ -37939,7 +37837,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "represivan",
+        "sr": "opresivan",
         "ru": "угнетающий"
       },
       "examples": {
@@ -38410,7 +38308,7 @@
     },
     {
       "id": "en-1150",
-      "term": "Pool talents",
+      "term": "Pool of talents",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -38653,7 +38551,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Vest",
+        "sr": "Prsluk",
         "ru": "Жилет"
       },
       "examples": {
@@ -38857,7 +38755,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Žaljenje",
+        "sr": "Žalovanje",
         "ru": "Скорбь"
       },
       "examples": {
@@ -38926,7 +38824,7 @@
       "translations": {
         "en": null,
         "sr": "analiza performansi svakog tima",
-        "ru": "анализ"
+        "ru": "анализ производительности каждой команды"
       },
       "examples": {
         "en": [
@@ -39022,11 +38920,11 @@
     },
     {
       "id": "en-1173",
-      "term": "realistcally achievable.",
+      "term": "realistically achievable",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "realistically achievable",
+        "en": null,
         "sr": "realno ostvarivo",
         "ru": "реально достижимо"
       },
@@ -39095,7 +38993,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "zadnja strana butine",
+        "sr": "potkolenica",
         "ru": "подколенное сухожилие"
       },
       "examples": {
@@ -39129,7 +39027,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "svetlooких",
+        "sr": "svetlookih",
         "ru": "с ясным взглядом"
       },
       "examples": {
@@ -39192,11 +39090,11 @@
     },
     {
       "id": "en-1179",
-      "term": "imposter sindrom",
+      "term": "impostor syndrome",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "impostor syndrome",
+        "en": null,
         "sr": "sindrom laznog pretpostavljanja",
         "ru": "синдром самозванца"
       },
@@ -39504,7 +39402,7 @@
       "translations": {
         "en": null,
         "sr": "savesnost",
-        "ru": "добросовестный"
+        "ru": "добросовестность"
       },
       "examples": {
         "en": [
@@ -39639,7 +39537,7 @@
       "type": "phrase",
       "translations": {
         "en": "nikad ne odustaje",
-        "sr": "nikad ne odlažeć",
+        "sr": "nikad ne odlaže",
         "ru": "никогда не откладывает"
       },
       "examples": {
@@ -39742,7 +39640,7 @@
       "translations": {
         "en": null,
         "sr": "emocionalni količnik",
-        "ru": "коэффициент эмоциональности"
+        "ru": "эмоциональный коэффициент"
       },
       "examples": {
         "en": [
@@ -39946,7 +39844,7 @@
       "translations": {
         "en": null,
         "sr": "intrigantan",
-        "ru": "intriguющий"
+        "ru": "интригующий"
       },
       "examples": {
         "en": [
@@ -40116,7 +40014,7 @@
       "translations": {
         "en": null,
         "sr": "dostojinstvo",
-        "ru": "достинство"
+        "ru": "достоинство"
       },
       "examples": {
         "en": [
@@ -40217,7 +40115,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "poznato",
+        "sr": "zloglasno",
         "ru": "пресловуто"
       },
       "examples": {
@@ -40319,7 +40217,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "stagnacija",
+        "sr": "stazis",
         "ru": "стазис"
       },
       "examples": {
@@ -40388,7 +40286,7 @@
       "translations": {
         "en": null,
         "sr": "nadmašen brojem",
-        "ru": "в меньшинстве или превосходящий"
+        "ru": "в меньшинстве"
       },
       "examples": {
         "en": [
@@ -40626,7 +40524,7 @@
       "translations": {
         "en": null,
         "sr": "osećanje",
-        "ru": "настроение"
+        "ru": "чувство или мнение"
       },
       "examples": {
         "en": [
@@ -40863,7 +40761,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "zastarjelo",
+        "sr": "zastarelo",
         "ru": "устаревший"
       },
       "examples": {
@@ -41543,7 +41441,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "podiže mi rasположenje",
+        "sr": "podiže mi raspoloženje",
         "ru": "поднимает мне настроение"
       },
       "examples": {
@@ -41612,7 +41510,7 @@
       "translations": {
         "en": null,
         "sr": "slimaćan",
-        "ru": "ligav -скользкитй"
+        "ru": "липкий"
       },
       "examples": {
         "en": [
@@ -41951,7 +41849,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Jarek",
+        "sr": "Rov",
         "ru": "Ров"
       },
       "examples": {
@@ -42053,7 +41951,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Pokušati da se uravnoteži",
+        "sr": "Nadoknaditi propušteno",
         "ru": "Наверстывать упущенное"
       },
       "examples": {
@@ -42325,7 +42223,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Privezан za svoj radni sto",
+        "sr": "Privezаn za svoj radni sto",
         "ru": "Привязан к своему столу"
       },
       "examples": {
@@ -42665,7 +42563,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "neautenčan",
+        "sr": "neautenčan or neautentičan",
         "ru": "неподлинный"
       },
       "examples": {
@@ -42694,11 +42592,11 @@
     },
     {
       "id": "en-1282",
-      "term": "authenticity. sincerity.",
+      "term": "authenticity, sincerity",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "authenticity, sincerity",
+        "en": null,
         "sr": "autentičnost, iskrenost",
         "ru": "подлинность, искренность"
       },
@@ -42838,7 +42736,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "folija",
+        "sr": "sprečiti or ometati",
         "ru": "фольга"
       },
       "examples": {
@@ -43042,7 +42940,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "okrutan",
+        "sr": "žestok or divlji",
         "ru": "яростный"
       },
       "examples": {
@@ -43110,7 +43008,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "intenzivirati",
+        "sr": "pojačati or intenzivirati",
         "ru": "интенсифицировать"
       },
       "examples": {
@@ -43144,7 +43042,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "inhibirati",
+        "sr": "sprečavati or inhibirati",
         "ru": "подавлять"
       },
       "examples": {
@@ -43178,7 +43076,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "potiskati to",
+        "sr": "potiskati ga or potiskati to",
         "ru": "подавить это"
       },
       "examples": {
@@ -43213,7 +43111,7 @@
       "translations": {
         "en": null,
         "sr": "potiskujući",
-        "ru": "подавление"
+        "ru": "душащий or подавляющий"
       },
       "examples": {
         "en": [
@@ -43281,7 +43179,7 @@
       "translations": {
         "en": null,
         "sr": "cenovne ponude za preuzimanje kompanije",
-        "ru": "цена для  поглащения"
+        "ru": "ценовые предложения для поглощения компании"
       },
       "examples": {
         "en": [
@@ -43649,11 +43547,11 @@
     },
     {
       "id": "en-1311",
-      "term": "Gental",
+      "term": "Gentle",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "Gentle",
+        "en": null,
         "sr": "Nežan",
         "ru": "Мягкий, нежный"
       },
@@ -43683,11 +43581,11 @@
     },
     {
       "id": "en-1312",
-      "term": "Not in alfa personality",
+      "term": "Not in alpha personality",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "Not in alpha personality",
+        "en": null,
         "sr": "Nema alfa ličnosti",
         "ru": "Не альфа-личность"
       },
@@ -44164,7 +44062,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "diskriminantan",
+        "sr": "pronicljiv",
         "ru": "проницательный"
       },
       "examples": {
@@ -44198,7 +44096,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "diskriminantni entuzijasti",
+        "sr": "pronicljivi entuzijasti",
         "ru": "проницательные энтузиасты"
       },
       "examples": {
@@ -44266,7 +44164,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "multituda",
+        "sr": "mnoštvo",
         "ru": "множество"
       },
       "examples": {
@@ -44368,7 +44266,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Poslovna spasobnost",
+        "sr": "Poslovna sposobnost",
         "ru": "Деловая хватка"
       },
       "examples": {
@@ -44537,7 +44435,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "buying",
+        "en": "having a strong desire to acquire or possess",
         "sr": "sklon stjecanju, kupovanju",
         "ru": "склонный к приобретению, накоплению"
       },
@@ -44567,11 +44465,11 @@
     },
     {
       "id": "en-1338",
-      "term": "competitors in their industry or companies in otheir",
+      "term": "competitors in their industry or companies in other",
       "source_language": "en",
       "type": "phrase",
       "translations": {
-        "en": "competitors in their industry or companies in other",
+        "en": null,
         "sr": "konkurenti u njihovoj industriji ili kompanije u drugim",
         "ru": "конкуренты в их отрасли или компании в других"
       },
@@ -44606,7 +44504,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "industrije kroz niz preuzimanja ili stavki",
+        "sr": "industrije kroz niz preuzimanja ili akvizicija",
         "ru": "отрасли посредством серии приобретений или поглощений"
       },
       "examples": {
@@ -44640,7 +44538,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "nezgrapna konglomerata",
+        "sr": "nezgrapan konglomerat",
         "ru": "громоздкий конгломерат"
       },
       "examples": {
@@ -44708,7 +44606,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "odložio",
+        "sr": "riješio se / oslobodio se",
         "ru": "избавился от"
       },
       "examples": {
@@ -44742,7 +44640,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "odijelio",
+        "sr": "prodao / odcijepio",
         "ru": "отчудил"
       },
       "examples": {
@@ -44810,7 +44708,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "obeshrabriti",
+        "sr": "obeshrabriti / odvratiti",
         "ru": "отговорить"
       },
       "examples": {
@@ -44844,7 +44742,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "plima se povlači",
+        "sr": "plima se povlači / oseka",
         "ru": "прилив отступает"
       },
       "examples": {
@@ -44975,11 +44873,11 @@
     },
     {
       "id": "en-1351",
-      "term": "Specalties",
+      "term": "Specialties",
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "Specialties",
+        "en": null,
         "sr": "Specijalnosti",
         "ru": "Специальности"
       },
@@ -45183,7 +45081,7 @@
       "source_language": "en",
       "type": "word",
       "translations": {
-        "en": "domisljatost",
+        "en": "domišljatost",
         "sr": "domišljatost",
         "ru": "изобретательность"
       },
@@ -45729,7 +45627,7 @@
       "translations": {
         "en": null,
         "sr": "Kada jedna kompanija pionirski otvori uspešan biznis",
-        "ru": "Когда одна компания пионерски открывает успешный бизнес"
+        "ru": "Когда одна компания открывает успешную бизнес-модель"
       },
       "examples": {
         "en": [
@@ -46170,7 +46068,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "evolucija",
+        "sr": "evolirati",
         "ru": "эволюционировать"
       },
       "examples": {
@@ -46307,7 +46205,7 @@
       "translations": {
         "en": null,
         "sr": "kontingencija",
-        "ru": "непредвиденные"
+        "ru": "непредвиденность or условие"
       },
       "examples": {
         "en": [
@@ -46442,7 +46340,7 @@
       "type": "phrase",
       "translations": {
         "en": null,
-        "sr": "Medved će izaći izза stabla.",
+        "sr": "Medved će izaći iz-za stabla.",
         "ru": "Медведь выйдет из-за дерева."
       },
       "examples": {
@@ -46850,7 +46748,7 @@
       "type": "word",
       "translations": {
         "en": null,
-        "sr": "Nastajanje",
+        "sr": "Nastajanje obaveza",
         "ru": "Несение"
       },
       "examples": {
@@ -46885,7 +46783,7 @@
       "translations": {
         "en": null,
         "sr": "Sklona izbegavanju rizika",
-        "ru": "менее склонны к риску."
+        "ru": "менее склонны к риску"
       },
       "examples": {
         "en": [

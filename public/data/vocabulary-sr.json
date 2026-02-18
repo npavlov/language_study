@@ -43,7 +43,7 @@
       "translations": {
         "en": "evade",
         "sr": null,
-        "ru": "уклонятся"
+        "ru": "уклониться"
       },
       "examples": {
         "en": [
@@ -547,7 +547,7 @@
     },
     {
       "id": "sr-0017",
-      "term": "Од сутра почињу часови у онлајн школи.",
+      "term": "Od sutra počinjju časovi u onlajn školi.",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -853,7 +853,7 @@
     },
     {
       "id": "sr-0026",
-      "term": "su mi nadredjeni",
+      "term": "su mi nadređeni",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -887,7 +887,7 @@
     },
     {
       "id": "sr-0027",
-      "term": "Malo sam prsla od posla",
+      "term": "Malo sam pukla od posla",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -1295,7 +1295,7 @@
     },
     {
       "id": "sr-0039",
-      "term": "негован",
+      "term": "negovan",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -1329,7 +1329,7 @@
     },
     {
       "id": "sr-0040",
-      "term": "Moje saucasce",
+      "term": "Moje saučašće",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -1775,7 +1775,7 @@
       "source_language": "sr",
       "type": "word",
       "translations": {
-        "en": "we are winking",
+        "en": "we are joking/fooling around",
         "sr": null,
         "ru": "подмигиваем"
       },
@@ -1941,7 +1941,7 @@
     },
     {
       "id": "sr-0058",
-      "term": "zakonodavnu i izvršnu vlast лопов је провалио",
+      "term": "zakonodavnu i izvršnu vlast",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -2179,7 +2179,7 @@
     },
     {
       "id": "sr-0065",
-      "term": "Juce sam bas okacila neki post, o",
+      "term": "Juče sam baš okačila neki post, o",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -2621,7 +2621,7 @@
     },
     {
       "id": "sr-0078",
-      "term": "Био си у праву када си рекао да ми ходање по планинама неће донети ништа добро.",
+      "term": "Bio si u pravu kada si rekao da mi hodanje po planinama neće doneti ništa dobro.",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -2995,7 +2995,7 @@
     },
     {
       "id": "sr-0089",
-      "term": "Припадате некој заједници!",
+      "term": "Pripadate nekoj zajednici!",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -3029,7 +3029,7 @@
     },
     {
       "id": "sr-0090",
-      "term": "I ja imam dobre vesti.",
+      "term": "Ja sam i imao dobre vesti.",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -3369,7 +3369,7 @@
     },
     {
       "id": "sr-0102",
-      "term": "то ме лечи",
+      "term": "to me leči",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -3505,7 +3505,7 @@
     },
     {
       "id": "sr-0106",
-      "term": "merdvine",
+      "term": "merdžine",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -3612,7 +3612,7 @@
       "type": "phrase",
       "translations": {
         "en": "don't touch yourself",
-        "sr": "nemoj da se diraš",
+        "sr": "nemoj da se diraj",
         "ru": "не трогай себя"
       },
       "examples": {
@@ -3743,7 +3743,7 @@
     },
     {
       "id": "sr-0113",
-      "term": "Осећам наглу киселост у укусу.",
+      "term": "Osećam naglu kiselost u ukusu.",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -3981,7 +3981,7 @@
     },
     {
       "id": "sr-0120",
-      "term": "zapazanja",
+      "term": "zapažanja",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -4565,7 +4565,7 @@
       "translations": {
         "en": "You bunch of idiots",
         "sr": null,
-        "ru": "Вы, блин, идиоты"
+        "ru": "Вы, идиоты"
       },
       "examples": {
         "en": [
@@ -4973,7 +4973,7 @@
       "translations": {
         "en": "Can you exchange 1000 for 500?",
         "sr": "Možeš li da razmeniš 1000 po 500?",
-        "ru": "Можеш ли да размениш 1000 по 500?"
+        "ru": "Можешь ли ты обменять 1000 на 500?"
       },
       "examples": {
         "en": [
@@ -5307,7 +5307,7 @@
     },
     {
       "id": "sr-0162",
-      "term": "Dan mi je ispunjen **",
+      "term": "Dan mi je ispunjen",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -5483,7 +5483,7 @@
       "translations": {
         "en": "claims",
         "sr": null,
-        "ru": "claims (претензии)"
+        "ru": "претензии"
       },
       "examples": {
         "en": [
@@ -6331,7 +6331,7 @@
       "source_language": "sr",
       "type": "phrase",
       "translations": {
-        "en": "my blinders on my head",
+        "en": "my blinkers on my head",
         "sr": null,
         "ru": "мои шоры на голове"
       },
@@ -6463,12 +6463,12 @@
     },
     {
       "id": "sr-0207",
-      "term": "mumbled- пробормтоал",
+      "term": "mumbled",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
         "en": "mumbled",
-        "sr": "promamtao",
+        "sr": "prombormtao",
         "ru": "пробормотал"
       },
       "examples": {
@@ -6497,7 +6497,7 @@
     },
     {
       "id": "sr-0215",
-      "term": "руковање",
+      "term": "rukovanje",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -6565,7 +6565,7 @@
     },
     {
       "id": "sr-0217",
-      "term": "деликатан",
+      "term": "delikatan",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -6735,7 +6735,7 @@
     },
     {
       "id": "sr-0222",
-      "term": "Сведок",
+      "term": "Svedok",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -6837,7 +6837,7 @@
     },
     {
       "id": "sr-0225",
-      "term": "imas veoma raznovrstan posao",
+      "term": "Imaš veoma raznovrstan posao",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -7283,7 +7283,7 @@
       "source_language": "sr",
       "type": "word",
       "translations": {
-        "en": "aplaudirao",
+        "en": "applauded",
         "sr": null,
         "ru": "аплодировал"
       },
@@ -7389,7 +7389,7 @@
       "type": "word",
       "translations": {
         "en": "poor person, pauper",
-        "sr": "сиромах, просјак",
+        "sr": "siromah, prosjak",
         "ru": "бедняк, нищий"
       },
       "examples": {
@@ -7594,7 +7594,7 @@
     },
     {
       "id": "sr-0250",
-      "term": "сујеверни људи",
+      "term": "sujeverni ljudi",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -7832,7 +7832,7 @@
     },
     {
       "id": "sr-0258",
-      "term": "наступају возила",
+      "term": "naступају vozila",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -8144,7 +8144,7 @@
       "translations": {
         "en": "extremity",
         "sr": "ekstremitet",
-        "ru": "је је завршни дело тела човека или животиње"
+        "ru": "конечность"
       },
       "examples": {
         "en": [
@@ -8240,7 +8240,7 @@
     },
     {
       "id": "sr-0270",
-      "term": "Брвнара је објекат направљен искључиво од стабала дрвета",
+      "term": "Brvnara je objekat napravljen isključivo od stabala drveća",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -8308,7 +8308,7 @@
     },
     {
       "id": "sr-0272",
-      "term": "Moji ektremiteti",
+      "term": "Moji ekstremiteti",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -8410,7 +8410,7 @@
     },
     {
       "id": "sr-0275",
-      "term": "Navedni -alleged",
+      "term": "Navedni",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -8550,7 +8550,7 @@
       "source_language": "sr",
       "type": "phrase",
       "translations": {
-        "en": "The dog's brow furrowed",
+        "en": "The dog frowned / The dog's face furrowed",
         "sr": null,
         "ru": "У собаки нахмурился лоб"
       },
@@ -8686,7 +8686,7 @@
       "source_language": "sr",
       "type": "word",
       "translations": {
-        "en": "Kindly",
+        "en": "Kindly / In a friendly manner / Pleasantly",
         "sr": null,
         "ru": "Любезно"
       },
@@ -8954,7 +8954,7 @@
     },
     {
       "id": "sr-0291",
-      "term": "Желим да те лишим цигарета",
+      "term": "Želim da te lišim cigareta",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -8988,7 +8988,7 @@
     },
     {
       "id": "sr-0292",
-      "term": "црвена рибизла",
+      "term": "crvena ribizla",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -9094,7 +9094,7 @@
       "source_language": "sr",
       "type": "phrase",
       "translations": {
-        "en": "pickles. we are smoking.",
+        "en": "pickles. we are smoking cigarettes.",
         "sr": null,
         "ru": "маринады. мы курим."
       },
@@ -9572,7 +9572,7 @@
       "translations": {
         "en": "traces",
         "sr": null,
-        "ru": "traits - черты"
+        "ru": "черты"
       },
       "examples": {
         "en": [
@@ -9940,7 +9940,7 @@
     },
     {
       "id": "sr-0321",
-      "term": "Он бежал как марафонец.",
+      "term": "On je bežao kao maratonac.",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -10008,7 +10008,7 @@
     },
     {
       "id": "sr-0323",
-      "term": "Сияет как звезда.",
+      "term": "Sijaji kao zvezda.",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -10212,7 +10212,7 @@
     },
     {
       "id": "sr-0329",
-      "term": "Sazvaci",
+      "term": "Sazvači",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -10246,7 +10246,7 @@
     },
     {
       "id": "sr-0330",
-      "term": "Назвали су га по острву",
+      "term": "Nazvali su ga po ostrvu",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -10314,7 +10314,7 @@
     },
     {
       "id": "sr-0332",
-      "term": "stalozen",
+      "term": "staložen",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -10348,7 +10348,7 @@
     },
     {
       "id": "sr-0333",
-      "term": "разметљив",
+      "term": "razmetljiv",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -10504,40 +10504,6 @@
         ]
       },
       "explanation": "Защитный головной убор, используемый для защиты головы во время спорта, езды на мотоцикле или в армии.",
-      "pronunciation": null,
-      "category": null,
-      "tags": [],
-      "difficulty": 3,
-      "enriched": true,
-      "metadata": {
-        "date_added": "2026-02-18",
-        "source_file": "serbian_words.txt",
-        "reviewed": false,
-        "enriched_at": "2026-02-18T10:50:17.532Z"
-      }
-    },
-    {
-      "id": "sr-0338",
-      "term": "razmetljiv",
-      "source_language": "sr",
-      "type": "word",
-      "translations": {
-        "en": "wasteful",
-        "sr": null,
-        "ru": "расточительный"
-      },
-      "examples": {
-        "en": [
-          "His wasteful spending habits worried his parents."
-        ],
-        "sr": [
-          "Njegove razmetljive navike trošenja su zabrinjavale njegove roditelje."
-        ],
-        "ru": [
-          "Его расточительные привычки тратить деньги беспокоили его родителей."
-        ]
-      },
-      "explanation": "Склонный к излишним или неэкономичным расходам; неумело или щедро тратящий деньги и ресурсы.",
       "pronunciation": null,
       "category": null,
       "tags": [],
@@ -10761,7 +10727,7 @@
       "type": "word",
       "translations": {
         "en": "thoughtful",
-        "sr": "pronjiclljiv",
+        "sr": "pronjiclјiv",
         "ru": "внимательный"
       },
       "examples": {
@@ -10892,7 +10858,7 @@
     },
     {
       "id": "sr-0349",
-      "term": "Kocija",
+      "term": "Kočija",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -10926,7 +10892,7 @@
     },
     {
       "id": "sr-0350",
-      "term": "zlostavljano nadmetanja",
+      "term": "nepošteno nadmetanja",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -11266,7 +11232,7 @@
     },
     {
       "id": "sr-0360",
-      "term": "Kaju",
+      "term": "Kajak",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -11402,7 +11368,7 @@
     },
     {
       "id": "sr-0364",
-      "term": "ligavo\\",
+      "term": "ligavo",
       "source_language": "sr",
       "type": "word",
       "translations": {
@@ -11742,7 +11708,7 @@
     },
     {
       "id": "sr-0374",
-      "term": "pronađite sve krupne infrastrukturne projekte u Sribiji 2025-2030",
+      "term": "pronađite sve krupne infrastrukturne projekte u Srbiji 2025-2030",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -11776,7 +11742,7 @@
     },
     {
       "id": "sr-0375",
-      "term": "stisnite pesnicu",
+      "term": "stisnite pesniču",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -12156,7 +12122,7 @@
       "translations": {
         "en": "slimy",
         "sr": null,
-        "ru": "липкий"
+        "ru": "липкий, слизистый"
       },
       "examples": {
         "en": [
@@ -12360,7 +12326,7 @@
       "translations": {
         "en": "caregiver",
         "sr": null,
-        "ru": "опекун"
+        "ru": "опекун, сиделка, няня"
       },
       "examples": {
         "en": [
@@ -12762,7 +12728,7 @@
     },
     {
       "id": "sr-0404",
-      "term": "umjetno spolovilo",
+      "term": "umjetno spolovilo or check if should be 'umjetna spolovina'",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -12835,7 +12801,7 @@
       "type": "word",
       "translations": {
         "en": "always",
-        "sr": "uvek",
+        "sr": "uvis or uvijek",
         "ru": "всегда"
       },
       "examples": {
@@ -12898,7 +12864,7 @@
     },
     {
       "id": "sr-0408",
-      "term": "sujetan covek",
+      "term": "sujetan čovek",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -12971,7 +12937,7 @@
       "type": "phrase",
       "translations": {
         "en": "Scratch me.",
-        "sr": "Češaj me.",
+        "sr": "Češkaj me.",
         "ru": "Почеши мне."
       },
       "examples": {
@@ -13242,7 +13208,7 @@
       "source_language": "sr",
       "type": "word",
       "translations": {
-        "en": "inflation",
+        "en": "inflating, puffing up, inflation (as a process)",
         "sr": null,
         "ru": "надувание"
       },
@@ -13414,7 +13380,7 @@
       "translations": {
         "en": "resilient",
         "sr": null,
-        "ru": "устойчивый"
+        "ru": "резилиентный or устойчивый к стрессу"
       },
       "examples": {
         "en": [
@@ -13836,7 +13802,7 @@
       "type": "word",
       "translations": {
         "en": "catkins",
-        "sr": "mačje mace",
+        "sr": "ječmene mace or similar",
         "ru": "катышки"
       },
       "examples": {
@@ -13967,7 +13933,7 @@
     },
     {
       "id": "sr-0440",
-      "term": "suočite se sa svojim demojima",
+      "term": "suočite se sa svojim demonima",
       "source_language": "sr",
       "type": "phrase",
       "translations": {
@@ -14341,7 +14307,7 @@
     },
     {
       "id": "sr-0451",
-      "term": "makes a claim.",
+      "term": "makes a claim",
       "source_language": "sr",
       "type": "phrase",
       "translations": {

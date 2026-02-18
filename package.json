@@ -14,7 +14,9 @@
     "enrich": "node scripts/enrich-vocabulary.js",
     "migrate": "node scripts/migrate-to-sqlite.js",
     "db:export": "node scripts/db-export.js",
-    "vocab": "node scripts/vocab-cli.js"
+    "vocab": "node scripts/vocab-cli.js",
+    "verify": "node scripts/verify-translations.js",
+    "fix-translations": "node scripts/apply-translation-fixes.js"
   },
   "devDependencies": {
     "better-sqlite3": "^12.6.2",
