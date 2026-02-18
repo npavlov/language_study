@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "lint": "eslint src/js/",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "parse": "node scripts/parse-words.js",
+    "enrich": "node scripts/enrich-vocabulary.js"
   },
   "devDependencies": {
     "eslint": "^9.0.0",

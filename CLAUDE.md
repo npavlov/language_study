@@ -39,17 +39,19 @@ tests/                  # unit tests (vitest)
 ## Build & Run Commands
 
 ```bash
-npm run dev       # start local dev server (vite or live-server)
+npm run dev       # start local dev server (vite)
 npm run lint      # eslint src/js/**
 npm run test      # vitest
 npm run build     # vite build → dist/ (for GitHub Pages deploy)
+npm run parse     # parse .txt word files → data/*.json (idempotent)
+npm run enrich    # AI-enrich vocabulary via Claude API (needs ANTHROPIC_API_KEY)
 ```
 
 ## Naming Conventions
 
 | Scope       | Convention          | Example                    |
 |-------------|---------------------|----------------------------|
-| Files       | kebab-case          | `flash-cards.js`           |
+| Files       | kebab-case          | `add-words.js`             |
 | JS funcs    | camelCase           | `getNextWord()`            |
 | JS classes  | PascalCase          | `GameEngine`               |
 | CSS classes | BEM                 | `.card__front--flipped`    |
@@ -63,26 +65,37 @@ Each vocabulary entry follows this schema:
 ```json
 {
   "id": "en-042",
-  "word": "persevere",
+  "term": "persevere",
   "source_language": "en",
   "type": "word",
   "translations": {
-    "en": "persevere",
+    "en": null,
     "sr": "istrajati",
     "ru": "упорствовать"
   },
   "examples": {
-    "en": "You must persevere despite the difficulties.",
-    "sr": "Morate istrajati uprkos poteškoćama.",
-    "ru": "Вы должны упорствовать, несмотря на трудности."
+    "en": ["You must persevere despite the difficulties."],
+    "sr": ["Morate istrajati uprkos poteškoćama."],
+    "ru": ["Вы должны упорствовать, несмотря на трудности."]
   },
   "explanation": "Проявлять настойчивость, не сдаваться перед трудностями.",
   "pronunciation": { "en": "ˌpɜːrsəˈvɪr" },
+  "category": "character",
   "tags": ["character", "resilience"],
-  "difficulty": 2
+  "difficulty": 2,
+  "enriched": true,
+  "metadata": {
+    "date_added": "2026-02-18",
+    "source_file": "english_words.txt",
+    "reviewed": false
+  }
 }
 ```
 
+- `term` = the word or phrase being studied. Field in source language.
+- `translations.{lang}` = translation to that language. `null` for the source language itself.
+- `examples.{lang}` = **array of strings** (example sentences). Empty array `[]` if none.
+- `enriched` = `true` after AI enrichment fills translations/examples/explanation.
 - `ru` translations serve as **fallback hints only** — not a primary display language.
 - `null` for any missing field. The game engine and UI must handle `null` gracefully.
 
@@ -95,6 +108,14 @@ Two-tier progressive reveal when learning English:
 
 When learning Serbian, reverse: first hint is English (`en`), second is Russian (`ru`).
 Never auto-reveal hints. User must explicitly request each level.
+
+## Data Pipeline
+
+1. **Parse** raw .txt files → structured JSON: `npm run parse -- --english english_words.txt --output data/vocabulary-en.json`
+2. **Enrich** with AI translations, examples, explanations: `ANTHROPIC_API_KEY=sk-... npm run enrich`
+3. Enrichment is idempotent — skips entries where `enriched === true`. Safe to re-run.
+4. Batches of 30, saves after each batch, auto-retries on failure.
+5. `--dry-run` flag previews without API calls.
 
 ## Coding Conventions
 
