@@ -1,0 +1,23 @@
+{
+  "name": "language-study",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Trilingual vocabulary game — learn English and Serbian with Russian hints",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/js/",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.76.0",
+    "xlsx": "^0.18.5"
+  }
+}

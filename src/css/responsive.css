@@ -1,0 +1,104 @@
+/* ========================================
+   Responsive breakpoints — mobile-first
+   ======================================== */
+
+/* --- Base (phone, <480px) --- */
+
+#app {
+  padding: var(--spacing-md);
+  padding-top: calc(var(--spacing-md) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Mode cards stack vertically on phone */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+/* Stats bar chart: fewer bars visible, each wider */
+.bar-chart {
+  height: 5rem;
+}
+
+/* --- Tablet: 480px+ --- */
+@media (min-width: 30rem) {
+  #app {
+    padding: var(--spacing-lg);
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Mode cards: 2-column grid */
+  .mode-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Flashcard can be wider */
+  .flashcards__scene {
+    max-width: 28rem;
+  }
+
+  /* Match grid items get more padding */
+  .match__item {
+    padding: var(--spacing-md);
+    font-size: var(--font-size-base);
+  }
+
+  .bar-chart {
+    height: 6rem;
+  }
+}
+
+/* --- Desktop: 1024px+ --- */
+@media (min-width: 64rem) {
+  #app {
+    padding: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+  }
+
+  /* Hide bottom tab bar on desktop — use side or top nav instead */
+  .tab-bar {
+    position: static;
+    height: auto;
+    border-top: none;
+    justify-content: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tab-bar__item {
+    flex-direction: row;
+    font-size: var(--font-size-sm);
+    gap: var(--spacing-xs);
+  }
+
+  /* Mode cards: can show 2x2 comfortably */
+  .mode-grid {
+    grid-template-columns: 1fr 1fr;
+    max-width: 40rem;
+  }
+
+  /* Flashcard comfortable width */
+  .flashcards__scene {
+    max-width: 32rem;
+  }
+
+  /* Quiz options: 2-column on desktop */
+  .quiz__options--desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .bar-chart {
+    height: 8rem;
+  }
+
+  /* No need for extra bottom padding without fixed tab bar */
+  .screen {
+    padding-bottom: var(--spacing-lg);
+  }
+}

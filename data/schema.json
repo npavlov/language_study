@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Language Study Vocabulary",
+  "description": "Trilingual vocabulary entries for EN/SR/RU language learning",
+  "type": "object",
+  "required": ["schema_version", "entries"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Schema version for future extensibility"
+    },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/VocabularyEntry" }
+    }
+  },
+  "$defs": {
+    "VocabularyEntry": {
+      "type": "object",
+      "required": ["id", "term", "source_language", "type", "translations", "difficulty", "metadata"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stable identifier, e.g. 'en-042', 'sr-001'"
+        },
+        "term": {
+          "type": "string",
+          "description": "Canonical form in the source language"
+        },
+        "source_language": {
+          "type": "string",
+          "enum": ["en", "sr", "ru"]
+        },
+        "type": {
+          "type": "string",
+          "enum": ["word", "phrase"],
+          "description": "'phrase' for multi-word expressions"
+        },
+        "translations": {
+          "type": "object",
+          "properties": {
+            "en": { "type": ["string", "null"] },
+            "sr": { "type": ["string", "null"] },
+            "ru": { "type": ["string", "null"] }
+          },
+          "description": "null when translation is not yet known"
+        },
+        "examples": {
+          "type": "object",
+          "properties": {
+            "en": { "type": "array", "items": { "type": "string" }, "default": [] },
+            "sr": { "type": "array", "items": { "type": "string" }, "default": [] },
+            "ru": { "type": "array", "items": { "type": "string" }, "default": [] }
+          },
+          "default": { "en": [], "sr": [], "ru": [] }
+        },
+        "explanation": {
+          "type": ["string", "null"],
+          "description": "Definition or usage note, preferably in Russian"
+        },
+        "pronunciation": {
+          "type": ["object", "null"],
+          "properties": {
+            "en": { "type": ["string", "null"] },
+            "sr": { "type": ["string", "null"] },
+            "ru": { "type": ["string", "null"] }
+          }
+        },
+        "category": {
+          "type": ["string", "null"],
+          "description": "Broad topic: food, travel, work, character, etc."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Freeform labels: noun, verb, formal, colloquial, etc."
+        },
+        "difficulty": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "1=beginner, 5=advanced"
+        },
+        "enriched": {
+          "type": "boolean",
+          "default": false,
+          "description": "true after AI enrichment has filled missing fields"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "date_added": {
+              "type": "string",
+              "format": "date",
+              "description": "ISO 8601 date"
+            },
+            "source_file": {
+              "type": ["string", "null"],
+              "description": "Original .txt filename, null if entered manually"
+            },
+            "reviewed": {
+              "type": "boolean",
+              "default": false,
+              "description": "true after human verification"
+            }
+          }
+        }
+      }
+    }
+  }
+}
