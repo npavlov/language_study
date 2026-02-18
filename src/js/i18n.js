@@ -33,6 +33,7 @@ export const t = {
   perfect_round: 'Идеальный раунд — без ошибок!',
 
   // Typing
+  translate_to: 'Переведи на',
   type_translation: 'Напиши перевод…',
   submit: 'Ответ',
   show_hint: 'Подсказка',

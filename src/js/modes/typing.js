@@ -12,7 +12,7 @@
  */
 
 import { fuzzyMatch, serbianCyrillicToLatin } from '../engine.js';
-import { t } from '../i18n.js';
+import { t, langLabel } from '../i18n.js';
 
 // --- Constants ---------------------------------------------------------------
 
@@ -117,6 +117,13 @@ export class TypingMode {
     card.appendChild(wordType);
     card.appendChild(wordTerm);
 
+    // Direction prompt: "Переведи на сербский:" + masked answer
+    const promptArea = el('div', 'typing__prompt');
+    const promptLabel = el('div', 'typing__prompt-label');
+    const maskedHint = el('div', 'typing__masked-hint');
+    promptArea.appendChild(promptLabel);
+    promptArea.appendChild(maskedHint);
+
     // Hint area
     const hintArea = el('div', 'typing__hint-area');
     hintArea.setAttribute('aria-live', 'polite');
@@ -167,6 +174,7 @@ export class TypingMode {
     // Assemble
     this._container.appendChild(header);
     this._container.appendChild(card);
+    this._container.appendChild(promptArea);
     this._container.appendChild(hintArea);
     this._container.appendChild(inputArea);
     this._container.appendChild(feedback);
@@ -174,7 +182,7 @@ export class TypingMode {
 
     this._dom = {
       progressFill, progressLabel, scoreEl,
-      wordType, wordTerm, hintArea,
+      wordType, wordTerm, promptLabel, maskedHint, hintArea,
       input, submitBtn, feedback,
       hintBtn, letterBtn, skipBtn,
       actions, inputArea,
@@ -205,10 +213,16 @@ export class TypingMode {
     this._currentIndex = this._engine.session?.currentIndex ?? this._currentIndex;
     this._updateProgress();
 
-    const { wordType, wordTerm, hintArea, input, feedback, hintBtn, letterBtn, skipBtn, submitBtn, inputArea } = this._dom;
+    const { wordType, wordTerm, promptLabel, maskedHint, hintArea, input, feedback, hintBtn, letterBtn, skipBtn, submitBtn, inputArea } = this._dom;
 
     wordType.textContent = entry.type ? entry.type.toUpperCase() : '';
     wordTerm.textContent = entry.term;
+
+    // Show direction prompt and masked answer
+    const answerLang = this._engine.hintLang;
+    promptLabel.textContent = `${t.translate_to} ${langLabel(answerLang).toLowerCase()}:`;
+    const expected = entry.translations[answerLang] || entry.term || '';
+    maskedHint.textContent = expected.replace(/\S/g, '★');
 
     hintArea.innerHTML = '';
     feedback.textContent = '';
