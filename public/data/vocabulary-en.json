@@ -2250,7 +2250,7 @@
     },
     {
       "id": "en-0067",
-      "term": "settled obligation/урегулированное обязательство",
+      "term": "settled obligation",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -8034,7 +8034,7 @@
     },
     {
       "id": "en-0238",
-      "term": "Curtons зановески",
+      "term": "Curtains",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -9904,7 +9904,7 @@
     },
     {
       "id": "en-0293",
-      "term": "Sip глоток",
+      "term": "Sip",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -11572,7 +11572,7 @@
     },
     {
       "id": "en-0342",
-      "term": "“it leverages” — это можно перевести как “это использует” или “это задействует”, в зависимости от контекста. Например:",
+      "term": "it leverages",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -11606,7 +11606,7 @@
     },
     {
       "id": "en-0343",
-      "term": "• It leverages new technology — Это использует новые технологии.",
+      "term": "It leverages new technology",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -11640,7 +11640,7 @@
     },
     {
       "id": "en-0344",
-      "term": "• “moves along with” — переводится как “движется вместе с” или “развивается вместе с”. Пример:",
+      "term": "moves along with",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -11674,7 +11674,7 @@
     },
     {
       "id": "en-0345",
-      "term": "• The system moves along with industry trends — Система развивается вместе с отраслевыми тенденциями.",
+      "term": "The system moves along with industry trends",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -16232,7 +16232,7 @@
     },
     {
       "id": "en-0479",
-      "term": "cruel- жестоко",
+      "term": "cruel",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -16266,7 +16266,7 @@
     },
     {
       "id": "en-0480",
-      "term": "frigid encounter- холодная встреча",
+      "term": "frigid encounter",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -18004,7 +18004,7 @@
     },
     {
       "id": "en-0531",
-      "term": "When you think about the billions at stake (поставленных на карту)",
+      "term": "When you think about the billions at stake",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -20186,7 +20186,7 @@
     },
     {
       "id": "en-0595",
-      "term": "to overthrow the government- свержение правительства",
+      "term": "to overthrow the government",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -20492,7 +20492,7 @@
     },
     {
       "id": "en-0604",
-      "term": "The bar стержень",
+      "term": "The bar",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -20696,7 +20696,7 @@
     },
     {
       "id": "en-0610",
-      "term": "flung- отбросил , отброешнный",
+      "term": "flung - threw forcefully",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -20730,7 +20730,7 @@
     },
     {
       "id": "en-0611",
-      "term": "swaying- качаясь",
+      "term": "swaying",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -23348,7 +23348,7 @@
     },
     {
       "id": "en-0688",
-      "term": "shook- потрясли",
+      "term": "shook",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -23450,7 +23450,7 @@
     },
     {
       "id": "en-0691",
-      "term": "sickened- больной",
+      "term": "sickened",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -24030,7 +24030,7 @@
     },
     {
       "id": "en-0708",
-      "term": "follies -безумство",
+      "term": "follies",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -25254,7 +25254,7 @@
     },
     {
       "id": "en-0744",
-      "term": "slums- трущебы",
+      "term": "slums",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -26414,7 +26414,7 @@
     },
     {
       "id": "en-0778",
-      "term": "mumbled- пробормтоал",
+      "term": "mumbled",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -26686,7 +26686,7 @@
     },
     {
       "id": "en-0786",
-      "term": "Nightingale- соловей",
+      "term": "Nightingale",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -27298,7 +27298,7 @@
     },
     {
       "id": "en-0804",
-      "term": "foul- грязный",
+      "term": "foul",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -27366,7 +27366,7 @@
     },
     {
       "id": "en-0806",
-      "term": "obscenity- непристойность",
+      "term": "obscenity",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -27400,7 +27400,7 @@
     },
     {
       "id": "en-0807",
-      "term": "tribulations- невзгоды",
+      "term": "tribulations",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -27676,7 +27676,7 @@
     },
     {
       "id": "en-0815",
-      "term": "pondered- размышлял",
+      "term": "pondered",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -29004,7 +29004,7 @@
     },
     {
       "id": "en-0854",
-      "term": "I buttoned the blue wool coat -я застегнул синее шерстяное пальто",
+      "term": "I buttoned the blue wool coat",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -29412,7 +29412,7 @@
     },
     {
       "id": "en-0866",
-      "term": "rots away -сгнивает",
+      "term": "rots away",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -29446,7 +29446,7 @@
     },
     {
       "id": "en-0867",
-      "term": "beneath our feet- под нашими ногами",
+      "term": "beneath our feet",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -29756,7 +29756,7 @@
     },
     {
       "id": "en-0876",
-      "term": "receptive - восприимчивый",
+      "term": "receptive",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -29824,7 +29824,7 @@
     },
     {
       "id": "en-0878",
-      "term": "uttered - произнесено",
+      "term": "uttered",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -29892,7 +29892,7 @@
     },
     {
       "id": "en-0880",
-      "term": "accuse- обвинять",
+      "term": "accuse",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -30198,7 +30198,7 @@
     },
     {
       "id": "en-0889",
-      "term": "slumping- падая",
+      "term": "slumping",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -30334,7 +30334,7 @@
     },
     {
       "id": "en-0893",
-      "term": "gazed evenly at me. - спокойно посмотрел на меня.",
+      "term": "gazed evenly at me",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -30368,7 +30368,7 @@
     },
     {
       "id": "en-0894",
-      "term": "shoving his fingers- засовывая пальцы",
+      "term": "shoving his fingers",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -30538,7 +30538,7 @@
     },
     {
       "id": "en-0899",
-      "term": "indulgence - снисходительность",
+      "term": "indulgence",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -31596,7 +31596,7 @@
     },
     {
       "id": "en-0930",
-      "term": "invited the blissfully ignorant kids out for brunch - пригласил блаженно невежественных детей на бранч",
+      "term": "invited the blissfully ignorant kids out for brunch",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -32072,7 +32072,7 @@
     },
     {
       "id": "en-0944",
-      "term": "kite- воздушный змей",
+      "term": "kite",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -32242,7 +32242,7 @@
     },
     {
       "id": "en-0949",
-      "term": "I clung to him - Я прицепилась к нему",
+      "term": "I clung to him",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -34218,7 +34218,7 @@
     },
     {
       "id": "en-1007",
-      "term": "aggravated - усугубленный",
+      "term": "aggravated",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -34626,7 +34626,7 @@
     },
     {
       "id": "en-1019",
-      "term": "they muzzle -они затыкают рот",
+      "term": "they muzzle",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -35756,7 +35756,7 @@
     },
     {
       "id": "en-1052",
-      "term": "chained to a desk- привязан к столу",
+      "term": "chained to a desk",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -38410,7 +38410,7 @@
     },
     {
       "id": "en-1130",
-      "term": "role ambiguity- неоднозначность роли",
+      "term": "role ambiguity",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -38784,7 +38784,7 @@
     },
     {
       "id": "en-1141",
-      "term": "Ниш solutions",
+      "term": "Niche solutions",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -40416,7 +40416,7 @@
     },
     {
       "id": "en-1189",
-      "term": "integrity- честность",
+      "term": "integrity",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -44975,7 +44975,7 @@
     },
     {
       "id": "en-1324",
-      "term": "To stifle it подавить",
+      "term": "To stifle",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -46505,7 +46505,7 @@
     },
     {
       "id": "en-1369",
-      "term": "disruption — разрушение, подрыв, срыв",
+      "term": "disruption",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -46539,7 +46539,7 @@
     },
     {
       "id": "en-1370",
-      "term": "disruptors — разрушители, новаторы-разрушители",
+      "term": "disruptors",
       "source_language": "en",
       "type": "phrase",
       "translations": {
@@ -46573,7 +46573,7 @@
     },
     {
       "id": "en-1371",
-      "term": "disruptive — разрушительный, подрывной",
+      "term": "disruptive",
       "source_language": "en",
       "type": "phrase",
       "translations": {
