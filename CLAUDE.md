@@ -29,9 +29,10 @@ src/
     components.css      # BEM component styles
     responsive.css      # media queries, dark mode
   assets/               # images, icons, fonts
-data/
-  vocabulary-en.json    # English word entries
-  vocabulary-sr.json    # Serbian word entries
+public/
+  data/
+    vocabulary-en.json  # English word entries (served as static assets)
+    vocabulary-sr.json  # Serbian word entries (served as static assets)
 scripts/                # Node.js utility scripts (parse-words, enrich-vocabulary)
 tests/                  # unit tests (vitest)
 ```
@@ -43,7 +44,7 @@ npm run dev       # start local dev server (vite)
 npm run lint      # eslint src/js/**
 npm run test      # vitest
 npm run build     # vite build → dist/ (for GitHub Pages deploy)
-npm run parse     # parse .txt word files → data/*.json (idempotent)
+npm run parse     # parse .txt word files → public/data/*.json (idempotent)
 npm run enrich    # AI-enrich vocabulary via Claude API (needs ANTHROPIC_API_KEY)
 ```
 
@@ -111,7 +112,7 @@ Never auto-reveal hints. User must explicitly request each level.
 
 ## Data Pipeline
 
-1. **Parse** raw .txt files → structured JSON: `npm run parse -- --english english_words.txt --output data/vocabulary-en.json`
+1. **Parse** raw .txt files → structured JSON: `npm run parse -- --english english_words.txt --output public/data/`
 2. **Enrich** with AI translations, examples, explanations: `ANTHROPIC_API_KEY=sk-... npm run enrich`
 3. Enrichment is idempotent — skips entries where `enriched === true`. Safe to re-run.
 4. Batches of 30, saves after each batch, auto-retries on failure.

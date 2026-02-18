@@ -6,7 +6,7 @@
  *
  * Usage:
  *   node scripts/parse-words.js
- *   node scripts/parse-words.js --english path/to/en.txt --serbian path/to/sr.txt --output data/
+ *   node scripts/parse-words.js --english path/to/en.txt --serbian path/to/sr.txt --output public/data/
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'fs';
@@ -27,7 +27,7 @@ function getArg(flag, fallback) {
 
 const englishPath = getArg('--english', join(projectRoot, 'english_words.txt'));
 const serbianPath = getArg('--serbian', join(projectRoot, 'serbian_words.txt'));
-const outputDir = getArg('--output', join(projectRoot, 'data'));
+const outputDir = getArg('--output', join(projectRoot, 'public', 'data'));
 
 // ---------------------------------------------------------------------------
 // Character detection helpers

@@ -1,6 +1,9 @@
 /**
  * Language Study — app entry point.
  * Wires together: router, menu, game modes, stats, add-words.
+ *
+ * Vocabulary is lazy-loaded: only the needed language file is fetched
+ * when the user starts a game, keeping the initial page load fast.
  */
 
 import { Router } from './router.js';
@@ -22,9 +25,15 @@ const MODE_MAP = {
   match: MatchMode,
 };
 
+const VOCAB_FILES = {
+  en: 'data/vocabulary-en.json',
+  sr: 'data/vocabulary-sr.json',
+};
+
 const app = document.getElementById('app');
 
 // --- State ---
+const vocabCache = {};  // { en: [...], sr: [...] } — loaded on demand
 let allEntries = [];
 let router = null;
 let menuScreen = null;
@@ -71,13 +80,44 @@ function buildTabBar() {
   document.body.appendChild(bar);
 }
 
+// --- Lazy vocabulary loader ---
+async function ensureVocabLoaded(...langs) {
+  const toLoad = langs.filter((l) => !vocabCache[l] && VOCAB_FILES[l]);
+  if (toLoad.length === 0) return;
+
+  const results = await Promise.all(
+    toLoad.map((l) => loadVocabulary(VOCAB_FILES[l]).then((entries) => [l, entries]))
+  );
+  for (const [lang, entries] of results) {
+    vocabCache[lang] = entries;
+  }
+}
+
+function rebuildAllEntries() {
+  const builtIn = [...(vocabCache.en || []), ...(vocabCache.sr || [])];
+  const userWords = loadUserWords();
+  allEntries = mergeWithBuiltIn(builtIn, userWords);
+  return allEntries;
+}
+
 // --- Game launch ---
-function startGame({ direction, mode }) {
+async function startGame({ direction, mode }) {
   const ModeClass = MODE_MAP[mode];
   if (!ModeClass) {
     console.error('Unknown mode:', mode);
     return;
   }
+
+  // Load vocabulary for both languages (need distractors from both)
+  menuScreen.setLoading(true);
+  try {
+    await ensureVocabLoaded('en', 'sr');
+  } finally {
+    menuScreen.setLoading(false);
+  }
+
+  rebuildAllEntries();
+  menuScreen.setWordCount(allEntries.length);
 
   const engine = new GameEngine({
     entries: allEntries,
@@ -88,7 +128,6 @@ function startGame({ direction, mode }) {
   activeMode = new ModeClass();
   activeMode.init(screens.play, engine);
 
-  // Listen for session end to record progress
   engine.on('session:ended', (summary) => {
     recordSession({
       date: new Date().toISOString(),
@@ -111,33 +150,28 @@ function stopGame() {
   screens.play.innerHTML = '';
 }
 
-// --- Init ---
+// --- Init (lightweight — no vocabulary fetch) ---
 async function init() {
   try {
-    const [enEntries, srEntries] = await Promise.all([
-      loadVocabulary('data/vocabulary-en.json'),
-      loadVocabulary('data/vocabulary-sr.json'),
-    ]);
-
-    const builtIn = [...enEntries, ...srEntries];
-    const userWords = loadUserWords();
-    allEntries = mergeWithBuiltIn(builtIn, userWords);
-
-    // Menu
+    // Menu (show immediately with 0 word count, updated after first load)
     menuScreen = new MenuScreen();
     menuScreen.init(screens.menu, {
-      wordCount: allEntries.length,
+      wordCount: 0,
       onStart: startGame,
-      onExport: () => exportToExcel(allEntries),
+      onExport: async () => {
+        await ensureVocabLoaded('en', 'sr');
+        rebuildAllEntries();
+        exportToExcel(allEntries);
+      },
     });
 
     // Stats
     statsScreen = new StatsScreen();
     statsScreen.init(screens.stats);
 
-    // Add Words
+    // Add Words (pass empty built-in for now, updated after load)
     addWordsScreen = new AddWordsScreen();
-    addWordsScreen.init(screens.addWords, builtIn);
+    addWordsScreen.init(screens.addWords, []);
 
     // Tab bar
     buildTabBar();
@@ -146,9 +180,7 @@ async function init() {
     router = new Router();
     router.register('#home', () => {
       stopGame();
-      // Refresh word count in case user added words
-      const freshUserWords = loadUserWords();
-      allEntries = mergeWithBuiltIn(builtIn, freshUserWords);
+      rebuildAllEntries();
       menuScreen.setWordCount(allEntries.length);
       menuScreen.show();
     }, () => menuScreen.hide());
@@ -166,13 +198,21 @@ async function init() {
       statsScreen.hide();
     });
 
-    router.register('#add-words', () => {
+    router.register('#add-words', async () => {
+      await ensureVocabLoaded('en', 'sr');
+      addWordsScreen.updateBuiltIn([...(vocabCache.en || []), ...(vocabCache.sr || [])]);
       addWordsScreen.show();
     }, () => {
       addWordsScreen.hide();
     });
 
     router.start();
+
+    // Preload vocabulary in background after UI is shown
+    ensureVocabLoaded('en', 'sr').then(() => {
+      rebuildAllEntries();
+      menuScreen.setWordCount(allEntries.length);
+    });
   } catch (err) {
     console.error('Failed to initialize app:', err);
     app.innerHTML = `<p style="color:var(--color-danger);padding:2rem">Ошибка загрузки: ${err.message}</p>`;

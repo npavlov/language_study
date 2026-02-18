@@ -4,7 +4,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const dataDir = join(__dirname, '..', 'data');
+const dataDir = join(__dirname, '..', 'public', 'data');
 
 function readVocab(filename) {
   return JSON.parse(readFileSync(join(dataDir, filename), 'utf-8'));

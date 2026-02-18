@@ -48,6 +48,13 @@ export class MenuScreen {
     this._updateWordCount();
   }
 
+  setLoading(isLoading) {
+    if (this._refs.startBtn) {
+      this._refs.startBtn.disabled = isLoading;
+      this._refs.startBtn.textContent = isLoading ? 'Загрузка…' : 'Начать';
+    }
+  }
+
   destroy() {
     if (this._root) {
       this._root.remove();
@@ -157,6 +164,7 @@ export class MenuScreen {
       }
     });
     root.appendChild(startBtn);
+    this._refs.startBtn = startBtn;
 
     // --- Export to Excel ---
     const exportBtn = el('button', 'btn btn--outline btn--block', '📥 Экспорт в Excel');

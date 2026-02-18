@@ -107,6 +107,11 @@ export class AddWordsScreen {
     this._renderWordList();
   }
 
+  /** Update built-in entries (used when vocabulary is lazy-loaded). */
+  updateBuiltIn(entries) {
+    this._builtInEntries = Array.isArray(entries) ? entries : [];
+  }
+
   /** Make the screen visible. */
   show() {
     if (this._container) this._container.classList.add('screen--active');

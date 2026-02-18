@@ -226,8 +226,8 @@ async function main() {
 
   const client = DRY_RUN ? null : new Anthropic();
 
-  const enPath = join(projectRoot, 'data', 'vocabulary-en.json');
-  const srPath = join(projectRoot, 'data', 'vocabulary-sr.json');
+  const enPath = join(projectRoot, 'public', 'data', 'vocabulary-en.json');
+  const srPath = join(projectRoot, 'public', 'data', 'vocabulary-sr.json');
 
   const enResult = await enrichFile(enPath, client);
   const srResult = await enrichFile(srPath, client);
