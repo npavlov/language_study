@@ -20,7 +20,7 @@
 ### E2E Tests (Playwright)
 
 **Location**: `e2e/`
-**Run**: `npm run test:e2e` (55 tests)
+**Run**: `npm run test:e2e` (62 tests)
 **Config**: `playwright.config.js`
 
 | File | Tests | Scope |
@@ -30,6 +30,7 @@
 | `quiz.spec.js` | 8 | Correct/wrong answers, auto-advance, hint on wrong, 2-wrong reveal, disabled buttons |
 | `typing.spec.js` | 13 | Input/submit, wrong answer, skip, Enter key, 6 hint stages, progressive reveal, Serbian |
 | `match.spec.js` | 12 | Select/deselect, correct/wrong pairs, matched disabled, complete round, timer, Serbian |
+| `long-session.spec.js` | 7 | 20-card uniqueness, re-insert verification, answer position randomization, cross-session shuffle |
 
 ### Playwright Setup
 
