@@ -1,5 +1,6 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { GameEngine, levenshtein, fuzzyMatch, serbianCyrillicToLatin } from '../src/js/engine.js';
+import * as settings from '../src/js/settings.js';
 
 function makeMockEntries(count = 10) {
   return Array.from({ length: count }, (_, i) => ({
@@ -256,5 +257,124 @@ describe('serbianCyrillicToLatin', () => {
   it('preserves non-Cyrillic characters', () => {
     expect(serbianCyrillicToLatin('hello')).toBe('hello');
     expect(serbianCyrillicToLatin('123')).toBe('123');
+  });
+});
+
+describe('Re-insert settings', () => {
+  let engine;
+  let entries;
+
+  beforeEach(() => {
+    entries = makeMockEntries(30);
+    engine = new GameEngine({ entries, direction: 'en-sr' });
+    vi.restoreAllMocks();
+  });
+
+  it('re-inserts wrong word at configured gap (default 10)', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: true,
+      reinsertGap: 10,
+    });
+
+    engine.startSession();
+    const firstWord = engine.getCurrentWord();
+
+    // Answer wrong
+    engine.checkAnswer('wrong_answer', 'sr');
+    engine.nextWord();
+
+    // The wrong word should be re-inserted 10 positions ahead
+    // currentIndex was 0 when wrong, so reinsertAt = 0 + 10 = 10
+    const reinsertedWord = engine.session.words[10];
+    expect(reinsertedWord.id).toBe(firstWord.id);
+  });
+
+  it('does not re-insert when reinsertEnabled is false', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: false,
+      reinsertGap: 10,
+    });
+
+    engine.startSession();
+    const wordsBefore = engine.session.words.length;
+
+    engine.checkAnswer('wrong_answer', 'sr');
+
+    // Word count should not increase
+    expect(engine.session.words.length).toBe(wordsBefore);
+  });
+
+  it('re-inserts at custom gap value', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: true,
+      reinsertGap: 5,
+    });
+
+    engine.startSession();
+    const firstWord = engine.getCurrentWord();
+
+    engine.checkAnswer('wrong_answer', 'sr');
+
+    // Should be at position 0 + 5 = 5
+    expect(engine.session.words[5].id).toBe(firstWord.id);
+  });
+
+  it('re-inserts same word again if answered wrong a second time', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: true,
+      reinsertGap: 3,
+    });
+
+    engine.startSession();
+    const firstWord = engine.getCurrentWord();
+    const originalLength = engine.session.words.length;
+
+    // First wrong answer
+    engine.checkAnswer('wrong', 'sr');
+    expect(engine.session.words.length).toBe(originalLength + 1);
+
+    // Advance to the re-inserted word (3 positions ahead)
+    for (let i = 0; i < 3; i++) engine.nextWord();
+    const reinserted = engine.getCurrentWord();
+    expect(reinserted.id).toBe(firstWord.id);
+
+    // Answer wrong again — should re-insert again
+    const lengthBefore = engine.session.words.length;
+    engine.checkAnswer('wrong_again', 'sr');
+    expect(engine.session.words.length).toBe(lengthBefore + 1);
+  });
+
+  it('correct answer on re-inserted word does not re-insert it', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: true,
+      reinsertGap: 3,
+    });
+
+    engine.startSession();
+    const firstWord = engine.getCurrentWord();
+
+    // Wrong answer triggers re-insert
+    engine.checkAnswer('wrong', 'sr');
+
+    // Advance to the re-inserted word
+    for (let i = 0; i < 3; i++) engine.nextWord();
+    const reinserted = engine.getCurrentWord();
+    expect(reinserted.id).toBe(firstWord.id);
+
+    // Correct answer — should not grow the queue further
+    const lengthBefore = engine.session.words.length;
+    engine.checkAnswer(reinserted.translations.sr, 'sr');
+    expect(engine.session.words.length).toBe(lengthBefore);
+  });
+
+  it('wrong words tracked in wrongWords regardless of reinsert setting', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: false,
+      reinsertGap: 10,
+    });
+
+    engine.startSession();
+    engine.checkAnswer('wrong', 'sr');
+    expect(engine.session.wrongWords.length).toBe(1);
   });
 });

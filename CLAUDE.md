@@ -31,6 +31,7 @@ src/
     vocabulary-db.js    # browser data layer — loads SQLite via sql.js WASM
     event-emitter.js    # lightweight pub/sub (on/off/emit)
     router.js           # hash-based SPA router (#home, #play, #stats, #add-words)
+    settings.js         # global app settings (localStorage): reinsert toggle, gap
     progress.js         # localStorage read/write for user progress
     export.js           # Excel export (lazy-loads xlsx)
     i18n.js             # Russian UI string map — ALL user-facing text lives here
@@ -76,6 +77,7 @@ e2e/                    # E2E tests (Playwright)
   quiz.spec.js          # correct/wrong, auto-advance, 2-wrong reveal, disabled
   typing.spec.js        # input/submit, skip, Enter key, 6 hint stages, Serbian
   match.spec.js         # select/deselect, correct/wrong pairs, timer, Serbian
+  reinsert-settings.spec.js # toggle on/off, persistence, re-insert behavior
 DOCS/                   # AI-agent documentation (keep in sync with code)
   engine.md             # GameEngine API, events, session state
   modes.md              # all 4 game modes: interactions, BEM classes
@@ -91,7 +93,7 @@ DOCS/                   # AI-agent documentation (keep in sync with code)
 # Development
 npm run dev        # start local dev server (vite)
 npm run build      # vite build → dist/ (for GitHub Pages deploy)
-npm run test       # vitest run (108 tests)
+npm run test       # vitest run (114 tests)
 npm run test:watch # vitest (watch mode)
 npm run test:e2e   # Playwright E2E (55 tests)
 npm run lint       # eslint src/js/
@@ -342,7 +344,7 @@ AI-agent-friendly docs live in `DOCS/`:
 
 ## Testing
 
-- 108 unit tests (vitest) across 7 test files + 62 E2E tests (Playwright).
+- 108 unit tests (vitest) across 7 test files + 68 E2E tests (Playwright).
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
 - SQLite tests: schema validation, data integrity, FTS search.
 - E2E tests: all 4 game modes, navigation, corner cases.

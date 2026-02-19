@@ -3,6 +3,7 @@
  */
 
 import { loadProgress } from '../progress.js';
+import { getSettings, updateSettings } from '../settings.js';
 import { t } from '../i18n.js';
 
 export class MenuScreen {
@@ -152,6 +153,26 @@ export class MenuScreen {
     root.appendChild(statsBar);
     this._refs.streakEl = streakEl;
     this._refs.learnedEl = learnedEl;
+
+    // --- Settings: Reinsert Toggle ---
+    const settingsSection = el('div', 'menu__section');
+    const reinsertSwitch = el('div', 'switch');
+    reinsertSwitch.dataset.setting = 'reinsertEnabled';
+    reinsertSwitch.appendChild(el('span', 'switch__label', t.repeat_forgotten));
+    const track = el('div', 'switch__track');
+    track.appendChild(el('div', 'switch__thumb'));
+    reinsertSwitch.appendChild(track);
+
+    const settings = getSettings();
+    if (settings.reinsertEnabled) reinsertSwitch.classList.add('switch--on');
+
+    reinsertSwitch.addEventListener('click', () => {
+      const isOn = reinsertSwitch.classList.toggle('switch--on');
+      updateSettings({ reinsertEnabled: isOn });
+    });
+
+    settingsSection.appendChild(reinsertSwitch);
+    root.appendChild(settingsSection);
 
     // --- Start Button ---
     const startBtn = el('button', 'btn btn--primary btn--block', 'Начать');

@@ -54,8 +54,9 @@ export const t = {
   pairs_matched: 'Пар найдено',
   next_round: 'Следующий раунд',
 
-  // Menu
+  // Menu / Settings
   words_available: 'слов доступно',
+  repeat_forgotten: 'Повторять забытые слова',
 
   // Language labels
   lang_en: 'Английский',

@@ -3,7 +3,7 @@
  * over 20-30 questions per mode.
  */
 import { test, expect } from '@playwright/test';
-import { startGame } from './helpers.js';
+import { goHome, startGame } from './helpers.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -161,7 +161,19 @@ test.describe('Quiz — long session', () => {
     page,
   }) => {
     test.setTimeout(90_000);
-    await startGame(page, { direction: 'en', mode: 'quiz' });
+
+    // Disable re-insert: brute-force option clicking triggers wrong answers,
+    // which would re-insert the same term and cause waitForTextChange timeouts
+    await goHome(page);
+    const toggle = page.locator('.switch[data-setting="reinsertEnabled"]');
+    if (await toggle.evaluate((el) => el.classList.contains('switch--on'))) {
+      await toggle.click();
+    }
+
+    await page.click('.toggle__option[data-direction="en-sr"]');
+    await page.click('.card[data-mode="quiz"]');
+    await page.click('.btn--primary.btn--block');
+    await page.waitForSelector('.screen--active#play-screen', { timeout: 10_000 });
 
     const terms = [];
     const correctPositions = []; // index (0-3) of the correct option
@@ -176,11 +188,9 @@ test.describe('Quiz — long session', () => {
       if (result) correctPositions.push(result.position);
     }
 
-    // Some wrong clicks may trigger re-inserts, so we expect at least 12
-    // distinct terms out of 20 (with 1376 words, duplicates are only
-    // from re-inserts of wrong-answered words)
+    // Re-insert is OFF, so all 20 terms should be unique
     const unique = new Set(terms);
-    expect(unique.size).toBeGreaterThanOrEqual(12);
+    expect(unique.size).toBe(20);
 
     // Correct answer should NOT always be in the same position
     const uniquePositions = new Set(correctPositions);

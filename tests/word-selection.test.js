@@ -9,8 +9,9 @@
  * - Supports filterIds for review sessions
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { GameEngine } from '../src/js/engine.js';
+import * as settings from '../src/js/settings.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -188,7 +189,12 @@ describe('Session simulation (typing mode flow)', () => {
     expect(wordsProcessed).toBe(30);
   });
 
-  it('wrong answers re-queue words once, extending the session', () => {
+  it('wrong answers re-queue words, extending the session', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: true,
+      reinsertGap: 10,
+    });
+
     const entries = makeMockEntries(30);
     const engine = new GameEngine({ entries, direction: 'en-sr' });
 
@@ -199,9 +205,11 @@ describe('Session simulation (typing mode flow)', () => {
     engine.checkAnswer('completely_wrong', 'sr');
     expect(engine.session.words.length).toBe(initialLength + 1);
 
-    // Second wrong answer for the same word does NOT re-queue again
+    // Second wrong answer for the same word also re-queues
     engine.checkAnswer('still_wrong', 'sr');
-    expect(engine.session.words.length).toBe(initialLength + 1);
+    expect(engine.session.words.length).toBe(initialLength + 2);
+
+    vi.restoreAllMocks();
   });
 
   it('session ends with valid summary after all words', () => {
@@ -358,20 +366,27 @@ describe('Randomization quality', () => {
     expect(secondIdx - firstIdx).toBeGreaterThanOrEqual(4);
   });
 
-  it('word is re-inserted at most once per session', () => {
+  it('word is re-inserted each time it is answered wrong', () => {
+    vi.spyOn(settings, 'getSettings').mockReturnValue({
+      reinsertEnabled: true,
+      reinsertGap: 5,
+    });
+
     const entries = makeMockEntries(20);
     const engine = new GameEngine({ entries, direction: 'en-sr' });
     engine.startSession();
 
     const word = engine.getCurrentWord();
 
-    // Answer wrong twice
+    // Answer wrong twice in a row
     engine.checkAnswer('wrong1', 'sr');
     engine.checkAnswer('wrong2', 'sr');
 
     // Count occurrences of this word
     const count = engine.session.words.filter((w) => w.id === word.id).length;
-    expect(count).toBe(2); // original + 1 re-insert
+    expect(count).toBe(3); // original + 2 re-inserts
+
+    vi.restoreAllMocks();
   });
 
   it('all entries appear in the session', () => {

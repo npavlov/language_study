@@ -60,8 +60,9 @@ Tracks usage in `session.hintsUsed` Map. Affects scoring: `hintsUsed === 0` give
 
 - Normalizes and compares `answer` to `expected` translation
 - Correct: increments streak, calculates score (`10 × streak_multiplier + hint_bonus`)
-- Wrong: resets streak, adds to `wrongWords`, re-queues word once (5 positions ahead)
-- Re-queue limited to **once per word per session** via `reinsertedWords` Set
+- Wrong: resets streak, adds to `wrongWords`, re-queues word `reinsertGap` positions ahead (default 10)
+- Re-insert controlled by global setting `reinsertEnabled` (see `settings.js`). When OFF, wrong words are NOT re-queued
+- When ON, same word can be re-inserted multiple times (each wrong answer re-queues again)
 
 ### `nextWord() → Entry | Summary`
 
@@ -94,7 +95,7 @@ session = {
   bestStreak: number,
   hintsUsed: Map<id, count>,
   wrongWords: string[],     // entry IDs
-  reinsertedWords: Set<id>, // limits re-queue to 1x per word
+  // re-insert controlled by settings.js (reinsertEnabled, reinsertGap)
   startTime: number,
   elapsedTime: number,
   totalAnswered: number,

@@ -5,11 +5,11 @@
 ### Unit Tests (Vitest)
 
 **Location**: `tests/`
-**Run**: `npm test` (108 tests)
+**Run**: `npm test` (114 tests)
 
 | File | Tests | Scope |
 |------|-------|-------|
-| `engine.test.js` | 28 | GameEngine, levenshtein, fuzzyMatch, transliteration, duplicate hint prevention |
+| `engine.test.js` | 34 | GameEngine, levenshtein, fuzzyMatch, transliteration, duplicate hint prevention, re-insert settings |
 | `word-selection.test.js` | 22 | Shuffle, filterIds, source language filtering, randomization quality, re-insert limits |
 | `schema.test.js` | 5 | Vocabulary schema validation |
 | `sqlite.test.js` | 17 | SQLite schema, data integrity, FTS search |
@@ -20,7 +20,7 @@
 ### E2E Tests (Playwright)
 
 **Location**: `e2e/`
-**Run**: `npm run test:e2e` (62 tests)
+**Run**: `npm run test:e2e` (68 tests)
 **Config**: `playwright.config.js`
 
 | File | Tests | Scope |
@@ -31,6 +31,7 @@
 | `typing.spec.js` | 13 | Input/submit, wrong answer, skip, Enter key, 6 hint stages, progressive reveal, Serbian |
 | `match.spec.js` | 12 | Select/deselect, correct/wrong pairs, matched disabled, complete round, timer, Serbian |
 | `long-session.spec.js` | 7 | 20-card uniqueness, re-insert verification, answer position randomization, cross-session shuffle |
+| `reinsert-settings.spec.js` | 6 | Toggle visibility/default/persistence, re-insert OFF = no repeats, ON = forgotten words reappear |
 
 ### Playwright Setup
 

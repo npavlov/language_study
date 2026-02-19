@@ -10,6 +10,7 @@
  */
 
 import { EventEmitter } from './event-emitter.js';
+import { getSettings } from './settings.js';
 
 /**
  * @typedef {'en'|'sr'|'ru'} Lang
@@ -238,15 +239,11 @@ export class GameEngine extends EventEmitter {
         this.session.wrongWords.push(entry.id);
       }
 
-      // Re-queue wrong word a few positions ahead (spaced repetition within session)
-      // Only re-insert once per word to avoid excessive repetition
-      if (!this.session.reinsertedWords) {
-        this.session.reinsertedWords = new Set();
-      }
-      if (!this.session.reinsertedWords.has(entry.id)) {
-        this.session.reinsertedWords.add(entry.id);
+      // Re-queue wrong word ahead (spaced repetition within session)
+      const { reinsertEnabled, reinsertGap } = getSettings();
+      if (reinsertEnabled) {
         const reinsertAt = Math.min(
-          this.session.currentIndex + 5,
+          this.session.currentIndex + reinsertGap,
           this.session.words.length
         );
         if (reinsertAt < this.session.words.length) {
