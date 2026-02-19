@@ -4,9 +4,10 @@
  * Players are shown a word term and must type the translation.
  * Answers are checked with fuzzy matching; close answers get a yellow warning.
  *
- * Progressive hint system (single button, 5 stages):
+ * Progressive hint system (single button, 6 stages):
  *   1–4. Progressively reveal random letters (1–2 per stage depending on word length)
- *   5.   Russian translation
+ *   5.   Sister language translation (SR or EN)
+ *   6.   Russian translation
  */
 
 import { fuzzyMatch, serbianCyrillicToLatin } from '../engine.js';
@@ -15,7 +16,7 @@ import { t, langLabel } from '../i18n.js';
 // --- Constants ---------------------------------------------------------------
 
 const FEEDBACK_CORRECT_DELAY_MS = 1000;
-const MAX_HINT_STAGE = 5;
+const MAX_HINT_STAGE = 6;
 
 // --- TypingMode class --------------------------------------------------------
 
@@ -245,9 +246,10 @@ export class TypingMode {
   // --- Progressive hint system -----------------------------------------------
 
   /**
-   * Single button drives all 5 stages:
+   * Single button drives all 6 stages:
    *   1–4. Progressively reveal random letters (1–2 per stage)
-   *   5.   Russian translation
+   *   5.   Sister language translation (SR or EN)
+   *   6.   Russian translation
    */
   _handleHint() {
     if (this._hintStage >= MAX_HINT_STAGE) return;
@@ -281,10 +283,23 @@ export class TypingMode {
         this._engine.getHint();
       }
     } else if (this._hintStage === 5) {
-      // Stage 5: Russian translation
+      // Stage 5: sister language translation
+      const hint = this._engine.getHint();
+      const sisterText = this._currentEntry.translations[this._engine.hintLang];
+      if (sisterText) {
+        const row = el('div', 'typing__hint typing__hint--level-1');
+        const lang = el('span', 'typing__hint-lang');
+        lang.textContent = langLabel(this._engine.hintLang) + ': ';
+        const text = el('span', 'typing__hint-text');
+        text.textContent = sisterText;
+        row.appendChild(lang);
+        row.appendChild(text);
+        hintArea.appendChild(row);
+      }
+    } else if (this._hintStage === 6) {
+      // Stage 6: Russian translation
       const ruText = this._currentEntry.translations[this._engine.fallbackLang];
       if (ruText) {
-        // Consume remaining engine hints for scoring
         this._engine.getHint();
         const row = el('div', 'typing__hint typing__hint--level-2');
         const lang = el('span', 'typing__hint-lang');
@@ -361,7 +376,7 @@ export class TypingMode {
       hintBtn.disabled = true;
       hintBtn.textContent = t.no_more_hints;
     } else {
-      const circles = ['❶', '❷', '❸', '❹', '❺'];
+      const circles = ['❶', '❷', '❸', '❹', '❺', '❻'];
       hintBtn.textContent = `${t.hint} ${circles[nextStage - 1]}`;
     }
   }
