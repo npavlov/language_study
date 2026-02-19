@@ -188,16 +188,20 @@ describe('Session simulation (typing mode flow)', () => {
     expect(wordsProcessed).toBe(30);
   });
 
-  it('wrong answers re-queue words, extending the session', () => {
+  it('wrong answers re-queue words once, extending the session', () => {
     const entries = makeMockEntries(30);
     const engine = new GameEngine({ entries, direction: 'en-sr' });
 
     engine.startSession();
     const initialLength = engine.session.words.length;
 
-    // Answer the first word wrong
+    // First wrong answer re-queues the word
     engine.checkAnswer('completely_wrong', 'sr');
-    expect(engine.session.words.length).toBeGreaterThan(initialLength);
+    expect(engine.session.words.length).toBe(initialLength + 1);
+
+    // Second wrong answer for the same word does NOT re-queue again
+    engine.checkAnswer('still_wrong', 'sr');
+    expect(engine.session.words.length).toBe(initialLength + 1);
   });
 
   it('session ends with valid summary after all words', () => {
@@ -243,5 +247,140 @@ describe('Session simulation (typing mode flow)', () => {
     // No more engine-level hints
     const hint3 = engine.getHint();
     expect(hint3).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Source language filtering
+// ---------------------------------------------------------------------------
+
+describe('Source language filtering', () => {
+  function makeMixedEntries() {
+    const en = Array.from({ length: 20 }, (_, i) => ({
+      id: `en-${String(i + 1).padStart(4, '0')}`,
+      term: `english${i + 1}`,
+      source_language: 'en',
+      type: 'word',
+      translations: { en: null, sr: `srpski${i + 1}`, ru: `русский${i + 1}` },
+      examples: { en: [], sr: [], ru: [] },
+      explanation: null,
+      pronunciation: null,
+      category: null,
+      tags: [],
+      difficulty: 3,
+      enriched: true,
+      metadata: { date_added: '2026-01-01', source_file: 'test', reviewed: false },
+    }));
+    const sr = Array.from({ length: 10 }, (_, i) => ({
+      id: `sr-${String(i + 1).padStart(4, '0')}`,
+      term: `srpska${i + 1}`,
+      source_language: 'sr',
+      type: 'word',
+      translations: { en: `english_trans${i + 1}`, sr: null, ru: `русский_пер${i + 1}` },
+      examples: { en: [], sr: [], ru: [] },
+      explanation: null,
+      pronunciation: null,
+      category: null,
+      tags: [],
+      difficulty: 3,
+      enriched: true,
+      metadata: { date_added: '2026-01-01', source_file: 'test', reviewed: false },
+    }));
+    return [...en, ...sr];
+  }
+
+  it('English direction only includes English entries', () => {
+    const entries = makeMixedEntries();
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    const playable = engine.getPlayableEntries();
+    expect(playable.length).toBe(20);
+    expect(playable.every((e) => e.source_language === 'en')).toBe(true);
+  });
+
+  it('Serbian direction only includes Serbian entries', () => {
+    const entries = makeMixedEntries();
+    const engine = new GameEngine({ entries, direction: 'sr-en' });
+    const playable = engine.getPlayableEntries();
+    expect(playable.length).toBe(10);
+    expect(playable.every((e) => e.source_language === 'sr')).toBe(true);
+  });
+
+  it('no Serbian words appear in English session', () => {
+    const entries = makeMixedEntries();
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession();
+    const ids = getSelectedIds(engine);
+    expect(ids.every((id) => id.startsWith('en-'))).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Randomization quality
+// ---------------------------------------------------------------------------
+
+describe('Randomization quality', () => {
+  it('no duplicate words in initial session (before wrong answers)', () => {
+    const entries = makeMockEntries(200);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession();
+    const ids = getSelectedIds(engine);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('no consecutive identical words after shuffle', () => {
+    const entries = makeMockEntries(50);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+
+    // Run 20 sessions, check no consecutive duplicates
+    for (let s = 0; s < 20; s++) {
+      engine.startSession();
+      const ids = getSelectedIds(engine);
+      for (let i = 1; i < ids.length; i++) {
+        expect(ids[i]).not.toBe(ids[i - 1]);
+      }
+    }
+  });
+
+  it('wrong answer re-insert does not create immediate consecutive duplicate', () => {
+    const entries = makeMockEntries(20);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession();
+
+    // Answer first word wrong — it should be re-inserted 5 positions ahead, not adjacent
+    const firstWord = engine.getCurrentWord();
+    engine.checkAnswer('wrong', 'sr');
+
+    const ids = getSelectedIds(engine);
+    const firstIdx = ids.indexOf(firstWord.id);
+    const secondIdx = ids.indexOf(firstWord.id, firstIdx + 1);
+
+    // Re-inserted word should be at least 4 positions away
+    expect(secondIdx - firstIdx).toBeGreaterThanOrEqual(4);
+  });
+
+  it('word is re-inserted at most once per session', () => {
+    const entries = makeMockEntries(20);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession();
+
+    const word = engine.getCurrentWord();
+
+    // Answer wrong twice
+    engine.checkAnswer('wrong1', 'sr');
+    engine.checkAnswer('wrong2', 'sr');
+
+    // Count occurrences of this word
+    const count = engine.session.words.filter((w) => w.id === word.id).length;
+    expect(count).toBe(2); // original + 1 re-insert
+  });
+
+  it('all entries appear in the session', () => {
+    const entries = makeMockEntries(50);
+    const engine = new GameEngine({ entries, direction: 'en-sr' });
+    engine.startSession();
+
+    const sessionIds = new Set(getSelectedIds(engine));
+    const entryIds = new Set(entries.map((e) => e.id));
+    expect(sessionIds).toEqual(entryIds);
   });
 });

@@ -40,6 +40,8 @@ export class GameEngine extends EventEmitter {
    */
   getPlayableEntries() {
     return this.allEntries.filter((entry) => {
+      // Must belong to the target language
+      if (entry.source_language !== this.targetLang) return false;
       // Must have the target language term
       const hasTerm = entry.term && entry.term.length > 0;
       // Must have at least one translation to show
@@ -152,11 +154,15 @@ export class GameEngine extends EventEmitter {
         // Skip to fallback if sister language missing
         const fallbackText = entry.translations[this.fallbackLang];
         if (fallbackText) {
+          // Mark as level 2 — no more hints after this
           hint = { level: 2, text: fallbackText, lang: this.fallbackLang };
+          this.session.hintsUsed.set(entry.id, 2);
+          this.emit('hint:revealed', { ...hint, wordId: entry.id });
+          return hint;
         }
       }
     } else if (currentHints === 1) {
-      // Second hint: Russian fallback
+      // Second hint: Russian fallback (only if first hint was sister language)
       const text = entry.translations[this.fallbackLang];
       if (text) {
         hint = { level: 2, text, lang: this.fallbackLang };
@@ -233,12 +239,19 @@ export class GameEngine extends EventEmitter {
       }
 
       // Re-queue wrong word a few positions ahead (spaced repetition within session)
-      const reinsertAt = Math.min(
-        this.session.currentIndex + 3,
-        this.session.words.length
-      );
-      if (reinsertAt < this.session.words.length) {
-        this.session.words.splice(reinsertAt, 0, entry);
+      // Only re-insert once per word to avoid excessive repetition
+      if (!this.session.reinsertedWords) {
+        this.session.reinsertedWords = new Set();
+      }
+      if (!this.session.reinsertedWords.has(entry.id)) {
+        this.session.reinsertedWords.add(entry.id);
+        const reinsertAt = Math.min(
+          this.session.currentIndex + 5,
+          this.session.words.length
+        );
+        if (reinsertAt < this.session.words.length) {
+          this.session.words.splice(reinsertAt, 0, entry);
+        }
       }
 
       this.emit('answer:wrong', {

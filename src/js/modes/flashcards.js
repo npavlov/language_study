@@ -32,7 +32,6 @@ const CLS = {
   CARD_FRONT:   'card__front',
   CARD_BACK:    'card__back',
   TERM:         'card__term',
-  TERM_TYPE:    'card__term-type',
   HINT:         'card__hint',
   HINT_LABEL:   'card__hint-label',
   HINT_TEXT:    'card__hint-text',
@@ -144,10 +143,8 @@ export class FlashcardsMode {
 
     // Front face
     const front    = el('div', CLS.CARD_FRONT);
-    const termType = el('span', CLS.TERM_TYPE);
     const term     = el('p',    CLS.TERM);
     const tapFront = el('span', CLS.TAP_PROMPT, t.tap_to_reveal);
-    front.appendChild(termType);
     front.appendChild(term);
     front.appendChild(tapFront);
 
@@ -184,7 +181,7 @@ export class FlashcardsMode {
     card.addEventListener('touchend', (e) => this._onTouchEnd(e), { passive: true });
 
     this._refs = {
-      root, progress, barFill, barText, card, termType, term,
+      root, progress, barFill, barText, card, term,
       hint1, hint2, tapBack, actions, btnKnow, btnDont,
     };
 
@@ -328,7 +325,7 @@ export class FlashcardsMode {
   // --- Card Reset ------------------------------------------------------------
 
   _resetCard(wordData) {
-    const { card, termType, term, hint1, hint2, tapBack, btnKnow, btnDont } = this._refs;
+    const { card, term, hint1, hint2, tapBack, btnKnow, btnDont } = this._refs;
 
     card.classList.add('card--no-transition');
     card.classList.remove(CLS.CARD_FLIPPED);
@@ -336,8 +333,6 @@ export class FlashcardsMode {
     card.classList.remove('card--no-transition');
 
     term.textContent = wordData.term || '';
-    termType.textContent = wordData.type ? `[${wordData.type}]` : '';
-    termType.hidden = !wordData.type;
 
     clearHintSlot(hint1);
     clearHintSlot(hint2);

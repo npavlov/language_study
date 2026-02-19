@@ -108,6 +108,26 @@ describe('GameEngine', () => {
     expect(hint3).toBeNull();
   });
 
+  it('does not show Russian twice when sister language is missing', () => {
+    // Create entry with no Serbian translation
+    const noSrEntries = entries.map((e) => ({
+      ...e,
+      translations: { ...e.translations, sr: null },
+    }));
+    const noSrEngine = new GameEngine({ entries: noSrEntries, direction: 'en-sr' });
+    noSrEngine.startSession();
+
+    // First hint should be Russian fallback (since SR is missing)
+    const hint1 = noSrEngine.getHint();
+    expect(hint1).toBeDefined();
+    expect(hint1.level).toBe(2);
+    expect(hint1.lang).toBe('ru');
+
+    // Second hint should be null — don't repeat Russian
+    const hint2 = noSrEngine.getHint();
+    expect(hint2).toBeNull();
+  });
+
   it('checks correct answer', () => {
     engine.startSession();
     const word = engine.getCurrentWord();
