@@ -5,11 +5,8 @@
  * Answers are checked with fuzzy matching; close answers get a yellow warning.
  *
  * Progressive hint system (single button, 5 stages):
- *   1. Show word length as stars ★★★★★★
- *   2. Reveal first letter         и★★★★★
- *   3. Reveal first + last         и★★★★и
- *   4. Sister language translation  (SR or EN)
- *   5. Russian fallback meaning
+ *   1–4. Progressively reveal random letters (1–2 per stage depending on word length)
+ *   5.   Russian translation
  */
 
 import { fuzzyMatch, serbianCyrillicToLatin } from '../engine.js';
@@ -36,6 +33,7 @@ export class TypingMode {
     // Progressive hint state
     this._hintStage = 0;    // 0 = no hints, 1..5 = progressive
     this._expected = '';     // cached expected answer for current word
+    this._revealedIndices = new Set(); // which char positions are revealed
 
     this._score = 0;
     this._totalWords = 0;
@@ -199,6 +197,7 @@ export class TypingMode {
     this._hintStage = 0;
     this._answered = false;
     this._closeAnswerGiven = false;
+    this._revealedIndices = new Set();
 
     // Cache the expected answer
     const answerLang = this._engine.hintLang;
@@ -247,55 +246,51 @@ export class TypingMode {
 
   /**
    * Single button drives all 5 stages:
-   *   1. Stars (word length)
-   *   2. First letter
-   *   3. First + last letter
-   *   4. Sister language translation
-   *   5. Russian fallback
+   *   1–4. Progressively reveal random letters (1–2 per stage)
+   *   5.   Russian translation
    */
   _handleHint() {
     if (this._hintStage >= MAX_HINT_STAGE) return;
 
     this._hintStage++;
-    const { hintArea, hintBtn } = this._dom;
+    const { hintArea } = this._dom;
     const expected = this._expected;
 
-    if (this._hintStage === 1) {
-      // Stage 1: show stars + letter count
-      const maskedRow = el('div', 'typing__hint typing__hint--masked');
-      maskedRow.textContent = this._buildMasked(expected, 0, false);
-      const countEl = el('span', 'typing__hint-count');
-      countEl.textContent = ` (${expected.length} ${t.n_letters})`;
-      maskedRow.appendChild(countEl);
-      hintArea.appendChild(maskedRow);
-    } else if (this._hintStage === 2) {
-      // Stage 2: reveal first letter
-      this._updateMaskedRow(this._buildMasked(expected, 1, false));
-    } else if (this._hintStage === 3) {
-      // Stage 3: reveal first + last letter
-      this._updateMaskedRow(this._buildMasked(expected, 1, true));
-    } else if (this._hintStage === 4) {
-      // Stage 4: sister language hint from engine
-      const hint = this._engine.getHint();
-      if (hint) {
-        const row = el('div', 'typing__hint typing__hint--level-1');
-        const lang = el('span', 'typing__hint-lang');
-        lang.textContent = langLabel(hint.lang) + ': ';
-        const text = el('span', 'typing__hint-text');
-        text.textContent = hint.text;
-        row.appendChild(lang);
-        row.appendChild(text);
-        hintArea.appendChild(row);
+    if (this._hintStage <= 4) {
+      // Stages 1–4: reveal random letters
+      const lettersPerStage = this._getRevealableIndices(expected).length > 0
+        ? ([...expected].filter(ch => !/\s/.test(ch)).length >= 6 ? 2 : 1)
+        : 0;
+      this._revealRandomLetters(expected, lettersPerStage);
+
+      if (this._hintStage === 1) {
+        // First stage: create the masked row with letter count
+        const maskedRow = el('div', 'typing__hint typing__hint--masked');
+        maskedRow.textContent = this._buildMasked(expected);
+        const countEl = el('span', 'typing__hint-count');
+        countEl.textContent = ` (${[...expected].filter(ch => !/\s/.test(ch)).length} ${t.n_letters})`;
+        maskedRow.appendChild(countEl);
+        hintArea.appendChild(maskedRow);
+      } else {
+        // Stages 2–4: update the existing masked row
+        this._updateMaskedRow(this._buildMasked(expected));
+      }
+
+      // Register hint usage in engine for scoring (once)
+      if (this._hintStage === 1) {
+        this._engine.getHint();
       }
     } else if (this._hintStage === 5) {
-      // Stage 5: Russian fallback from engine
-      const hint = this._engine.getHint();
-      if (hint) {
+      // Stage 5: Russian translation
+      const ruText = this._currentEntry.translations[this._engine.fallbackLang];
+      if (ruText) {
+        // Consume remaining engine hints for scoring
+        this._engine.getHint();
         const row = el('div', 'typing__hint typing__hint--level-2');
         const lang = el('span', 'typing__hint-lang');
-        lang.textContent = langLabel(hint.lang) + ': ';
+        lang.textContent = langLabel(this._engine.fallbackLang) + ': ';
         const text = el('span', 'typing__hint-text');
-        text.textContent = hint.text;
+        text.textContent = ruText;
         row.appendChild(lang);
         row.appendChild(text);
         hintArea.appendChild(row);
@@ -306,16 +301,41 @@ export class TypingMode {
   }
 
   /**
-   * Build a masked string with stars, optionally revealing first/last chars.
-   * Preserves spaces and punctuation.
+   * Get indices of characters that can still be revealed (non-space, not yet revealed).
    */
-  _buildMasked(word, revealFirst, revealLast) {
+  _getRevealableIndices(word) {
     const chars = [...word];
-    const len = chars.length;
+    const indices = [];
+    for (let i = 0; i < chars.length; i++) {
+      if (!/\s/.test(chars[i]) && !this._revealedIndices.has(i)) {
+        indices.push(i);
+      }
+    }
+    return indices;
+  }
+
+  /**
+   * Reveal `count` random unrevealed letter positions.
+   */
+  _revealRandomLetters(word, count) {
+    const available = this._getRevealableIndices(word);
+    const toReveal = Math.min(count, available.length);
+    for (let i = 0; i < toReveal; i++) {
+      const pick = Math.floor(Math.random() * available.length);
+      this._revealedIndices.add(available[pick]);
+      available.splice(pick, 1);
+    }
+  }
+
+  /**
+   * Build a masked string with stars, revealing positions in _revealedIndices.
+   * Preserves spaces.
+   */
+  _buildMasked(word) {
+    const chars = [...word];
     return chars.map((ch, i) => {
       if (/\s/.test(ch)) return ' ';
-      if (revealFirst && i < revealFirst) return ch;
-      if (revealLast && i === len - 1) return ch;
+      if (this._revealedIndices.has(i)) return ch;
       return '★';
     }).join('');
   }
