@@ -11,15 +11,9 @@ import initSqlJs from 'sql.js';
 let cached = null;
 
 /**
- * Convert a SQLite row (array of values) to the JSON entry format.
- * Column order must match the SELECT in loadAllEntries().
+ * Convert a row object (from stmt.getAsObject) to the entry format.
  */
-function rowToEntry(columns, values) {
-  const row = {};
-  for (let i = 0; i < columns.length; i++) {
-    row[columns[i]] = values[i];
-  }
-
+function rowToEntry(row) {
   return {
     id: row.id,
     term: row.term,
@@ -50,6 +44,17 @@ function rowToEntry(columns, values) {
   };
 }
 
+const QUERY = `
+  SELECT id, term, source_language, type,
+         translation_en, translation_sr, translation_ru,
+         examples_en, examples_sr, examples_ru,
+         explanation, pronunciation,
+         category, tags, difficulty, enriched,
+         date_added, source_file, reviewed, enriched_at
+  FROM vocabulary
+  ORDER BY id
+`;
+
 /**
  * Load all vocabulary entries from SQLite.
  * @returns {Promise<{en: Array, sr: Array}>}
@@ -69,32 +74,24 @@ export async function loadAllEntries() {
   const buffer = await response.arrayBuffer();
   const db = new SQL.Database(new Uint8Array(buffer));
 
-  const result = db.exec(`
-    SELECT id, term, source_language, type,
-           translation_en, translation_sr, translation_ru,
-           examples_en, examples_sr, examples_ru,
-           explanation, pronunciation,
-           category, tags, difficulty, enriched,
-           date_added, source_file, reviewed, enriched_at
-    FROM vocabulary
-    ORDER BY id
-  `);
-
-  db.close();
-
   const entries = { en: [], sr: [] };
 
-  if (result.length > 0) {
-    const { columns, values } = result[0];
-    for (const row of values) {
-      const entry = rowToEntry(columns, row);
-      if (entry.source_language === 'en') {
-        entries.en.push(entry);
-      } else if (entry.source_language === 'sr') {
-        entries.sr.push(entry);
-      }
+  // Use stmt.getAsObject() to get proper {column: value} objects,
+  // avoiding reliance on result property names that may be minified
+  // in the sql.js browser build (e.g. 'columns' → 'lc').
+  const stmt = db.prepare(QUERY);
+  while (stmt.step()) {
+    const row = stmt.getAsObject();
+    const entry = rowToEntry(row);
+    if (entry.source_language === 'en') {
+      entries.en.push(entry);
+    } else if (entry.source_language === 'sr') {
+      entries.sr.push(entry);
     }
   }
+  stmt.free();
+
+  db.close();
 
   cached = entries;
   return entries;
