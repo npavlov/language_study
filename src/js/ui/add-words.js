@@ -14,6 +14,8 @@
  * No framework, no CSS imports — vanilla ES module.
  */
 
+import { t, fmt } from '../i18n.js';
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const STORAGE_KEY = 'user_words';
@@ -159,23 +161,23 @@ export class AddWordsScreen {
   _buildSingleWordSection() {
     const section = el('section', 'add-words__section card');
 
-    section.appendChild(sectionTitle('Add a word or phrase'));
+    section.appendChild(sectionTitle(t.add_word_title));
 
     // Error / success message area
     const feedback = el('p', 'add-words__feedback');
     feedback.hidden = true;
 
     // ── Word / phrase input ───────────────────────────────────────────────
-    const termGroup = formGroup('Word / phrase *');
+    const termGroup = formGroup(t.word_phrase_label);
     const termInput = el('input', 'input');
     termInput.type        = 'text';
-    termInput.placeholder = 'Enter word or phrase…';
+    termInput.placeholder = t.word_placeholder;
     termInput.required    = true;
     termGroup.appendChild(termInput);
     section.appendChild(termGroup);
 
     // ── Source language toggle ────────────────────────────────────────────
-    const langGroup = formGroup('Source language');
+    const langGroup = formGroup(t.source_lang_label);
     const toggle    = el('div', 'toggle');
 
     const langBtns = LANGS.map(({ code, label }) => {
@@ -193,25 +195,25 @@ export class AddWordsScreen {
     section.appendChild(langGroup);
 
     // ── Translation ───────────────────────────────────────────────────────
-    const transGroup = formGroup('Translation (optional)');
+    const transGroup = formGroup(t.translation_label);
     const transInput = el('input', 'input');
     transInput.type        = 'text';
-    transInput.placeholder = 'Enter translation…';
+    transInput.placeholder = t.translation_placeholder;
     transGroup.appendChild(transInput);
     section.appendChild(transGroup);
 
     // ── Example sentence ──────────────────────────────────────────────────
-    const exGroup = formGroup('Example sentence (optional)');
+    const exGroup = formGroup(t.example_label);
     const exInput = el('textarea', 'input textarea');
-    exInput.placeholder = 'Enter an example sentence…';
+    exInput.placeholder = t.example_placeholder;
     exGroup.appendChild(exInput);
     section.appendChild(exGroup);
 
     // ── Category / tags ───────────────────────────────────────────────────
-    const tagsGroup = formGroup('Category / tags (optional, comma-separated)');
+    const tagsGroup = formGroup(t.tags_label);
     const tagsInput = el('input', 'input');
     tagsInput.type        = 'text';
-    tagsInput.placeholder = 'e.g. travel, noun, formal';
+    tagsInput.placeholder = t.tags_placeholder;
     tagsGroup.appendChild(tagsInput);
     section.appendChild(tagsGroup);
 
@@ -220,14 +222,14 @@ export class AddWordsScreen {
 
     const submitBtn = el('button', 'btn btn--primary');
     submitBtn.type        = 'button';
-    submitBtn.textContent = 'Add';
+    submitBtn.textContent = t.add_btn;
     submitBtn.addEventListener('click', () => this._submitSingleWord());
     section.appendChild(submitBtn);
 
     // ── Cancel edit button (hidden unless editing) ────────────────────────
     const cancelBtn = el('button', 'btn btn--outline');
     cancelBtn.type        = 'button';
-    cancelBtn.textContent = 'Cancel edit';
+    cancelBtn.textContent = t.cancel_edit;
     cancelBtn.hidden      = true;
     cancelBtn.addEventListener('click', () => this._cancelEdit());
     section.appendChild(cancelBtn);
@@ -251,15 +253,15 @@ export class AddWordsScreen {
 
   _buildBulkSection() {
     const section = el('section', 'add-words__section card');
-    section.appendChild(sectionTitle('Bulk add'));
+    section.appendChild(sectionTitle(t.bulk_add_title));
 
     const hint = el('p', 'add-words__hint');
-    hint.textContent = 'Paste one word or phrase per line. Words already in your list or the built-in vocabulary are skipped.';
+    hint.textContent = t.bulk_hint;
     section.appendChild(hint);
 
     const textarea = el('textarea', 'input textarea');
     textarea.rows        = 6;
-    textarea.placeholder = 'word one\nword two\nphrase three';
+    textarea.placeholder = t.bulk_placeholder;
     section.appendChild(textarea);
 
     const feedback = el('p', 'add-words__feedback');
@@ -268,7 +270,7 @@ export class AddWordsScreen {
 
     const addAllBtn = el('button', 'btn btn--primary');
     addAllBtn.type        = 'button';
-    addAllBtn.textContent = 'Add all';
+    addAllBtn.textContent = t.add_all;
     addAllBtn.addEventListener('click', () => {
       const lines = textarea.value
         .split('\n')
@@ -285,10 +287,10 @@ export class AddWordsScreen {
 
   _buildImportSection() {
     const section = el('section', 'add-words__section card');
-    section.appendChild(sectionTitle('Import from file'));
+    section.appendChild(sectionTitle(t.import_title));
 
     const hint = el('p', 'add-words__hint');
-    hint.textContent = 'Drop a .txt file (one word per line) or click to pick a file.';
+    hint.textContent = t.import_hint;
     section.appendChild(hint);
 
     const dropZone = el('div', 'drop-zone');
@@ -296,7 +298,7 @@ export class AddWordsScreen {
     dropZone.setAttribute('tabindex', '0');
 
     const dropLabel = el('span', 'drop-zone__label');
-    dropLabel.textContent = 'Drop .txt file here or click to browse';
+    dropLabel.textContent = t.drop_label;
     dropZone.appendChild(dropLabel);
 
     const fileInput = el('input', 'add-words__file-input');
@@ -343,20 +345,20 @@ export class AddWordsScreen {
     const header = el('div', 'add-words__list-header');
 
     const titleEl = el('h2', 'add-words__section-title');
-    titleEl.textContent = 'Your words';
+    titleEl.textContent = t.your_words;
     header.appendChild(titleEl);
 
     const exportRow = el('div', 'add-words__export-row');
 
     const exportJsonBtn = el('button', 'btn btn--outline btn--sm');
     exportJsonBtn.type        = 'button';
-    exportJsonBtn.textContent = 'Export JSON';
+    exportJsonBtn.textContent = t.export_json;
     exportJsonBtn.addEventListener('click', () => this._exportJson());
     exportRow.appendChild(exportJsonBtn);
 
     const exportTxtBtn = el('button', 'btn btn--outline btn--sm');
     exportTxtBtn.type        = 'button';
-    exportTxtBtn.textContent = 'Export .txt';
+    exportTxtBtn.textContent = t.export_txt;
     exportTxtBtn.addEventListener('click', () => this._exportTxt());
     exportRow.appendChild(exportTxtBtn);
 
@@ -365,7 +367,7 @@ export class AddWordsScreen {
 
     // Empty-state message
     const emptyMsg = el('p', 'add-words__empty');
-    emptyMsg.textContent = 'No user words yet. Add one above!';
+    emptyMsg.textContent = t.no_user_words;
 
     // Word list <ul>
     const wordList = el('ul', 'word-list');
@@ -419,7 +421,7 @@ export class AddWordsScreen {
     termWrap.appendChild(termSpan);
 
     const badge = el('span', 'badge badge--user');
-    badge.textContent = 'user';
+    badge.textContent = t.user_badge;
     termWrap.appendChild(badge);
 
     // Optional translation snippet
@@ -427,7 +429,7 @@ export class AddWordsScreen {
     const trans    = entry.translations && entry.translations[langCode];
     if (trans) {
       const transSpan = el('span', 'word-list__translation');
-      transSpan.textContent = ` — ${trans}`;
+      transSpan.textContent = ` \u2014 ${trans}`;
       termWrap.appendChild(transSpan);
     }
 
@@ -438,13 +440,13 @@ export class AddWordsScreen {
 
     const editBtn = el('button', 'btn btn--outline btn--sm');
     editBtn.type        = 'button';
-    editBtn.textContent = 'Edit';
+    editBtn.textContent = t.edit_btn;
     editBtn.addEventListener('click', () => this._startEdit(entry));
     actions.appendChild(editBtn);
 
     const deleteBtn = el('button', 'btn btn--danger btn--sm');
     deleteBtn.type        = 'button';
-    deleteBtn.textContent = 'Delete';
+    deleteBtn.textContent = t.delete_btn;
     deleteBtn.addEventListener('click', () => this._deleteEntry(entry.id));
     actions.appendChild(deleteBtn);
 
@@ -471,12 +473,12 @@ export class AddWordsScreen {
     const ex    = exInput.value.trim();
     const tags  = tagsInput.value
       .split(',')
-      .map(t => t.trim())
+      .map(s => s.trim())
       .filter(Boolean);
 
     // Validation
     if (!term) {
-      this._showFeedback(singleFeedback, 'Please enter a word or phrase.', 'error');
+      this._showFeedback(singleFeedback, t.enter_word_error, 'error');
       termInput.classList.add('input--error');
       termInput.focus();
       return;
@@ -487,7 +489,7 @@ export class AddWordsScreen {
     const termLower = term.toLowerCase();
     const isDupe = this._isDuplicate(termLower, this._editingEntry ? this._editingEntry.id : null);
     if (isDupe) {
-      this._showFeedback(singleFeedback, `"${term}" already exists in the vocabulary.`, 'error');
+      this._showFeedback(singleFeedback, fmt('already_exists', { term }), 'error');
       return;
     }
 
@@ -519,7 +521,7 @@ export class AddWordsScreen {
       saveUserWords(this._userWords);
       this._cancelEdit();
       this._renderWordList();
-      this._showFeedback(singleFeedback, `"${term}" updated.`, 'success');
+      this._showFeedback(singleFeedback, fmt('word_updated', { term }), 'success');
     } else {
       // ── Add new entry ─────────────────────────────────────────────────
       const entry = this._buildEntry(term, this._activeLang, trans, ex, tags);
@@ -527,7 +529,7 @@ export class AddWordsScreen {
       saveUserWords(this._userWords);
       this._renderWordList();
       this._clearSingleForm();
-      this._showFeedback(singleFeedback, `"${term}" added.`, 'success');
+      this._showFeedback(singleFeedback, fmt('word_added', { term }), 'success');
     }
   }
 
@@ -563,7 +565,7 @@ export class AddWordsScreen {
 
     tagsInput.value = (entry.tags || []).join(', ');
 
-    submitBtn.textContent = 'Save changes';
+    submitBtn.textContent = t.save_changes;
     cancelBtn.hidden      = false;
 
     singleFeedback.hidden = true;
@@ -576,7 +578,7 @@ export class AddWordsScreen {
   /** Reset the single-word form to add-mode. */
   _cancelEdit() {
     this._editingEntry          = null;
-    this._refs.submitBtn.textContent = 'Add';
+    this._refs.submitBtn.textContent = t.add_btn;
     this._refs.cancelBtn.hidden      = true;
     this._clearSingleForm();
   }
@@ -589,7 +591,7 @@ export class AddWordsScreen {
     const entry = this._userWords.find(w => w.id === id);
     if (!entry) return;
 
-    const confirmed = window.confirm(`Delete "${entry.term}"?`);
+    const confirmed = window.confirm(fmt('delete_confirm', { term: entry.term }));
     if (!confirmed) return;
 
     this._userWords = this._userWords.filter(w => w.id !== id);
@@ -612,7 +614,7 @@ export class AddWordsScreen {
    */
   _bulkAdd(lines, feedbackEl, onSuccess) {
     if (lines.length === 0) {
-      this._showFeedback(feedbackEl, 'Nothing to add — textarea is empty.', 'error');
+      this._showFeedback(feedbackEl, t.nothing_to_add, 'error');
       return;
     }
 
@@ -640,8 +642,8 @@ export class AddWordsScreen {
     }
 
     const msg = added > 0
-      ? `Added ${added} word${added !== 1 ? 's' : ''}${skipped > 0 ? `, skipped ${skipped} duplicate${skipped !== 1 ? 's' : ''}` : ''}.`
-      : `All ${skipped} word${skipped !== 1 ? 's' : ''} already exist — nothing added.`;
+      ? fmt('words_added_result', { added, skipped })
+      : fmt('words_all_exist', { count: skipped });
     this._showFeedback(feedbackEl, msg, added > 0 ? 'success' : 'error');
   }
 
@@ -654,7 +656,7 @@ export class AddWordsScreen {
    */
   _importFile(file, feedbackEl) {
     if (!file.name.endsWith('.txt') && file.type !== 'text/plain') {
-      this._showFeedback(feedbackEl, 'Only .txt files are supported.', 'error');
+      this._showFeedback(feedbackEl, t.only_txt_error, 'error');
       return;
     }
 
@@ -667,7 +669,7 @@ export class AddWordsScreen {
       this._bulkAdd(lines, feedbackEl, null);
     };
     reader.onerror = () => {
-      this._showFeedback(feedbackEl, 'Could not read the file.', 'error');
+      this._showFeedback(feedbackEl, t.file_read_error, 'error');
     };
     reader.readAsText(file, 'utf-8');
   }
@@ -703,7 +705,7 @@ export class AddWordsScreen {
 
   _exportJson() {
     if (this._userWords.length === 0) {
-      alert('No user words to export.');
+      alert(t.no_words_export);
       return;
     }
     const blob = new Blob(
@@ -715,7 +717,7 @@ export class AddWordsScreen {
 
   _exportTxt() {
     if (this._userWords.length === 0) {
-      alert('No user words to export.');
+      alert(t.no_words_export);
       return;
     }
     const lines = this._userWords.map(w => w.term).join('\n');

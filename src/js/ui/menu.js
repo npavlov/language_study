@@ -4,7 +4,7 @@
 
 import { loadProgress } from '../progress.js';
 import { getSettings, updateSettings } from '../settings.js';
-import { t } from '../i18n.js';
+import { t, langLabel } from '../i18n.js';
 
 export class MenuScreen {
   constructor() {
@@ -53,7 +53,7 @@ export class MenuScreen {
   setLoading(isLoading) {
     if (this._refs.startBtn) {
       this._refs.startBtn.disabled = isLoading;
-      this._refs.startBtn.textContent = isLoading ? 'Загрузка…' : 'Начать';
+      this._refs.startBtn.textContent = isLoading ? t.loading : t.start;
     }
   }
 
@@ -70,20 +70,20 @@ export class MenuScreen {
 
     // --- Header / Title ---
     const header = el('div', 'menu__header');
-    header.appendChild(el('h1', 'menu__title', '📚 Language Study'));
-    header.appendChild(el('p', 'menu__subtitle', 'Учи английский и сербский в игровой форме'));
+    header.appendChild(el('h1', 'menu__title', '\uD83D\uDCDA Language Study'));
+    header.appendChild(el('p', 'menu__subtitle', t.app_subtitle));
     root.appendChild(header);
 
     // --- Language Direction Toggle ---
     const dirSection = el('div', 'menu__section');
-    dirSection.appendChild(el('label', 'form-group__label', 'Направление'));
+    dirSection.appendChild(el('label', 'form-group__label', t.direction_label));
     const toggle = el('div', 'toggle');
 
-    const btnEn = el('button', 'toggle__option toggle__option--active', '🇬🇧 Английский');
+    const btnEn = el('button', 'toggle__option toggle__option--active', `\uD83C\uDDEC\uD83C\uDDE7 ${langLabel('en')}`);
     btnEn.dataset.direction = 'en-sr';
     btnEn.type = 'button';
 
-    const btnSr = el('button', 'toggle__option', '🇷🇸 Сербский');
+    const btnSr = el('button', 'toggle__option', `\uD83C\uDDF7\uD83C\uDDF8 ${langLabel('sr')}`);
     btnSr.dataset.direction = 'sr-en';
     btnSr.type = 'button';
 
@@ -109,14 +109,14 @@ export class MenuScreen {
 
     // --- Game Mode Cards ---
     const modesSection = el('div', 'menu__section');
-    modesSection.appendChild(el('label', 'form-group__label', 'Режим игры'));
+    modesSection.appendChild(el('label', 'form-group__label', t.game_mode_label));
     const grid = el('div', 'mode-grid');
 
     const modes = [
-      { id: 'flashcards', icon: '🃏', title: 'Карточки', desc: 'Переворачивай и запоминай' },
-      { id: 'quiz', icon: '❓', title: 'Тест', desc: 'Выбери правильный ответ' },
-      { id: 'typing', icon: '⌨️', title: 'Ввод', desc: 'Напиши перевод' },
-      { id: 'match', icon: '🔗', title: 'Пары', desc: 'Соедини слово с переводом' },
+      { id: 'flashcards', icon: '\uD83C\uDCCF', title: t.mode_flashcards, desc: t.mode_flashcards_desc },
+      { id: 'quiz', icon: '\u2753', title: t.mode_quiz, desc: t.mode_quiz_desc },
+      { id: 'typing', icon: '\u2328\uFE0F', title: t.mode_typing, desc: t.mode_typing_desc },
+      { id: 'match', icon: '\uD83D\uDD17', title: t.mode_match, desc: t.mode_match_desc },
     ];
 
     const modeCards = [];
@@ -146,8 +146,8 @@ export class MenuScreen {
 
     // --- Quick Stats ---
     const statsBar = el('div', 'menu__stats');
-    const streakEl = el('span', 'menu__stat', '🔥 0 дней');
-    const learnedEl = el('span', 'menu__stat', '📖 0 изучено');
+    const streakEl = el('span', 'menu__stat');
+    const learnedEl = el('span', 'menu__stat');
     statsBar.appendChild(streakEl);
     statsBar.appendChild(learnedEl);
     root.appendChild(statsBar);
@@ -172,10 +172,43 @@ export class MenuScreen {
     });
 
     settingsSection.appendChild(reinsertSwitch);
+
+    // --- UI Language Selector ---
+    const langSwitch = el('div', 'menu__lang-selector');
+    langSwitch.appendChild(el('span', 'switch__label', t.ui_language));
+
+    const langToggle = el('div', 'toggle toggle--sm');
+    const uiLangs = [
+      { code: 'ru', label: 'RU' },
+      { code: 'en', label: 'EN' },
+      { code: 'sr', label: 'SR' },
+    ];
+
+    for (const { code, label } of uiLangs) {
+      const btn = el('button', 'toggle__option');
+      btn.type = 'button';
+      btn.textContent = label;
+      btn.dataset.uilang = code;
+      if (code === settings.uiLanguage) btn.classList.add('toggle__option--active');
+      langToggle.appendChild(btn);
+    }
+
+    langToggle.addEventListener('click', (e) => {
+      const btn = e.target.closest('.toggle__option');
+      if (!btn || !btn.dataset.uilang) return;
+      const newLang = btn.dataset.uilang;
+      if (newLang === settings.uiLanguage) return;
+      updateSettings({ uiLanguage: newLang });
+      window.location.reload();
+    });
+
+    langSwitch.appendChild(langToggle);
+    settingsSection.appendChild(langSwitch);
+
     root.appendChild(settingsSection);
 
     // --- Start Button ---
-    const startBtn = el('button', 'btn btn--primary btn--block', 'Начать');
+    const startBtn = el('button', 'btn btn--primary btn--block', t.start);
     startBtn.type = 'button';
     startBtn.style.marginTop = 'var(--spacing-lg)';
     startBtn.addEventListener('click', () => {
@@ -190,7 +223,7 @@ export class MenuScreen {
     this._refs.startBtn = startBtn;
 
     // --- Export to Excel ---
-    const exportBtn = el('button', 'btn btn--outline btn--block', '📥 Экспорт в Excel');
+    const exportBtn = el('button', 'btn btn--outline btn--block', `\uD83D\uDCE5 ${t.export_excel}`);
     exportBtn.type = 'button';
     exportBtn.style.marginTop = 'var(--spacing-sm)';
     exportBtn.addEventListener('click', () => {
@@ -212,10 +245,10 @@ export class MenuScreen {
     const known = words.filter((w) => w.masteryLevel === 'known' || w.masteryLevel === 'mastered').length;
 
     if (this._refs.streakEl) {
-      this._refs.streakEl.textContent = `🔥 ${progress.streakDays || 0} дней`;
+      this._refs.streakEl.textContent = `\uD83D\uDD25 ${progress.streakDays || 0} ${t.days}`;
     }
     if (this._refs.learnedEl) {
-      this._refs.learnedEl.textContent = `📖 ${known} изучено (${mastered} освоено)`;
+      this._refs.learnedEl.textContent = `\uD83D\uDCD6 ${known} ${t.learned} (${mastered} ${t.mastered_stat})`;
     }
   }
 

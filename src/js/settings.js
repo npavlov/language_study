@@ -6,6 +6,7 @@ const STORAGE_KEY = 'ls_settings';
 const DEFAULTS = {
   reinsertEnabled: true, // re-queue wrong words for spaced repetition
   reinsertGap: 10,       // how many words ahead to re-insert
+  uiLanguage: 'ru',      // UI language: 'ru', 'en', or 'sr'
 };
 
 /**

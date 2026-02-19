@@ -2,6 +2,7 @@
 // Vanilla ES module. All DOM created programmatically. BEM class names from components.css.
 
 import { loadProgress, resetProgress, exportProgress } from '../progress.js';
+import { t, fmtDate, fmtDuration } from '../i18n.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -18,20 +19,6 @@ function pct(num, den) {
   return den === 0 ? 0 : Math.round((num / den) * 100);
 }
 
-function fmtDate(isoStr) {
-  if (!isoStr) return '—';
-  // YYYY-MM-DD → readable short date
-  const [y, m, d] = isoStr.split('-');
-  return `${Number(d)} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(m) - 1]} ${y}`;
-}
-
-function fmtDuration(seconds) {
-  if (!seconds) return '—';
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return m > 0 ? `${m}m ${s}s` : `${s}s`;
-}
-
 // ---------------------------------------------------------------------------
 // Section renderers (each returns a DOM element)
 // ---------------------------------------------------------------------------
@@ -44,17 +31,17 @@ function renderOverall(words) {
 
   const section = el('section', 'stats__section');
 
-  const heading = el('h2', 'stats__heading', 'Overall progress');
+  const heading = el('h2', 'stats__heading', t.overall_progress);
   section.appendChild(heading);
 
   const summary = el('p', 'stats__summary',
-    `${counts.mastered} / ${total} word${total !== 1 ? 's' : ''} mastered`);
+    `${counts.mastered} / ${total} ${t.words_mastered}`);
   section.appendChild(summary);
 
   // Stacked mastery bar
   const bar = el('div', 'mastery-bar');
   bar.setAttribute('role', 'img');
-  bar.setAttribute('aria-label', `new: ${counts.new}, learning: ${counts.learning}, known: ${counts.known}, mastered: ${counts.mastered}`);
+  bar.setAttribute('aria-label', `${t.level_new}: ${counts.new}, ${t.level_learning}: ${counts.learning}, ${t.level_known}: ${counts.known}, ${t.level_mastered}: ${counts.mastered}`);
 
   const levels = ['new', 'learning', 'known', 'mastered'];
   for (const level of levels) {
@@ -66,7 +53,12 @@ function renderOverall(words) {
 
   // Legend
   const legend = el('div', 'stats__legend');
-  const labels = { new: 'New', learning: 'Learning', known: 'Known', mastered: 'Mastered' };
+  const labels = {
+    new: t.level_new,
+    learning: t.level_learning,
+    known: t.level_known,
+    mastered: t.level_mastered,
+  };
   for (const level of levels) {
     const item = el('span', `stats__legend-item stats__legend-item--${level}`,
       `${labels[level]}: ${counts[level]}`);
@@ -79,7 +71,7 @@ function renderOverall(words) {
 
 function renderAccuracy(words, sessions) {
   const section = el('section', 'stats__section');
-  section.appendChild(el('h2', 'stats__heading', 'Accuracy'));
+  section.appendChild(el('h2', 'stats__heading', t.accuracy));
 
   // Overall accuracy across all words
   let totalAttempts = 0;
@@ -89,15 +81,15 @@ function renderAccuracy(words, sessions) {
     totalCorrect  += w.correct ?? 0;
   }
   const overallPct = pct(totalCorrect, totalAttempts);
-  section.appendChild(el('p', 'stats__summary', `${overallPct}% overall accuracy`));
+  section.appendChild(el('p', 'stats__summary', `${overallPct}% ${t.overall_accuracy}`));
 
   // Bar chart of last 10 sessions
   const recent = sessions.slice(-10);
   if (recent.length > 0) {
-    section.appendChild(el('p', 'stats__label', 'Last sessions'));
+    section.appendChild(el('p', 'stats__label', t.last_sessions));
     const chart = el('div', 'bar-chart');
     chart.setAttribute('role', 'img');
-    chart.setAttribute('aria-label', 'Bar chart of recent session accuracy');
+    chart.setAttribute('aria-label', t.bar_chart_label);
     for (const s of recent) {
       const sessionPct = pct(s.score, s.total || 1);
       const bar = el('div', 'bar-chart__bar');
@@ -110,7 +102,7 @@ function renderAccuracy(words, sessions) {
     }
     section.appendChild(chart);
   } else {
-    section.appendChild(el('p', 'stats__empty', 'No sessions recorded yet.'));
+    section.appendChild(el('p', 'stats__empty', t.no_sessions));
   }
 
   return section;
@@ -118,16 +110,16 @@ function renderAccuracy(words, sessions) {
 
 function renderStreak(streakDays, lastSessionDate) {
   const section = el('section', 'stats__section');
-  section.appendChild(el('h2', 'stats__heading', 'Streak'));
+  section.appendChild(el('h2', 'stats__heading', t.streak));
 
   const streakEl = el('p', 'stats__streak');
-  const flame = el('span', 'stats__streak-icon', '🔥');
+  const flame = el('span', 'stats__streak-icon', '\uD83D\uDD25');
   streakEl.appendChild(flame);
-  streakEl.appendChild(document.createTextNode(` ${streakDays} day${streakDays !== 1 ? 's' : ''}`));
+  streakEl.appendChild(document.createTextNode(` ${streakDays} ${t.days}`));
   section.appendChild(streakEl);
 
   if (lastSessionDate) {
-    section.appendChild(el('p', 'stats__label', `Last session: ${fmtDate(lastSessionDate)}`));
+    section.appendChild(el('p', 'stats__label', `${t.last_session}: ${fmtDate(lastSessionDate)}`));
   }
 
   return section;
@@ -135,7 +127,7 @@ function renderStreak(streakDays, lastSessionDate) {
 
 function renderWeakWords(words, onPractice) {
   const section = el('section', 'stats__section');
-  section.appendChild(el('h2', 'stats__heading', 'Words to review'));
+  section.appendChild(el('h2', 'stats__heading', t.words_to_review_heading));
 
   const weak = Object.entries(words)
     .filter(([, w]) => (w.total ?? 0) >= 2 && pct(w.correct ?? 0, w.total) < 60)
@@ -147,7 +139,7 @@ function renderWeakWords(words, onPractice) {
     .slice(0, 20);
 
   if (weak.length === 0) {
-    section.appendChild(el('p', 'stats__empty', 'No words need review — great work!'));
+    section.appendChild(el('p', 'stats__empty', t.no_words_review));
     return section;
   }
 
@@ -163,7 +155,7 @@ function renderWeakWords(words, onPractice) {
   section.appendChild(list);
 
   const btn = el('button', 'btn btn--primary btn--sm');
-  btn.textContent = 'Practice these';
+  btn.textContent = t.practice_these;
   btn.addEventListener('click', () => onPractice(weak.map(([id]) => id)));
   section.appendChild(btn);
 
@@ -172,12 +164,12 @@ function renderWeakWords(words, onPractice) {
 
 function renderRecentSessions(sessions) {
   const section = el('section', 'stats__section');
-  section.appendChild(el('h2', 'stats__heading', 'Recent sessions'));
+  section.appendChild(el('h2', 'stats__heading', t.recent_sessions));
 
   const recent = sessions.slice(-5).reverse();
 
   if (recent.length === 0) {
-    section.appendChild(el('p', 'stats__empty', 'No sessions recorded yet.'));
+    section.appendChild(el('p', 'stats__empty', t.no_sessions));
     return section;
   }
 
@@ -186,7 +178,7 @@ function renderRecentSessions(sessions) {
 
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
-  for (const col of ['Date', 'Score', 'Duration']) {
+  for (const col of [t.col_date, t.col_score, t.col_duration]) {
     const th = el('th', 'stats__th', col);
     th.setAttribute('scope', 'col');
     headerRow.appendChild(th);
@@ -210,12 +202,12 @@ function renderRecentSessions(sessions) {
 
 function renderActions(container, onReset) {
   const section = el('section', 'stats__section');
-  section.appendChild(el('h2', 'stats__heading', 'Actions'));
+  section.appendChild(el('h2', 'stats__heading', t.actions));
 
   const row = el('div', 'stats__actions');
 
   // Export button
-  const exportBtn = el('button', 'btn btn--outline', 'Export JSON');
+  const exportBtn = el('button', 'btn btn--outline', t.export_json);
   exportBtn.addEventListener('click', () => {
     const json = exportProgress();
     const blob = new Blob([json], { type: 'application/json' });
@@ -230,9 +222,9 @@ function renderActions(container, onReset) {
   });
 
   // Reset button
-  const resetBtn = el('button', 'btn btn--danger', 'Reset progress');
+  const resetBtn = el('button', 'btn btn--danger', t.reset_progress);
   resetBtn.addEventListener('click', () => {
-    if (window.confirm('Reset all progress? This cannot be undone.')) {
+    if (window.confirm(t.reset_confirm)) {
       resetProgress();
       onReset();
     }
@@ -283,7 +275,7 @@ export class StatsScreen {
 
     // Header
     const header = el('header', 'header');
-    header.appendChild(el('h1', 'header__title', 'Statistics'));
+    header.appendChild(el('h1', 'header__title', t.stats_title));
     root.appendChild(header);
 
     // Sections

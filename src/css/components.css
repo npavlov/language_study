@@ -344,6 +344,24 @@
   transform: translateX(20px);
 }
 
+/* --- Toggle small variant --- */
+.toggle--sm {
+  gap: 2px;
+}
+
+.toggle--sm .toggle__option {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+/* --- Language selector in menu --- */
+.menu__lang-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) 0;
+}
+
 /* --- Menu screen --- */
 .menu__header {
   text-align: center;

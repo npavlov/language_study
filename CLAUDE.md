@@ -5,7 +5,7 @@
 Static HTML game for a Russian-native speaker learning English and Serbian.
 Words are stored in SQLite (source of truth) and loaded directly in the browser via sql.js (WASM).
 The app runs entirely client-side on GitHub Pages.
-All UI text is in Russian. English and Serbian are study languages only.
+UI supports 3 languages (Russian, English, Serbian) — switchable in settings. English and Serbian are also study languages.
 
 ## Tech Stack
 
@@ -34,7 +34,7 @@ src/
     settings.js         # global app settings (localStorage): reinsert toggle, gap
     progress.js         # localStorage read/write for user progress
     export.js           # Excel export (lazy-loads xlsx)
-    i18n.js             # Russian UI string map — ALL user-facing text lives here
+    i18n.js             # UI strings (RU/EN/SR) — ALL user-facing text lives here
     modes/
       flashcards.js     # flip-card mode with swipe gestures
       quiz.js           # 4-option multiple choice
@@ -64,6 +64,7 @@ scripts/
   migrate-to-sqlite.js  # one-time JSON → SQLite migration
 tests/                  # unit tests (vitest)
   engine.test.js        # GameEngine, levenshtein, fuzzyMatch, transliteration
+  i18n.test.js          # i18n language selection, fmt, localized formatting
   schema.test.js        # vocabulary JSON schema validation
   sqlite.test.js        # SQLite schema, integrity, FTS tests
   parser.test.js        # parse-words script tests
@@ -77,7 +78,9 @@ e2e/                    # E2E tests (Playwright)
   quiz.spec.js          # correct/wrong, auto-advance, 2-wrong reveal, disabled
   typing.spec.js        # input/submit, skip, Enter key, 6 hint stages, Serbian
   match.spec.js         # select/deselect, correct/wrong pairs, timer, Serbian
+  long-session.spec.js  # 20-card uniqueness, re-insert, answer position randomization
   reinsert-settings.spec.js # toggle on/off, persistence, re-insert behavior
+  i18n.spec.js          # UI language switching (RU/EN/SR), persistence, localized text
 DOCS/                   # AI-agent documentation (keep in sync with code)
   engine.md             # GameEngine API, events, session state
   modes.md              # all 4 game modes: interactions, BEM classes
@@ -93,7 +96,7 @@ DOCS/                   # AI-agent documentation (keep in sync with code)
 # Development
 npm run dev        # start local dev server (vite)
 npm run build      # vite build → dist/ (for GitHub Pages deploy)
-npm run test       # vitest run (114 tests)
+npm run test       # vitest run (133 tests)
 npm run test:watch # vitest (watch mode)
 npm run test:e2e   # Playwright E2E (55 tests)
 npm run lint       # eslint src/js/
@@ -161,9 +164,9 @@ Hash-based SPA: `#home`, `#play`, `#stats`, `#add-words`. Router class in `route
 
 ### Localization (i18n)
 
-All user-facing UI text is in Russian, stored in `src/js/i18n.js`. Import `{ t }` for strings, `{ langLabel }` for language name display.
+All user-facing UI text is stored in `src/js/i18n.js` with translations for 3 languages (RU, EN, SR). The active language is determined by the `uiLanguage` setting in localStorage (default: `'ru'`). Import `{ t }` for strings, `{ fmt }` for interpolated strings, `{ langLabel }` for language name display, `{ fmtDate, fmtDuration }` for localized formatting.
 
-**Rule**: Never hardcode English UI text in mode files. Always use `t.key_name` from i18n.js.
+**Rule**: Never hardcode UI text in mode or screen files. Always use `t.key_name` from i18n.js. New strings must be added to all 3 language maps.
 
 ## Data Format
 
@@ -344,7 +347,7 @@ AI-agent-friendly docs live in `DOCS/`:
 
 ## Testing
 
-- 114 unit tests (vitest) across 7 test files + 68 E2E tests (Playwright).
+- 133 unit tests (vitest) across 8 test files + 76 E2E tests (Playwright).
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
 - SQLite tests: schema validation, data integrity, FTS search.
 - E2E tests: all 4 game modes, navigation, long sessions, settings.

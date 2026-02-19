@@ -5,12 +5,13 @@
 ### Unit Tests (Vitest)
 
 **Location**: `tests/`
-**Run**: `npm test` (114 tests)
+**Run**: `npm test` (133 tests)
 
 | File | Tests | Scope |
 |------|-------|-------|
 | `engine.test.js` | 34 | GameEngine, levenshtein, fuzzyMatch, transliteration, duplicate hint prevention, re-insert settings |
 | `word-selection.test.js` | 22 | Shuffle, filterIds, source language filtering, randomization quality, re-insert limits |
+| `i18n.test.js` | 19 | Language selection (RU/EN/SR), fmt interpolation, langLabel, fmtDate, fmtDuration, translation completeness |
 | `schema.test.js` | 5 | Vocabulary schema validation |
 | `sqlite.test.js` | 17 | SQLite schema, data integrity, FTS search |
 | `vocabulary-integrity.test.js` | 23 | Cross-language contamination, translation completeness |
@@ -20,7 +21,7 @@
 ### E2E Tests (Playwright)
 
 **Location**: `e2e/`
-**Run**: `npm run test:e2e` (68 tests)
+**Run**: `npm run test:e2e` (76 tests)
 **Config**: `playwright.config.js`
 
 | File | Tests | Scope |
@@ -32,6 +33,7 @@
 | `match.spec.js` | 12 | Select/deselect, correct/wrong pairs, matched disabled, complete round, timer, Serbian |
 | `long-session.spec.js` | 7 | 20-card uniqueness, re-insert verification, answer position randomization, cross-session shuffle |
 | `reinsert-settings.spec.js` | 6 | Toggle visibility/default/persistence, re-insert OFF = no repeats, ON = forgotten words reappear |
+| `i18n.spec.js` | 8 | Language selector visible, default RU, switch to EN/SR, persistence across reload, localized game UI |
 
 ### Playwright Setup
 
@@ -111,5 +113,8 @@ test.describe('Mode Name', () => {
 | Direction toggle | `.toggle__option[data-direction="en-sr"]` |
 | Tab bar items | `.tab-bar__item:nth-child(N)` |
 | Play screen | `#play-screen` |
+| Re-insert toggle | `.switch[data-setting="reinsertEnabled"]` |
+| UI language toggle | `.menu__lang-selector .toggle` |
+| UI language option | `.toggle__option[data-uilang="en"]` |
 
 **Warning**: `.card` alone matches menu cards + add-words sections. Always scope flashcard selectors with `.flashcards__scene .card`.

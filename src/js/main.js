@@ -18,6 +18,7 @@ import { TypingMode } from './modes/typing.js';
 import { MatchMode } from './modes/match.js';
 import { exportToExcel } from './export.js';
 import { loadAllEntries } from './vocabulary-db.js';
+import { t } from './i18n.js';
 
 const MODE_MAP = {
   flashcards: FlashcardsMode,
@@ -59,9 +60,9 @@ function buildTabBar() {
   bar.className = 'tab-bar';
 
   const tabs = [
-    { hash: '#home', icon: '🏠', label: 'Игра' },
-    { hash: '#stats', icon: '📊', label: 'Статистика' },
-    { hash: '#add-words', icon: '➕', label: 'Слова' },
+    { hash: '#home', icon: '\uD83C\uDFE0', label: t.tab_game },
+    { hash: '#stats', icon: '\uD83D\uDCCA', label: t.tab_stats },
+    { hash: '#add-words', icon: '\u2795', label: t.tab_words },
   ];
 
   for (const tab of tabs) {
@@ -223,7 +224,7 @@ async function init() {
     });
   } catch (err) {
     console.error('Failed to initialize app:', err);
-    app.innerHTML = `<p style="color:var(--color-danger);padding:2rem">Ошибка загрузки: ${err.message}</p>`;
+    app.innerHTML = `<p style="color:var(--color-danger);padding:2rem">${t.error_loading}: ${err.message}</p>`;
   }
 }
 
