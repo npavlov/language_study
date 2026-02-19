@@ -288,8 +288,8 @@ function cmdStats() {
 }
 
 function cmdExport() {
-  console.log('Exporting SQLite → JSON...');
-  execFileSync('node', ['scripts/db-export.js'], { cwd: ROOT, stdio: 'inherit' });
+  console.log('Copying DB assets to public/data/...');
+  execFileSync('node', ['scripts/copy-db-assets.js'], { cwd: ROOT, stdio: 'inherit' });
 }
 
 // ---------------------------------------------------------------------------

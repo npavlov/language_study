@@ -3,7 +3,7 @@
 ## Project Purpose
 
 Static HTML game for a Russian-native speaker learning English and Serbian.
-Words are stored in SQLite (source of truth) and exported to JSON for the browser.
+Words are stored in SQLite (source of truth) and loaded directly in the browser via sql.js (WASM).
 The app runs entirely client-side on GitHub Pages.
 All UI text is in Russian. English and Serbian are study languages only.
 
@@ -13,8 +13,8 @@ All UI text is in Russian. English and Serbian are study languages only.
 - **HTML**: semantic HTML5 (`<main>`, `<section>`, `<nav>`, `<button>`).
 - **CSS**: custom properties for theming, BEM naming, mobile-first media queries.
 - **Node.js**: dev tooling only (tests, linting, build scripts). Never served at runtime.
-- **Data**: SQLite database (`data/vocabulary.db`) → exported to JSON (`public/data/*.json`) for browser `fetch()`.
-- **SQLite**: `better-sqlite3` (devDependency) for all data pipeline scripts. FTS5 full-text search.
+- **Data**: SQLite database (`data/vocabulary.db`) → copied to `public/data/` and loaded directly in browser via sql.js.
+- **SQLite**: `better-sqlite3` (devDependency) for data pipeline scripts. `sql.js` (dependency) for browser runtime. FTS5 full-text search.
 
 ## Directory Structure
 
@@ -28,6 +28,7 @@ src/
   js/
     main.js             # app entry — wires router, screens, game modes
     engine.js           # core game engine — sessions, scoring, hints, word selection
+    vocabulary-db.js    # browser data layer — loads SQLite via sql.js WASM
     event-emitter.js    # lightweight pub/sub (on/off/emit)
     router.js           # hash-based SPA router (#home, #play, #stats, #add-words)
     progress.js         # localStorage read/write for user progress
@@ -49,21 +50,21 @@ src/
   assets/               # images, icons, fonts
 public/
   data/
-    vocabulary-en.json  # generated from SQLite — English entries for browser
-    vocabulary-sr.json  # generated from SQLite — Serbian entries for browser
+    vocabulary.db       # copied from data/ — served to browser
+    sql-wasm.wasm       # sql.js WASM runtime — copied from node_modules
 scripts/
   lib/
     db.js               # shared DB helper (openDb, row converters, UPSERT_SQL)
   parse-words.js        # parse .txt word files → SQLite
   enrich-vocabulary.js  # AI-enrich vocabulary via Claude API (reads/writes SQLite)
   cleanup-vocabulary.js # deduplicate/validate vocabulary in SQLite
-  db-export.js          # SQLite → JSON export for browser runtime
+  copy-db-assets.js     # copy .db and .wasm to public/data/ (predev/prebuild)
   vocab-cli.js          # CRUD CLI: add, remove, edit, search, list, stats
   migrate-to-sqlite.js  # one-time JSON → SQLite migration
 tests/                  # unit tests (vitest)
   engine.test.js        # GameEngine, levenshtein, fuzzyMatch, transliteration
   schema.test.js        # vocabulary JSON schema validation
-  sqlite.test.js        # SQLite schema, integrity, FTS, roundtrip tests
+  sqlite.test.js        # SQLite schema, integrity, FTS tests
   parser.test.js        # parse-words script tests
   word-selection.test.js # shuffle, filterIds, session tests
   vocabulary-integrity.test.js # cross-language contamination checks
@@ -76,7 +77,7 @@ tests/                  # unit tests (vitest)
 # Development
 npm run dev        # start local dev server (vite)
 npm run build      # vite build → dist/ (for GitHub Pages deploy)
-npm run test       # vitest run (106 tests)
+npm run test       # vitest run (99 tests)
 npm run test:watch # vitest (watch mode)
 npm run lint       # eslint src/js/
 
@@ -87,8 +88,7 @@ npm run vocab -- remove --id en-0042
 npm run vocab -- edit --id en-0042 --difficulty 4
 npm run vocab -- list --lang en --limit 20
 npm run vocab -- stats            # counts, enrichment %, difficulty distribution
-npm run vocab -- export           # regenerate JSON from SQLite
-npm run db:export  # same as vocab export — SQLite → JSON
+npm run vocab -- export           # copy DB assets to public/data/
 npm run parse      # parse .txt word files → SQLite
 npm run enrich     # AI-enrich vocabulary (needs ANTHROPIC_API_KEY)
 npm run migrate    # one-time JSON → SQLite migration (use --force to overwrite)
@@ -113,14 +113,16 @@ npm run migrate    # one-time JSON → SQLite migration (use --force to overwrit
 ```
 data/vocabulary.db (SQLite, source of truth)
        │
-       ├── npm run db:export ──→ public/data/vocabulary-{en,sr}.json (browser runtime)
+       ├── predev/prebuild ──→ public/data/vocabulary.db (copy for browser)
+       │                       public/data/sql-wasm.wasm (sql.js WASM runtime)
        │
        ├── npm run vocab ──→ CRUD operations directly on SQLite
        │
        └── npm run enrich ──→ AI enrichment reads/writes SQLite
 ```
 
-Browser runtime is unchanged: `fetch()` loads JSON, no SQLite in the browser.
+Browser loads `vocabulary.db` via `fetch()` and opens it read-only with sql.js (WASM).
+Data is queried once, converted to JS objects, and cached in memory.
 
 ### Event-Driven Decoupling
 
@@ -178,9 +180,9 @@ CREATE TABLE vocabulary (
 CREATE VIRTUAL TABLE vocabulary_fts USING fts5(...);
 ```
 
-### JSON Format (browser runtime)
+### In-Memory Entry Format (browser runtime)
 
-Generated by `npm run db:export`. Each file has `{ schema_version: "1.0", entries: [...] }`.
+Generated by `vocabulary-db.js` from SQLite rows. Same format used by the game engine:
 
 ```json
 {
@@ -246,7 +248,7 @@ All modes emit `mode:done` via `this._engine.emit('mode:done')` for back-to-menu
 
 1. **Parse** raw .txt files → SQLite: `npm run parse`
 2. **Enrich** with AI translations, examples, explanations: `ANTHROPIC_API_KEY=sk-... npm run enrich`
-3. **Export** SQLite → JSON for browser: `npm run db:export`
+3. **Copy assets** to public/: runs automatically via `predev`/`prebuild` hooks, or manually via `npm run vocab -- export`
 4. Enrichment is idempotent — skips entries where `enriched = 1`. Safe to re-run.
 5. Batches of 5, saves after each batch, auto-retries on failure.
 6. `--dry-run` flag previews without API calls.
@@ -270,8 +272,8 @@ npm run vocab -- remove --id en-0042
 # Edit
 npm run vocab -- edit --id en-0042 --difficulty 4 --category "greetings"
 
-# After ANY database change, regenerate JSON:
-npm run db:export
+# After ANY database change, copy DB to public/:
+npm run vocab -- export
 
 # Verify
 npm run test
@@ -291,10 +293,10 @@ db.close();
 
 ### Important rules
 
-- **Always run `npm run db:export` after modifying the database** — JSON files must stay in sync.
-- **Always run `npm test` after changes** — verifies SQLite ↔ JSON consistency.
+- **Always run `npm run vocab -- export` after modifying the database** — copies .db to public/ for browser.
+- **Always run `npm test` after changes** — verifies data integrity.
 - The shared DB module is at `scripts/lib/db.js` — use `openDb()`, `jsonEntryToRow()`, `rowToJsonEntry()`, `UPSERT_SQL`.
-- SQLite file is committed to git. JSON files are also committed (for dev server convenience).
+- SQLite file is committed to git. The `predev`/`prebuild` hooks auto-copy it to `public/data/`.
 
 ## Coding Conventions
 
@@ -309,9 +311,9 @@ db.close();
 
 ## Testing
 
-- 106 tests across 7 test files.
+- 99 tests across 7 test files.
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
-- SQLite tests: schema validation, data integrity, FTS search, roundtrip consistency.
+- SQLite tests: schema validation, data integrity, FTS search.
 - Use vitest. Place tests in `tests/` mirroring `src/js/` structure.
 - No DOM/browser tests unless unavoidable.
 - Target coverage: core modules (engine, progress, modes) above 80%.
@@ -326,5 +328,4 @@ db.close();
 - Commit `node_modules/`, `dist/`, `.env`, or `.DS_Store`.
 - Hardcode UI text in mode files — use `i18n.js`.
 - Emit events from `getCurrentWord()` — it must be a pure getter.
-- Modify JSON vocabulary files directly — always edit SQLite and run `npm run db:export`.
-- Use sql.js or any SQLite in the browser — SQLite is for the data pipeline only.
+- Modify `public/data/vocabulary.db` directly — always edit `data/vocabulary.db` and run `npm run vocab -- export`.

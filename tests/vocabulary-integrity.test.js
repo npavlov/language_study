@@ -10,15 +10,54 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import Database from 'better-sqlite3';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const dataDir = join(__dirname, '..', 'public', 'data');
+const DB_PATH = join(__dirname, '..', 'data', 'vocabulary.db');
 
-function readVocab(filename) {
-  return JSON.parse(readFileSync(join(dataDir, filename), 'utf-8'));
+/**
+ * Convert a SQLite row to the JSON entry format.
+ */
+function rowToEntry(row) {
+  return {
+    id: row.id,
+    term: row.term,
+    source_language: row.source_language,
+    type: row.type,
+    translations: {
+      en: row.translation_en,
+      sr: row.translation_sr,
+      ru: row.translation_ru,
+    },
+    examples: {
+      en: JSON.parse(row.examples_en),
+      sr: JSON.parse(row.examples_sr),
+      ru: JSON.parse(row.examples_ru),
+    },
+    explanation: row.explanation,
+    pronunciation: row.pronunciation ? JSON.parse(row.pronunciation) : null,
+    category: row.category,
+    tags: JSON.parse(row.tags),
+    difficulty: row.difficulty,
+    enriched: row.enriched === 1,
+    metadata: {
+      date_added: row.date_added,
+      source_file: row.source_file,
+      reviewed: row.reviewed === 1,
+      ...(row.enriched_at ? { enriched_at: row.enriched_at } : {}),
+    },
+  };
+}
+
+function loadEntries(lang) {
+  const db = new Database(DB_PATH, { readonly: true });
+  const rows = db.prepare(
+    'SELECT * FROM vocabulary WHERE source_language = ? ORDER BY id'
+  ).all(lang);
+  db.close();
+  return rows.map(rowToEntry);
 }
 
 // ---------------------------------------------------------------------------
@@ -28,14 +67,8 @@ function readVocab(filename) {
 /** Cyrillic block (Russian + Serbian Cyrillic) */
 const CYRILLIC_RE = /[а-яА-ЯёЁђЂљЉњЊћЋџЏ]/;
 
-/** Extended Latin with Serbian diacritics */
-const LATIN_RE = /[a-zA-Z]/;
-
 /** Serbian-specific Latin diacritics */
 const SERBIAN_DIACRITICS_RE = /[čćžšđČĆŽŠĐ]/;
-
-/** Pure ASCII-like English word (allows hyphens, apostrophes, spaces) */
-const ENGLISH_WORD_RE = /^[a-zA-Z][a-zA-Z\s\-']*$/;
 
 /** Maximum reasonable term length (words/short phrases) */
 const MAX_TERM_LENGTH = 80;
@@ -44,9 +77,8 @@ const MAX_TERM_LENGTH = 80;
 // English vocabulary integrity
 // ---------------------------------------------------------------------------
 
-describe('English vocabulary (vocabulary-en.json)', () => {
-  const data = readVocab('vocabulary-en.json');
-  const entries = data.entries;
+describe('English vocabulary integrity', () => {
+  const entries = loadEntries('en');
 
   it('has entries', () => {
     expect(entries.length).toBeGreaterThan(0);
@@ -65,7 +97,6 @@ describe('English vocabulary (vocabulary-en.json)', () => {
   it('no English terms contain Cyrillic characters (cross-language contamination)', () => {
     const contaminated = entries.filter((e) => CYRILLIC_RE.test(e.term));
     if (contaminated.length > 0) {
-      // Log specific violations for debugging
       const examples = contaminated.slice(0, 10).map((e) => `  ${e.id}: "${e.term}"`);
       console.warn(
         `Found ${contaminated.length} English entries with Cyrillic in term:\n${examples.join('\n')}`
@@ -140,9 +171,8 @@ describe('English vocabulary (vocabulary-en.json)', () => {
 // Serbian vocabulary integrity
 // ---------------------------------------------------------------------------
 
-describe('Serbian vocabulary (vocabulary-sr.json)', () => {
-  const data = readVocab('vocabulary-sr.json');
-  const entries = data.entries;
+describe('Serbian vocabulary integrity', () => {
+  const entries = loadEntries('sr');
 
   it('has entries', () => {
     expect(entries.length).toBeGreaterThan(0);
@@ -203,7 +233,6 @@ describe('Serbian vocabulary (vocabulary-sr.json)', () => {
   });
 
   it('Serbian terms do not look like Russian-only words (no ы, э, ё)', () => {
-    // Serbian Cyrillic does not use ы, э, ё — these are Russian-only
     const RUSSIAN_ONLY_RE = /[ыэёЫЭЁ]/;
     const russianOnly = entries.filter((e) => RUSSIAN_ONLY_RE.test(e.term));
     if (russianOnly.length > 0) {
@@ -221,40 +250,37 @@ describe('Serbian vocabulary (vocabulary-sr.json)', () => {
 // ---------------------------------------------------------------------------
 
 describe('Cross-vocabulary integrity', () => {
-  const enData = readVocab('vocabulary-en.json');
-  const srData = readVocab('vocabulary-sr.json');
+  const enEntries = loadEntries('en');
+  const srEntries = loadEntries('sr');
 
   it('no ID collisions between English and Serbian vocabularies', () => {
-    const enIds = new Set(enData.entries.map((e) => e.id));
-    const srIds = new Set(srData.entries.map((e) => e.id));
+    const enIds = new Set(enEntries.map((e) => e.id));
+    const srIds = new Set(srEntries.map((e) => e.id));
     const collisions = [...enIds].filter((id) => srIds.has(id));
     expect(collisions).toEqual([]);
   });
 
   it('English IDs start with "en-"', () => {
-    const wrong = enData.entries.filter((e) => !e.id.startsWith('en-'));
+    const wrong = enEntries.filter((e) => !e.id.startsWith('en-'));
     expect(wrong.map((e) => e.id)).toEqual([]);
   });
 
   it('Serbian IDs start with "sr-"', () => {
-    const wrong = srData.entries.filter((e) => !e.id.startsWith('sr-'));
+    const wrong = srEntries.filter((e) => !e.id.startsWith('sr-'));
     expect(wrong.map((e) => e.id)).toEqual([]);
   });
 
   it('no English term appears as a Serbian term (exact match)', () => {
-    const enTerms = new Set(enData.entries.map((e) => e.term.toLowerCase().trim()));
-    const overlap = srData.entries.filter((e) => enTerms.has(e.term.toLowerCase().trim()));
+    const enTerms = new Set(enEntries.map((e) => e.term.toLowerCase().trim()));
+    const overlap = srEntries.filter((e) => enTerms.has(e.term.toLowerCase().trim()));
 
-    // Some overlap may be legitimate (loanwords, Latin-script Serbian),
-    // but flag for review if count is high
     if (overlap.length > 0) {
       const examples = overlap.slice(0, 10).map((e) => `  ${e.id}: "${e.term}"`);
       console.warn(
         `${overlap.length} Serbian terms also appear in English vocab:\n${examples.join('\n')}`
       );
     }
-    // Lenient: allow some overlap for loanwords, but flag if >5% of SR vocab
-    const overlapPct = (overlap.length / srData.entries.length) * 100;
+    const overlapPct = (overlap.length / srEntries.length) * 100;
     expect(overlapPct).toBeLessThan(5);
   });
 });

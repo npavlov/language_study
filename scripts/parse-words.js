@@ -352,10 +352,10 @@ function main() {
 
   db.close();
 
-  // Optionally generate JSON files
+  // Optionally copy DB assets to public/
   if (writeJson) {
-    console.log('Generating JSON files...');
-    execFileSync('node', ['scripts/db-export.js'], { cwd: ROOT, stdio: 'inherit' });
+    console.log('Copying DB assets to public/data/...');
+    execFileSync('node', ['scripts/copy-db-assets.js'], { cwd: ROOT, stdio: 'inherit' });
   }
 
   console.log(`=== Done! Total vocabulary: ${totalEntries} entries ===`);

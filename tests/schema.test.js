@@ -17,18 +17,6 @@ describe('vocabulary JSON schema', () => {
     expect(schema.properties.schema_version).toBeDefined();
   });
 
-  it('vocabulary-en.json has correct structure', () => {
-    const data = readJson('vocabulary-en.json');
-    expect(data.schema_version).toBe('1.0');
-    expect(Array.isArray(data.entries)).toBe(true);
-  });
-
-  it('vocabulary-sr.json has correct structure', () => {
-    const data = readJson('vocabulary-sr.json');
-    expect(data.schema_version).toBe('1.0');
-    expect(Array.isArray(data.entries)).toBe(true);
-  });
-
   it('schema defines all required entry fields', () => {
     const schema = readJson('schema.json');
     const required = schema.$defs.VocabularyEntry.required;

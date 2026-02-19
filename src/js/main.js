@@ -2,12 +2,12 @@
  * Language Study — app entry point.
  * Wires together: router, menu, game modes, stats, add-words.
  *
- * Vocabulary is lazy-loaded: only the needed language file is fetched
- * when the user starts a game, keeping the initial page load fast.
+ * Vocabulary is lazy-loaded from SQLite (via sql.js WASM) when the
+ * user starts a game, keeping the initial page load fast.
  */
 
 import { Router } from './router.js';
-import { GameEngine, loadVocabulary } from './engine.js';
+import { GameEngine } from './engine.js';
 import { MenuScreen } from './ui/menu.js';
 import { StatsScreen } from './ui/stats.js';
 import { AddWordsScreen, loadUserWords, mergeWithBuiltIn } from './ui/add-words.js';
@@ -17,17 +17,13 @@ import { QuizMode } from './modes/quiz.js';
 import { TypingMode } from './modes/typing.js';
 import { MatchMode } from './modes/match.js';
 import { exportToExcel } from './export.js';
+import { loadAllEntries } from './vocabulary-db.js';
 
 const MODE_MAP = {
   flashcards: FlashcardsMode,
   quiz: QuizMode,
   typing: TypingMode,
   match: MatchMode,
-};
-
-const VOCAB_FILES = {
-  en: 'data/vocabulary-en.json',
-  sr: 'data/vocabulary-sr.json',
 };
 
 const app = document.getElementById('app');
@@ -81,16 +77,12 @@ function buildTabBar() {
 }
 
 // --- Lazy vocabulary loader ---
-async function ensureVocabLoaded(...langs) {
-  const toLoad = langs.filter((l) => !vocabCache[l] && VOCAB_FILES[l]);
-  if (toLoad.length === 0) return;
+async function ensureVocabLoaded() {
+  if (vocabCache.en && vocabCache.sr) return;
 
-  const results = await Promise.all(
-    toLoad.map((l) => loadVocabulary(VOCAB_FILES[l]).then((entries) => [l, entries]))
-  );
-  for (const [lang, entries] of results) {
-    vocabCache[lang] = entries;
-  }
+  const entries = await loadAllEntries();
+  vocabCache.en = entries.en;
+  vocabCache.sr = entries.sr;
 }
 
 function rebuildAllEntries() {
@@ -120,7 +112,7 @@ async function startGame({ direction, mode }) {
   // Load vocabulary for both languages (need distractors from both)
   menuScreen.setLoading(true);
   try {
-    await ensureVocabLoaded('en', 'sr');
+    await ensureVocabLoaded();
   } finally {
     menuScreen.setLoading(false);
   }
@@ -171,7 +163,7 @@ async function init() {
       wordCounts: { en: 0, sr: 0 },
       onStart: startGame,
       onExport: async () => {
-        await ensureVocabLoaded('en', 'sr');
+        await ensureVocabLoaded();
         rebuildAllEntries();
         exportToExcel(allEntries);
       },
@@ -211,7 +203,7 @@ async function init() {
     });
 
     router.register('#add-words', async () => {
-      await ensureVocabLoaded('en', 'sr');
+      await ensureVocabLoaded();
       addWordsScreen.updateBuiltIn([...(vocabCache.en || []), ...(vocabCache.sr || [])]);
       addWordsScreen.show();
     }, () => {
@@ -221,7 +213,7 @@ async function init() {
     router.start();
 
     // Preload vocabulary in background after UI is shown
-    ensureVocabLoaded('en', 'sr').then(() => {
+    ensureVocabLoaded().then(() => {
       rebuildAllEntries();
       menuScreen.setWordCounts(computeWordCounts(allEntries));
     });

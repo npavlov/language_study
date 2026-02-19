@@ -159,7 +159,7 @@ function main() {
   console.log(`  Updated: ${stats.updated}`);
   console.log(`  Deleted: ${stats.deleted}`);
   console.log(`  Not found: ${stats.notFound}`);
-  console.log('\nRun "npm run db:export" to regenerate JSON, then "npm test" to verify.');
+  console.log('\nRun "npm run vocab -- export" to copy DB assets, then "npm test" to verify.');
 }
 
 main();

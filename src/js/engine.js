@@ -361,14 +361,3 @@ export function serbianCyrillicToLatin(text) {
     .join('');
 }
 
-/**
- * Load vocabulary from a JSON file URL.
- * @param {string} url - path to vocabulary JSON
- * @returns {Promise<Array>} vocabulary entries
- */
-export async function loadVocabulary(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Failed to load vocabulary: ${response.status}`);
-  const data = await response.json();
-  return data.entries || [];
-}

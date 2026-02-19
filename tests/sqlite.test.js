@@ -10,7 +10,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import Database from 'better-sqlite3';
@@ -18,8 +18,6 @@ import Database from 'better-sqlite3';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const DB_PATH = join(ROOT, 'data', 'vocabulary.db');
-const JSON_EN_PATH = join(ROOT, 'public', 'data', 'vocabulary-en.json');
-const JSON_SR_PATH = join(ROOT, 'public', 'data', 'vocabulary-sr.json');
 
 // ---------------------------------------------------------------------------
 // Schema tests
@@ -223,58 +221,3 @@ describe('Full-text search', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// Roundtrip: SQLite ↔ JSON consistency
-// ---------------------------------------------------------------------------
-
-describe('SQLite ↔ JSON consistency', () => {
-  it('EN entry count matches JSON', () => {
-    const db = new Database(DB_PATH, { readonly: true });
-    const dbCount = db.prepare("SELECT COUNT(*) as n FROM vocabulary WHERE source_language = 'en'").get().n;
-    db.close();
-
-    const json = JSON.parse(readFileSync(JSON_EN_PATH, 'utf-8'));
-    expect(dbCount).toBe(json.entries.length);
-  });
-
-  it('SR entry count matches JSON', () => {
-    const db = new Database(DB_PATH, { readonly: true });
-    const dbCount = db.prepare("SELECT COUNT(*) as n FROM vocabulary WHERE source_language = 'sr'").get().n;
-    db.close();
-
-    const json = JSON.parse(readFileSync(JSON_SR_PATH, 'utf-8'));
-    expect(dbCount).toBe(json.entries.length);
-  });
-
-  it('sample EN entry matches between DB and JSON', () => {
-    const db = new Database(DB_PATH, { readonly: true });
-    const dbRow = db.prepare("SELECT * FROM vocabulary WHERE id = 'en-0001'").get();
-    db.close();
-
-    const json = JSON.parse(readFileSync(JSON_EN_PATH, 'utf-8'));
-    const jsonEntry = json.entries.find((e) => e.id === 'en-0001');
-
-    expect(dbRow.term).toBe(jsonEntry.term);
-    expect(dbRow.source_language).toBe(jsonEntry.source_language);
-    expect(dbRow.translation_sr).toBe(jsonEntry.translations.sr);
-    expect(dbRow.translation_ru).toBe(jsonEntry.translations.ru);
-    expect(JSON.parse(dbRow.examples_en)).toEqual(jsonEntry.examples.en);
-    expect(dbRow.explanation).toBe(jsonEntry.explanation);
-    expect(dbRow.difficulty).toBe(jsonEntry.difficulty);
-    expect(dbRow.enriched === 1).toBe(jsonEntry.enriched);
-  });
-
-  it('sample SR entry matches between DB and JSON', () => {
-    const db = new Database(DB_PATH, { readonly: true });
-    const dbRow = db.prepare("SELECT * FROM vocabulary WHERE id = 'sr-0001'").get();
-    db.close();
-
-    const json = JSON.parse(readFileSync(JSON_SR_PATH, 'utf-8'));
-    const jsonEntry = json.entries.find((e) => e.id === 'sr-0001');
-
-    expect(dbRow.term).toBe(jsonEntry.term);
-    expect(dbRow.translation_en).toBe(jsonEntry.translations.en);
-    expect(dbRow.translation_ru).toBe(jsonEntry.translations.ru);
-    expect(JSON.parse(dbRow.examples_sr)).toEqual(jsonEntry.examples.sr);
-  });
-});
