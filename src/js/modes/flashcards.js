@@ -225,6 +225,14 @@ export class FlashcardsMode {
         hint2.wrapper.hidden = false;
       }
       tapBack.style.display = 'none';
+    } else if (this._tapCount === 2) {
+      // Third tap — flip back to front
+      card.classList.remove(CLS.CARD_FLIPPED);
+      this._tapCount = 3;
+    } else if (this._tapCount === 3) {
+      // Fourth tap — flip to hints again
+      card.classList.add(CLS.CARD_FLIPPED);
+      this._tapCount = 2;
     }
   }
 
