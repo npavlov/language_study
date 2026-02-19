@@ -342,7 +342,7 @@ AI-agent-friendly docs live in `DOCS/`:
 
 ## Testing
 
-- 108 unit tests (vitest) across 7 test files + 55 E2E tests (Playwright).
+- 108 unit tests (vitest) across 7 test files + 62 E2E tests (Playwright).
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
 - SQLite tests: schema validation, data integrity, FTS search.
 - E2E tests: all 4 game modes, navigation, corner cases.
