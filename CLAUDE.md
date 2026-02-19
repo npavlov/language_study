@@ -69,6 +69,20 @@ tests/                  # unit tests (vitest)
   word-selection.test.js # shuffle, filterIds, session tests
   vocabulary-integrity.test.js # cross-language contamination checks
   setup.test.js         # test environment setup
+e2e/                    # E2E tests (Playwright)
+  helpers.js            # shared helpers: goHome, startGame, selectDirection, getText
+  navigation.spec.js    # home screen, tabs, language toggle, refresh redirect
+  flashcards.spec.js    # flip cycle, know/don't know, progress, summary, Serbian
+  quiz.spec.js          # correct/wrong, auto-advance, 2-wrong reveal, disabled
+  typing.spec.js        # input/submit, skip, Enter key, 6 hint stages, Serbian
+  match.spec.js         # select/deselect, correct/wrong pairs, timer, Serbian
+DOCS/                   # AI-agent documentation (keep in sync with code)
+  engine.md             # GameEngine API, events, session state
+  modes.md              # all 4 game modes: interactions, BEM classes
+  data-flow.md          # SQLite → browser pipeline, sql.js, Entry format
+  testing.md            # unit + E2E test suites, helpers, selectors
+  i18n.md               # Russian string map, langLabel(), rules
+  routing.md            # hash router, screens, game launch flow
 ```
 
 ## Build & Run Commands
@@ -77,8 +91,9 @@ tests/                  # unit tests (vitest)
 # Development
 npm run dev        # start local dev server (vite)
 npm run build      # vite build → dist/ (for GitHub Pages deploy)
-npm run test       # vitest run (99 tests)
+npm run test       # vitest run (108 tests)
 npm run test:watch # vitest (watch mode)
+npm run test:e2e   # Playwright E2E (55 tests)
 npm run lint       # eslint src/js/
 
 # Data pipeline (SQLite-based)
@@ -308,14 +323,31 @@ db.close();
 - Keep functions under 40 lines. Extract when longer.
 - Use `const` by default, `let` when reassignment is needed, never `var`.
 - All UI strings must go through `i18n.js` — never hardcode Russian/English text in mode files.
+- **After changing code, update the corresponding `DOCS/*.md` files** — keep documentation in sync with implementation.
+
+## Documentation
+
+AI-agent-friendly docs live in `DOCS/`:
+
+| File | Scope |
+|------|-------|
+| `engine.md` | GameEngine API, events, session state, entry format |
+| `modes.md` | All 4 game modes — lifecycle, interactions, BEM classes |
+| `data-flow.md` | SQLite → browser pipeline, sql.js usage, schemas |
+| `testing.md` | Unit + E2E test suites, helpers, selectors, how to run |
+| `i18n.md` | Russian string map, langLabel(), rules |
+| `routing.md` | Hash router, screens, tab bar, game launch flow |
+
+**Rule**: When modifying any `src/js/` or `src/css/` file, update the relevant `DOCS/*.md`.
 
 ## Testing
 
-- 99 tests across 7 test files.
+- 108 unit tests (vitest) across 7 test files + 55 E2E tests (Playwright).
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
 - SQLite tests: schema validation, data integrity, FTS search.
-- Use vitest. Place tests in `tests/` mirroring `src/js/` structure.
-- No DOM/browser tests unless unavoidable.
+- E2E tests: all 4 game modes, navigation, corner cases.
+- Use vitest for unit tests (`tests/`), Playwright for E2E (`e2e/`).
+- Run: `npm test` (unit), `npm run test:e2e` (E2E).
 - Target coverage: core modules (engine, progress, modes) above 80%.
 
 ## Do NOT

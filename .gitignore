@@ -7,3 +7,5 @@ dist/
 *.db-shm
 public/data/vocabulary.db
 public/data/sql-wasm.wasm
+test-results/
+playwright-report/
