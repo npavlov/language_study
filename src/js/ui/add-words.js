@@ -429,7 +429,7 @@ export class AddWordsScreen {
     const trans    = entry.translations && entry.translations[langCode];
     if (trans) {
       const transSpan = el('span', 'word-list__translation');
-      transSpan.textContent = ` \u2014 ${trans}`;
+      transSpan.textContent = ` — ${trans}`;
       termWrap.appendChild(transSpan);
     }
 

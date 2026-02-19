@@ -45,14 +45,14 @@ describe('i18n — default (Russian)', () => {
     const { fmtDate } = await import('../src/js/i18n.js');
     expect(fmtDate('2026-02-19')).toBe('19 Фев 2026');
     expect(fmtDate('2026-12-01')).toBe('1 Дек 2026');
-    expect(fmtDate(null)).toBe('\u2014');
+    expect(fmtDate(null)).toBe('—');
   });
 
   it('fmtDuration formats seconds with Russian units', async () => {
     const { fmtDuration } = await import('../src/js/i18n.js');
     expect(fmtDuration(90)).toBe('1м 30с');
     expect(fmtDuration(45)).toBe('45с');
-    expect(fmtDuration(0)).toBe('\u2014');
+    expect(fmtDuration(0)).toBe('—');
   });
 
   it('t.months is a 12-element array', async () => {
@@ -125,7 +125,7 @@ describe('i18n — Serbian', () => {
 
   it('fmt works with Serbian templates', async () => {
     const { fmt } = await import('../src/js/i18n.js');
-    expect(fmt('delete_confirm', { term: 'reč' })).toBe('Obrisati \u201Ereč\u201C?');
+    expect(fmt('delete_confirm', { term: 'reč' })).toBe('Obrisati „reč"?');
   });
 
   it('months has Serbian month names', async () => {

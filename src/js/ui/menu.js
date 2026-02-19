@@ -70,7 +70,7 @@ export class MenuScreen {
 
     // --- Header / Title ---
     const header = el('div', 'menu__header');
-    header.appendChild(el('h1', 'menu__title', '\uD83D\uDCDA Language Study'));
+    header.appendChild(el('h1', 'menu__title', '📚 Language Study'));
     header.appendChild(el('p', 'menu__subtitle', t.app_subtitle));
     root.appendChild(header);
 
@@ -79,11 +79,11 @@ export class MenuScreen {
     dirSection.appendChild(el('label', 'form-group__label', t.direction_label));
     const toggle = el('div', 'toggle');
 
-    const btnEn = el('button', 'toggle__option toggle__option--active', `\uD83C\uDDEC\uD83C\uDDE7 ${langLabel('en')}`);
+    const btnEn = el('button', 'toggle__option toggle__option--active', `🇬🇧 ${langLabel('en')}`);
     btnEn.dataset.direction = 'en-sr';
     btnEn.type = 'button';
 
-    const btnSr = el('button', 'toggle__option', `\uD83C\uDDF7\uD83C\uDDF8 ${langLabel('sr')}`);
+    const btnSr = el('button', 'toggle__option', `🇷🇸 ${langLabel('sr')}`);
     btnSr.dataset.direction = 'sr-en';
     btnSr.type = 'button';
 
@@ -113,10 +113,10 @@ export class MenuScreen {
     const grid = el('div', 'mode-grid');
 
     const modes = [
-      { id: 'flashcards', icon: '\uD83C\uDCCF', title: t.mode_flashcards, desc: t.mode_flashcards_desc },
-      { id: 'quiz', icon: '\u2753', title: t.mode_quiz, desc: t.mode_quiz_desc },
-      { id: 'typing', icon: '\u2328\uFE0F', title: t.mode_typing, desc: t.mode_typing_desc },
-      { id: 'match', icon: '\uD83D\uDD17', title: t.mode_match, desc: t.mode_match_desc },
+      { id: 'flashcards', icon: '🃏', title: t.mode_flashcards, desc: t.mode_flashcards_desc },
+      { id: 'quiz', icon: '❓', title: t.mode_quiz, desc: t.mode_quiz_desc },
+      { id: 'typing', icon: '⌨️', title: t.mode_typing, desc: t.mode_typing_desc },
+      { id: 'match', icon: '🔗', title: t.mode_match, desc: t.mode_match_desc },
     ];
 
     const modeCards = [];
@@ -223,7 +223,7 @@ export class MenuScreen {
     this._refs.startBtn = startBtn;
 
     // --- Export to Excel ---
-    const exportBtn = el('button', 'btn btn--outline btn--block', `\uD83D\uDCE5 ${t.export_excel}`);
+    const exportBtn = el('button', 'btn btn--outline btn--block', `📥 ${t.export_excel}`);
     exportBtn.type = 'button';
     exportBtn.style.marginTop = 'var(--spacing-sm)';
     exportBtn.addEventListener('click', () => {
@@ -245,10 +245,10 @@ export class MenuScreen {
     const known = words.filter((w) => w.masteryLevel === 'known' || w.masteryLevel === 'mastered').length;
 
     if (this._refs.streakEl) {
-      this._refs.streakEl.textContent = `\uD83D\uDD25 ${progress.streakDays || 0} ${t.days}`;
+      this._refs.streakEl.textContent = `🔥 ${progress.streakDays || 0} ${t.days}`;
     }
     if (this._refs.learnedEl) {
-      this._refs.learnedEl.textContent = `\uD83D\uDCD6 ${known} ${t.learned} (${mastered} ${t.mastered_stat})`;
+      this._refs.learnedEl.textContent = `📖 ${known} ${t.learned} (${mastered} ${t.mastered_stat})`;
     }
   }
 

@@ -51,7 +51,7 @@ const translations = {
     no_more_hints: 'Подсказок нет',
     skip: 'Пропустить',
     next_word: 'Дальше',
-    correct_answer: 'Правильно! \u2713',
+    correct_answer: 'Правильно! ✓',
     answer_is: 'Ответ:',
     close_answer: 'Почти! Ответ:',
     type_answer_first: 'Сначала напиши ответ.',
@@ -203,7 +203,7 @@ const translations = {
     no_more_hints: 'No more hints',
     skip: 'Skip',
     next_word: 'Next',
-    correct_answer: 'Correct! \u2713',
+    correct_answer: 'Correct! ✓',
     answer_is: 'Answer:',
     close_answer: 'Close! Answer:',
     type_answer_first: 'Type your answer first.',
@@ -348,7 +348,7 @@ const translations = {
     no_more_hints: 'Nema više pomoći',
     skip: 'Preskoči',
     next_word: 'Dalje',
-    correct_answer: 'Tačno! \u2713',
+    correct_answer: 'Tačno! ✓',
     answer_is: 'Odgovor:',
     close_answer: 'Blizu! Odgovor:',
     type_answer_first: 'Prvo napiši odgovor.',
@@ -447,16 +447,16 @@ const translations = {
     edit_btn: 'Uredi',
     delete_btn: 'Obriši',
     enter_word_error: 'Unesi reč ili frazu.',
-    already_exists: '\u201E{term}\u201C već postoji u rečniku.',
-    word_updated: '\u201E{term}\u201C ažurirano.',
-    word_added: '\u201E{term}\u201C dodato.',
+    already_exists: '„{term}" već postoji u rečniku.',
+    word_updated: '„{term}" ažurirano.',
+    word_added: '„{term}" dodato.',
     nothing_to_add: 'Nema šta da se doda — polje je prazno.',
     words_added_result: 'Dodato: {added}, preskočeno: {skipped}.',
     words_all_exist: 'Svih {count} već postoji — ništa nije dodato.',
     only_txt_error: 'Podržani su samo .txt fajlovi.',
     file_read_error: 'Nije moguće pročitati fajl.',
     no_words_export: 'Nema reči za izvoz.',
-    delete_confirm: 'Obrisati \u201E{term}\u201C?',
+    delete_confirm: 'Obrisati „{term}"?',
   },
 };
 
@@ -518,7 +518,7 @@ export function langLabel(lang) {
  * @returns {string}
  */
 export function fmtDate(isoStr) {
-  if (!isoStr) return '\u2014';
+  if (!isoStr) return '—';
   const [y, m, d] = isoStr.split('-');
   return `${Number(d)} ${t.months[Number(m) - 1]} ${y}`;
 }
@@ -529,7 +529,7 @@ export function fmtDate(isoStr) {
  * @returns {string}
  */
 export function fmtDuration(seconds) {
-  if (!seconds) return '\u2014';
+  if (!seconds) return '—';
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return m > 0 ? `${m}${t.time_m} ${s}${t.time_s}` : `${s}${t.time_s}`;

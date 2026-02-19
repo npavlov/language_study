@@ -113,7 +113,7 @@ function renderStreak(streakDays, lastSessionDate) {
   section.appendChild(el('h2', 'stats__heading', t.streak));
 
   const streakEl = el('p', 'stats__streak');
-  const flame = el('span', 'stats__streak-icon', '\uD83D\uDD25');
+  const flame = el('span', 'stats__streak-icon', '🔥');
   streakEl.appendChild(flame);
   streakEl.appendChild(document.createTextNode(` ${streakDays} ${t.days}`));
   section.appendChild(streakEl);

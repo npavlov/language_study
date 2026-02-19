@@ -60,9 +60,9 @@ function buildTabBar() {
   bar.className = 'tab-bar';
 
   const tabs = [
-    { hash: '#home', icon: '\uD83C\uDFE0', label: t.tab_game },
-    { hash: '#stats', icon: '\uD83D\uDCCA', label: t.tab_stats },
-    { hash: '#add-words', icon: '\u2795', label: t.tab_words },
+    { hash: '#home', icon: '🏠', label: t.tab_game },
+    { hash: '#stats', icon: '📊', label: t.tab_stats },
+    { hash: '#add-words', icon: '➕', label: t.tab_words },
   ];
 
   for (const tab of tabs) {
