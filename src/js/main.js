@@ -190,6 +190,10 @@ async function init() {
     }, () => menuScreen.hide());
 
     router.register('#play', () => {
+      if (!activeMode) {
+        router.navigate('#home');
+        return;
+      }
       screens.play.classList.add('screen--active');
     }, () => {
       screens.play.classList.remove('screen--active');
