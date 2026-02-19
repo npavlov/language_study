@@ -340,17 +340,19 @@ AI-agent-friendly docs live in `DOCS/`:
 | `i18n.md` | Russian string map, langLabel(), rules |
 | `routing.md` | Hash router, screens, tab bar, game launch flow |
 
-**Rule**: When modifying any `src/js/` or `src/css/` file, update the relevant `DOCS/*.md`.
+**Rule**: Every code change MUST include updates to the relevant `DOCS/*.md` files. No feature is complete without documentation updates. Update test counts, API descriptions, and any affected sections.
 
 ## Testing
 
-- 108 unit tests (vitest) across 7 test files + 68 E2E tests (Playwright).
+- 114 unit tests (vitest) across 7 test files + 68 E2E tests (Playwright).
 - Unit tests for pure JS logic: data parsing, scoring, hint state machine, word selection.
 - SQLite tests: schema validation, data integrity, FTS search.
-- E2E tests: all 4 game modes, navigation, corner cases.
+- E2E tests: all 4 game modes, navigation, long sessions, settings.
 - Use vitest for unit tests (`tests/`), Playwright for E2E (`e2e/`).
 - Run: `npm test` (unit), `npm run test:e2e` (E2E).
 - Target coverage: core modules (engine, progress, modes) above 80%.
+
+**Rule**: Every code change MUST include corresponding tests. Add unit tests for logic changes, E2E tests for UI/behavior changes. No feature is complete without tests.
 
 ## Do NOT
 
